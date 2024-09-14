@@ -13,10 +13,10 @@ Para instalar el repositorio localmente, debes clonar el proyecto con el siguien
 
 ## Ejecución
 Antes de ejecutar la máquina virtual, es necesario instalar las dependencias del proyecto. Para hacerlo, ejecuta el siguiente comando en la raíz del repositorio:
-" npm install "
+- " npm install "
 
 Con las dependencias instaladas, puedes ejecutar el proyecto con el siguiente comando:
-" node index.js "
+- " node index.js "
 
 
 ## Requisitos:
