@@ -1,9 +1,0 @@
-$FUN $main
-LDV 10
-LDV 2
-MUL
-LDV 1
-ADD
-LDV $n
-EQ
-$END $main
