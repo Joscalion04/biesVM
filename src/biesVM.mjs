@@ -5,24 +5,25 @@ class BiesVM {
     this.bindings = [[]]; // B
     this.contexts = []; // D
   }
+/*
+    loadProgram(program) {
+        // Cargar y parsear el programa biesASM
+        this.code = program;
+      }
 
-  loadProgram(program) {
-    // Cargar y parsear el programa biesASM
-    this.code = program;
-  }
+      execute() {
+        // Iniciar la ejecución del programa
+        while (this.code.length > 0) {
+          const instruction = this.code.shift();
+          this.executeInstruction(instruction);
+        }
+      }
+*/
 
-  execute() {
-    // Iniciar la ejecución del programa
-    while (this.code.length > 0) {
-      const instruction = this.code.shift();
-      this.executeInstruction(instruction);
-    }
-  }
-
-  executeInstruction(instruction) { // instruction es el ctx del arbol
+  executeInstruction(mnemonic, args) { // instruction es el ctx del arbol
     // Lógica para ejecutar cada instrucción
     // Ejemplo: LDV, ADD, POP, etc.
-    switch (instruction.mnemonic) {
+    switch (mnemonic) {
       case 'INI': {// ?
 
       } break;
@@ -52,7 +53,8 @@ class BiesVM {
       } break;
 
       case 'LDV': {
-        this.stack.push(instruction.value);
+        const N = parseInt(args[0]);
+        this.stack.push(N);
       } break;
 
       case 'BLD': {// ?
@@ -212,3 +214,5 @@ class BiesVM {
     }
   }
 }
+
+export default BiesVM;
