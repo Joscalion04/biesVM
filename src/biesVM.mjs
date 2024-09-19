@@ -57,10 +57,19 @@ class BiesVM {
         this.stack.push(N);
       } break;
 
-      case 'BLD': {// ?
-        
+      case 'BLD': {
+        const K = this.stack.pop();
+        const E = this.stack.pop();
+        this.stack.push(this.bindings[E][K]);
       } break;
-      // region Operaciones aritméticas
+
+      case 'BST': {
+        const K = this.stack.pop();
+        const E = this.stack.pop();
+        const V = this.stack.pop();
+        this.bindings[E][K] = V;
+      } break;
+      
       case 'ADD': {
         const N = this.stack.pop();
         const M = this.stack.pop();
