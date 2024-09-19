@@ -24,7 +24,7 @@ class BiesVM {
     // Lógica para ejecutar cada instrucción
     // Ejemplo: LDV, ADD, POP, etc.
     switch (mnemonic) {
-      case 'INI': {// ?
+      case 'INI': {
 
       } break;
 
@@ -42,7 +42,7 @@ class BiesVM {
       } break;
 
       case 'POP': {
-        this.stack.pop();// ?
+        this.stack.pop();
       } break;
 
       case 'SWP': {
@@ -69,7 +69,7 @@ class BiesVM {
         const V = this.stack.pop();
         this.bindings[E][K] = V;
       } break;
-      
+
       case 'ADD': {
         const N = this.stack.pop();
         const M = this.stack.pop();
@@ -164,7 +164,7 @@ class BiesVM {
         this.stack.push(N ^ M);// Funciona este operador?
       } break;
 
-      case 'NOT': {// ?
+      case 'NOT': {
         const N = this.stack.pop();
         this.stack.push(!N ? 1 : 0);
       } break;
@@ -217,8 +217,12 @@ class BiesVM {
         // No hacer nada
       } break;
       
-      case 'BR': {// ?
+      case 'BR': {
 
+      } break;
+      
+      case 'RET': {
+        
       } break;
     }
   }
