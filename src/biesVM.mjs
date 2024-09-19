@@ -53,21 +53,19 @@ class BiesVM {
       } break;
 
       case 'LDV': {
-        const N = parseInt(args[0]);
+        const N = args[0];
         this.stack.push(N);
       } break;
 
       case 'BLD': {
-        const K = this.stack.pop();
-        const E = this.stack.pop();
-        this.stack.push(this.bindings[E][K]);
+        this.stack.push(this.bindings[args[0]][args[1]]);
       } break;
 
       case 'BST': {
-        const K = this.stack.pop();
-        const E = this.stack.pop();
-        const V = this.stack.pop();
-        this.bindings[E][K] = V;
+        const K = this.stack.pop(); // Variable
+        const E = parseInt(args[0]); // Binding
+        const V = parseInt(args[1]); 
+        this.bindings[E][V] = K;
       } break;
 
       case 'ADD': {
