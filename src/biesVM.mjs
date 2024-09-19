@@ -58,6 +58,7 @@ class BiesVM {
       } break;
 
       case 'BLD': {
+        //console.log(this.bindings[args[0]][args[1]]);
         this.stack.push(this.bindings[args[0]][args[1]]);
       } break;
 
@@ -69,32 +70,32 @@ class BiesVM {
       } break;
 
       case 'ADD': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = parseInt(this.stack.pop()); 
+        const M = parseInt(this.stack.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N + M);
         }
       } break;
 
       case 'MUL': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = parseInt(this.stack.pop());
+        const M = parseInt(this.stack.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N * M);
         }
       } break;
 
       case 'DIV': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = parseInt(this.stack.pop()); 
+        const M = parseInt(this.stack.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N / M);
         }
       } break;
 
       case 'SUB': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = parseInt(this.stack.pop()); 
+        const M = parseInt(this.stack.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N - M);
         }
