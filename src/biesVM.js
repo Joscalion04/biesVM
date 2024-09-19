@@ -19,7 +19,7 @@ class BiesVM {
     }
   }
 
-  executeInstruction(instruction) {
+  executeInstruction(instruction) { // instruction es el ctx del arbol
     // Lógica para ejecutar cada instrucción
     // Ejemplo: LDV, ADD, POP, etc.
     switch (instruction.mnemonic) {
@@ -32,6 +32,12 @@ class BiesVM {
         this.stack = [];
         this.bindings = [[]];
         this.contexts = [];
+      } break;
+
+      case 'PRN': {
+        const N = this.stack.pop();
+        console.log(N);
+        this.stack.push(N);
       } break;
 
       case 'POP': {
