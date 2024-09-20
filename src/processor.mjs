@@ -24,6 +24,8 @@ class PrintVisitor extends biesGrammarVisitor {
             return ctx.INT().getText();
         } else if (ctx.STR()) {
             return ctx.STR().getText();
+        } else if (ctx.getText().startsWith('$')) { // Handle arguments like $1
+            return ctx.getText();
         }
         return null;
     }
