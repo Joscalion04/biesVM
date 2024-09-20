@@ -1,3 +1,4 @@
 node_modules/
 test/
 grammar/.antlr4
+.vscode/

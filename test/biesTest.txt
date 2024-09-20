@@ -1,6 +1,6 @@
 LDF $1
 BST 0 0
-LDV 1
+TOL 1
 BST 0 1
 LDV 656
 BST 0 2

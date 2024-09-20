@@ -5,20 +5,6 @@ class BiesVM {
     this.bindings = [[]]; // B
     this.contexts = []; // D
   }
-/*
-    loadProgram(program) {
-        // Cargar y parsear el programa biesASM
-        this.code = program;
-      }
-
-      execute() {
-        // Iniciar la ejecución del programa
-        while (this.code.length > 0) {
-          const instruction = this.code.shift();
-          this.executeInstruction(instruction);
-        }
-      }
-*/
 
   executeInstruction(mnemonic, args) { // instruction es el ctx del arbol
     // Lógica para ejecutar cada instrucción

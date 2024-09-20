@@ -3,9 +3,9 @@
 import antlr4 from 'antlr4';
 import biesVisitor from './biesVisitor.js';
 
-const serializedATN = [4,1,18,28,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,1,0,4,0,
+const serializedATN = [4,1,19,28,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,1,0,4,0,
 10,8,0,11,0,12,0,11,1,1,1,1,1,1,5,1,17,8,1,10,1,12,1,20,9,1,3,1,22,8,1,1,
-2,1,2,1,3,1,3,1,3,0,0,4,0,2,4,6,0,2,1,0,1,14,1,0,15,17,26,0,9,1,0,0,0,2,
+2,1,2,1,3,1,3,1,3,0,0,4,0,2,4,6,0,2,1,0,1,15,1,0,16,18,26,0,9,1,0,0,0,2,
 13,1,0,0,0,4,23,1,0,0,0,6,25,1,0,0,0,8,10,3,2,1,0,9,8,1,0,0,0,10,11,1,0,
 0,0,11,9,1,0,0,0,11,12,1,0,0,0,12,1,1,0,0,0,13,21,3,4,2,0,14,18,3,6,3,0,
 15,17,3,6,3,0,16,15,1,0,0,0,17,20,1,0,0,0,18,16,1,0,0,0,18,19,1,0,0,0,19,
@@ -24,10 +24,10 @@ export default class biesParser extends antlr4.Parser {
     static grammarFileName = "bies.g4";
     static literalNames = [ null, "'LDV'", "'POP'", "'BLD'", "'ADD'", "'MUL'", 
                             "'DIV'", "'SUB'", "'PRN'", "'BST'", "'HLT'", 
-                            "'LDF'", "'APP'", "'$FUN'", "'RET'" ];
+                            "'LDF'", "'APP'", "'$FUN'", "'RET'", "'TOL'" ];
     static symbolicNames = [ null, null, null, null, null, null, null, null, 
-                             null, null, null, null, null, null, null, "INT", 
-                             "STR", "FUNCTION", "WS" ];
+                             null, null, null, null, null, null, null, null, 
+                             "INT", "STR", "FUNCTION", "WS" ];
     static ruleNames = [ "start", "inst", "mnemonic", "arg" ];
 
     constructor(input) {
@@ -55,7 +55,7 @@ export default class biesParser extends antlr4.Parser {
 	            this.state = 11; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 32766) !== 0));
+	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 65534) !== 0));
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -83,13 +83,13 @@ export default class biesParser extends antlr4.Parser {
 	        this.state = 21;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 229376) !== 0)) {
+	        if((((_la) & ~0x1f) === 0 && ((1 << _la) & 458752) !== 0)) {
 	            this.state = 14;
 	            this.arg();
 	            this.state = 18;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 229376) !== 0)) {
+	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 458752) !== 0)) {
 	                this.state = 15;
 	                this.arg();
 	                this.state = 20;
@@ -122,7 +122,7 @@ export default class biesParser extends antlr4.Parser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 23;
 	        _la = this._input.LA(1);
-	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 32766) !== 0))) {
+	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 65534) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -153,7 +153,7 @@ export default class biesParser extends antlr4.Parser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 25;
 	        _la = this._input.LA(1);
-	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 229376) !== 0))) {
+	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 458752) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -192,10 +192,11 @@ biesParser.T__10 = 11;
 biesParser.T__11 = 12;
 biesParser.T__12 = 13;
 biesParser.T__13 = 14;
-biesParser.INT = 15;
-biesParser.STR = 16;
-biesParser.FUNCTION = 17;
-biesParser.WS = 18;
+biesParser.T__14 = 15;
+biesParser.INT = 16;
+biesParser.STR = 17;
+biesParser.FUNCTION = 18;
+biesParser.WS = 19;
 
 biesParser.RULE_start = 0;
 biesParser.RULE_inst = 1;

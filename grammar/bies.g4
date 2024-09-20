@@ -11,6 +11,6 @@ start : inst+;
 
 inst : mnemonic (arg (arg)*)? ; // Instrucciones pueden tener uno o dos argumentos opcionales
 
-mnemonic : 'LDV' | 'POP' | 'BLD' | 'ADD' | 'MUL' | 'DIV' | 'SUB' | 'PRN' | 'BST' | 'HLT' | 'LDF' | 'APP' | '$FUN' | 'RET';
+mnemonic : 'LDV' | 'POP' | 'BLD' | 'ADD' | 'MUL' | 'DIV' | 'SUB' | 'PRN' | 'BST' | 'HLT' | 'LDF' | 'APP' | '$FUN' | 'RET' | 'TOL';
 
 arg : INT | STR | FUNCTION;
