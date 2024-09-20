@@ -6,6 +6,16 @@ class BiesVM {
     this.contexts = []; // D
   }
 
+  findFunction(functionName) {
+    for (let i = this.bindings.length - 1; i >= 0; i--) {
+      if (this.bindings[i][functionName]) {
+        return this.bindings[i][functionName]; // Retorna la closure
+      }
+    }
+    throw new Error(`Función ${functionName} no encontrada`);
+  }
+
+
   executeInstruction(mnemonic, args) { // instruction es el ctx del arbol
     // Lógica para ejecutar cada instrucción
     // Ejemplo: LDV, ADD, POP, etc.
@@ -97,7 +107,7 @@ class BiesVM {
       case 'SGN': {
         const N = this.stack.pop();
         if (typeof N === 'number') {
-          this.stack.push(Math.sign(N) > 0 ? 1 : 0);
+          this.stack.push(Math.sign(N) > 0 ? 1 : 0);//Revisar
         }
       } break;
 
@@ -205,9 +215,28 @@ class BiesVM {
       case 'BR': {
 
       } break;
+
+      case 'BF': {
+          
+      } break;
+
+      case 'LDF': {
+        const functionName = args[0];
+        // Buscar la función en los bindings (closure = función + entorno)
+        const closure = this.findFunction(functionName);
+        this.stack.push(closure);
+      } break;      
+
+      case 'APP': {
+
+      } break;
       
       case 'RET': {
         
+      } break;
+
+      case '$FUN': {
+      
       } break;
     }
   }
