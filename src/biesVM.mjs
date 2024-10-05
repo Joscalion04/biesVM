@@ -20,10 +20,14 @@ class BiesVM {
     // Lógica para ejecutar cada instrucción
     // Ejemplo: LDV, ADD, POP, etc.
     switch (mnemonic) {
+      // Inicializar
       case 'INI': {
-
+        const N = args[0];
+        this.contexts.push(N);
+        this.code = this.contexts[0];
       } break;
 
+      // Stop
       case 'HLT': {
         this.code = [];
         this.stack = [];
@@ -31,16 +35,11 @@ class BiesVM {
         this.contexts = [];
       } break;
 
-      case 'PRN': {
-        const N = this.stack.pop();
-        console.log(N);
-        this.stack.push(N);
-      } break;
-
       case 'POP': {
         this.stack.pop();
       } break;
 
+      // Swap
       case 'SWP': {
         const N = this.stack.pop();
         const M = this.stack.pop();
@@ -48,13 +47,14 @@ class BiesVM {
         this.stack.push(M);
       } break;
 
+      // Load Value
       case 'LDV': {
-        const N = args[0];
-        this.stack.push(N);
+        const V = args[0];
+        this.stack.push(V);
       } break;
 
+      // Load desde ambiente
       case 'BLD': {
-        //console.log(this.bindings[args[0]][args[1]]);
         this.stack.push(this.bindings[args[0]][args[1]]);
       } break;
 
@@ -96,7 +96,8 @@ class BiesVM {
           this.stack.push(N - M);
         }
       } break;
-      // endregion Operaciones aritméticas
+      
+      // Negación
       case 'NEG': {
         const N = this.stack.pop();
         if (typeof N === 'number') {
@@ -104,6 +105,7 @@ class BiesVM {
         }
       } break;
 
+      // Signo
       case 'SGN': {
         const N = this.stack.pop();
         if (typeof N === 'number') {
@@ -111,31 +113,36 @@ class BiesVM {
         }
       } break;
 
-      case 'EQ': {// Solo si son numeros?
+      // Igual
+      case 'EQ': {
         const N = this.stack.pop();
         const M = this.stack.pop();
         this.stack.push(N === M ? 1 : 0);
       } break;
 
-      case 'GT': {// Solo si son numeros?
+      // Mayor que
+      case 'GT': {
         const N = this.stack.pop();
         const M = this.stack.pop();
         this.stack.push(N > M ? 1 : 0);
       } break;
 
-      case 'GTE': {// Solo si son numeros?
+      // Mayor o igual que
+      case 'GTE': {
         const N = this.stack.pop();
         const M = this.stack.pop();
         this.stack.push(N >= M ? 1 : 0);
       } break;
 
-      case 'LT': {// Solo si son numeros?
+      // Menor que
+      case 'LT': {
         const N = this.stack.pop();
         const M = this.stack.pop();
         this.stack.push(N < M ? 1 : 0);
       } break;
 
-      case 'LTE': {// Solo si son numeros?
+      // Menor o igual que
+      case 'LTE': {
         const N = this.stack.pop();
         const M = this.stack.pop();
         this.stack.push(N <= M ? 1 : 0);
@@ -161,29 +168,35 @@ class BiesVM {
 
       case 'NOT': {
         const N = this.stack.pop();
-        this.stack.push(!N ? 1 : 0);
+        this.stack.push(N ? 0 : N);
       } break;
 
+      // String null test
       case 'SNT': {
         const V = this.stack.pop();
         this.stack.push(V === "" ? 1 : 0);
       } break;
 
+      // Concatenar strings
       case 'CAT': {
         const H1 = this.stack.pop();
         const H2 = this.stack.pop();
         this.stack.push(H1.concat(H2));
       } break;
 
+      // Convertir a string
       case 'TOS': {
         const V = this.stack.pop();
         this.stack.push(V.toString());
       } break;
 
-      case 'LNT': {//?
-
+      // List null test
+      case 'LNT': {
+        const V = this.stack.pop();
+        this.stack.push(Array.isArray(V) && V.length === 0 ? 1 : 0);
       } break;
 
+      // Insertar al inicio de la lista
       case 'LIN': {
         const V = this.stack.pop();
         const L = this.stack.pop();
@@ -191,18 +204,21 @@ class BiesVM {
         this.stack.push(L);
       } break;
 
+      // Tomar el k-ésimo elemento de la lista
       case 'LTK': {
         const K = this.stack.pop();
         const V = this.stack.pop();
-        this.stack.push(V[K]);//?
+        this.stack.push(V[K]);
       } break;
 
+      // Tomar el resto después del k-ésimo elemento de la lista
       case 'LRK': {
         const K = this.stack.pop();
         const V = this.stack.pop();
         this.stack.push(V.slice(K));
       } break;
 
+      // Convertir a lista
       case 'TOL': {
         const V = this.stack.pop();
         this.stack.push(Array.of(V));
@@ -212,12 +228,30 @@ class BiesVM {
         // No hacer nada
       } break;
       
+      // Salta N instrucciones
       case 'BR': {
-
+        const N = args[0];
+        this.code += N;
       } break;
 
+      // Salta N instrucciones si es verdadero
+      case 'BT': {
+        const N = args[0];
+        if (this.stack.pop()) {
+          this.code += N;
+        } else {
+          this.code++;
+        }
+      } break;
+
+      // Salta N instrucciones si es falso
       case 'BF': {
-          
+        const N = args[0];
+        if (!this.stack.pop()) {
+          this.code += N;
+        } else {
+          this.code++;
+        }
       } break;
 
       case 'LDF': {
@@ -225,18 +259,69 @@ class BiesVM {
         // Buscar la función en los bindings (closure = función + entorno)
         const closure = this.findFunction(functionName);
         this.stack.push(closure);
-      } break;      
+      } break;
 
       case 'APP': {
-
-      } break;
+        const closure = this.stack.pop(); // La closure es la función que vamos a aplicar
+        const value = this.stack.pop(); // El valor que pasamos como argumento
+        const [C, S, B, D] = closure; // Cuerpo de la función, stack, bindings y contexto de la closure
+      
+        // Empujamos el valor de entrada al nuevo contexto de bindings
+        const newBindings = [...B]; // Hacemos una copia de los bindings
+        newBindings.push(value);
+      
+        // Guardamos el contexto actual para restaurarlo más tarde
+        this.contexts.push([this.code, this.stack, this.bindings]);
+      
+        // Ejecutamos el cuerpo de la closure
+        this.code = C;
+        this.stack = S;
+        this.bindings = newBindings;
+      } break;      
       
       case 'RET': {
-        
-      } break;
-
-      case '$FUN': {
+        const returnValue = this.stack.pop(); // Valor de retorno
+        const [savedCode, savedStack, savedBindings] = this.contexts.pop(); // Restauramos el contexto anterior
       
+        // Restauramos el contexto y apilamos el valor de retorno
+        this.code = savedCode;
+        this.stack = [returnValue, ...savedStack]; // Apilamos el valor de retorno
+        this.bindings = savedBindings;
+      } break;      
+
+      case 'CST': {
+        const type = args[0]; // Tipo objetivo (number, list, string)
+        const value = this.stack.pop();
+      
+        // Verificamos si el valor es del tipo adecuado
+        if (
+          (type === 'number' && typeof value === 'number') ||
+          (type === 'list' && Array.isArray(value)) ||
+          (type === 'string' && typeof value === 'string')
+        ) {
+          this.stack.push(value); // Si coincide el tipo, lo apilamos de nuevo
+        } else {
+          throw new Error(`Casting fallido: ${value} no es del tipo ${type}`);
+        }
+      } break;      
+
+      case 'INO': {
+        const type = args[0]; // Tipo a verificar (number, list, string)
+        const value = this.stack.pop();
+        
+        // Verificamos si el valor es del tipo indicado
+        const isInstanceOf = 
+          (type === 'number' && typeof value === 'number') ||
+          (type === 'list' && Array.isArray(value)) ||
+          (type === 'string' && typeof value === 'string');
+      
+        this.stack.push(isInstanceOf ? 1 : 0); // Apilamos 1 si es del tipo, 0 si no
+      } break;      
+
+      case 'PRN': {
+        const N = this.stack.pop();
+        console.log(N);
+        this.stack.push(N);
       } break;
     }
   }
