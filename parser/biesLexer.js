@@ -1,7 +1,6 @@
 // Generated from grammar/bies.g4 by ANTLR 4.13.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
-
 /**
 * Representa un lexer para la gramática BIES.
 * @author Manuel Mora Sandi 
@@ -61,9 +60,14 @@ const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
 
 /**
- * Lexer para la gramática BIES.
- * @extends antlr4.Lexer
- */
+* Lexer para la gramática BIES.
+* @extends antlr4.Lexer
+* 
+*  @author Manuel Mora Sandi 
+* @author Derek Rojas Mendoza
+* @author Josué Vindas Pérez
+* @author Joseph León Cabezas
+*/
 export default class biesLexer extends antlr4.Lexer {
 
     /**
