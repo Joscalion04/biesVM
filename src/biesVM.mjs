@@ -32,9 +32,9 @@ class BiesVM {
   * @throws Error Si la función no se encuentra en ningún binding.
   */
   findFunction(functionName) {
-    for (let i = this.bindings.length - 1; i >= 0; i--) {
-      if (this.bindings[i][functionName]) {
-        return this.bindings[i][functionName]; // Retorna la closure
+    for (let i = this.contexts.length - 1; i >= 0; i--) {
+      if (this.contexts[i][functionName]) {
+        return this.contexts[i][functionName]; // Retorna la closure
       }
     }
     throw new Error(`Función ${functionName} no encontrada`);
