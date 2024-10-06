@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "antlr4": "^4.13.1-patch-1"
+    "antlr4": "^4.13.2"
   }
 }
