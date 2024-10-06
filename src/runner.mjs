@@ -3,8 +3,6 @@ import antlr4 from 'antlr4';
 import PrintVisitor from "../src/processor.mjs";
 import biesGrammarLexer from '../parser/biesLexer.js';
 import biesGrammarParser from '../parser/biesParser.js';
-//@ts-check
-
 let default_input_file = './test/biesTest.txt'
 
 /**
