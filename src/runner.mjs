@@ -60,6 +60,14 @@ function test_parser(input_file=default_input_file){
     visitor.visit(AST);
 
     console.log(`PROCESADO ${input_file} !`)
+
+    //console.log("BUSCAR FUNCION")
+    // Supongamos que 'tree' es el árbol sintáctico completo
+    //const functionId = '$1'; // El ID de la función que deseas buscar y ejecutar
+    //const printVisitor = new PrintVisitor();
+
+    // Ejecutar la función con el ID especificado
+    //printVisitor.executeFunctionById(AST, functionId);
 }
 
 export default test_parser

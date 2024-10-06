@@ -2,54 +2,45 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
-/**
-* Esta clase define un visitante genérico completo para un árbol de análisis producido por biesParser.
-* @author Manuel Mora Sandi 
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
+// This class defines a complete generic visitor for a parse tree produced by biesParser.
 
 export default class biesVisitor extends antlr4.tree.ParseTreeVisitor {
 
-	/**
-    * Visita un árbol de análisis producido por biesParser#start.
-    * 
-    * @param {StartContext} ctx - El contexto de la regla 'start'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
+	// Visit a parse tree produced by biesParser#start.
 	visitStart(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	/**
-    * Visita un árbol de análisis producido por biesParser#inst.
-    * 
-    * @param {InstContext} ctx - El contexto de la regla 'inst'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
+	// Visit a parse tree produced by biesParser#funDef.
+	visitFunDef(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by biesParser#argsDecl.
+	visitArgsDecl(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by biesParser#inst.
 	visitInst(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
-	/**
-    * Visita un árbol de análisis producido por biesParser#mnemonic.
-    * 
-    * @param {MnemonicContext} ctx - El contexto de la regla 'mnemonic'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
+
+	// Visit a parse tree produced by biesParser#mnemonic.
 	visitMnemonic(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
-	/**
-    * Visita un árbol de análisis producido por biesParser#arg.
-    * 
-    * @param {ArgContext} ctx - El contexto de la regla 'arg'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
+
+	// Visit a parse tree produced by biesParser#arg.
 	visitArg(ctx) {
 	  return this.visitChildren(ctx);
 	}
+
+
+
 }

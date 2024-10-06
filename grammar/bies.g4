@@ -2,15 +2,24 @@ grammar bies;
 
 // LEXER
 INT : '-'?[0-9]+;
-STR : '\'' .*?'\'' ;
+STR : '\'' .*? '\'';
 FUNCTION : '$' [0-9]+;
+FUN : '$FUN';
+END : '$END';
 WS : [ \t\r\n]+ -> skip;
 
 // PARSER
-start : inst+;
+start : (funDef | inst)+ ; // Inicia con funciones o instrucciones, y debe haber al menos una
 
-inst : mnemonic (arg (arg)*)? ; // Instrucciones pueden tener uno o dos argumentos opcionales
+funDef : FUN FUNCTION (argsDecl)? ('parent:' FUNCTION)? inst+ END FUNCTION;
 
-mnemonic : 'INI' | 'HLT' | 'POP' | 'SWP' | 'LDV' | 'BLD' | 'BST' | 'ADD' | 'MUL' | 'DIV' | 'SUB' | 'NEG' | 'SGN' | 'EQ' | 'GT' | 'GTE' | 'LT' | 'LTE' | 'AND' | 'OR' | 'XOR' | 'NOT' | 'SNT' | 'CAT' | 'TOS' | 'LNT' | 'LIN' | 'LTK' | 'LRK' | 'TOL' | 'NOP' | 'BR' | 'BT' | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN' |;
+argsDecl : 'args:' INT ; // Definición de argumentos
 
-arg : INT | STR | FUNCTION;
+inst : mnemonic (arg (arg)*)? ; // Instrucciones pueden tener uno o más argumentos
+
+mnemonic : 'INI' | 'HLT' | 'POP' | 'SWP' | 'LDV' | 'BLD' | 'BST' | 'ADD' | 'MUL' | 'DIV' | 'SUB' 
+         | 'NEG' | 'SGN' | 'EQ' | 'GT' | 'GTE' | 'LT' | 'LTE' | 'AND' | 'OR' | 'XOR' | 'NOT' 
+         | 'SNT' | 'CAT' | 'TOS' | 'LNT' | 'LIN' | 'LTK' | 'LRK' | 'TOL' | 'NOP' | 'BR' | 'BT' 
+         | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN';
+
+arg : INT | STR | FUNCTION | END;

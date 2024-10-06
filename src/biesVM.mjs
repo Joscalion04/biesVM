@@ -51,6 +51,7 @@ class BiesVM {
   executeInstruction(mnemonic, args) { // instruction es el ctx del arbol
     // Lógica para ejecutar cada instrucción
     // Ejemplo: LDV, ADD, POP, etc.
+    console.log(mnemonic, args);
     switch (mnemonic) {
       // Inicializar
       case 'INI': {
@@ -289,7 +290,7 @@ class BiesVM {
       case 'LDF': {
         const functionName = args[0];
         // Buscar la función en los bindings (closure = función + entorno)
-        const closure = this.findFunction(functionName);
+        const closure = this.findFunction(functionName); // Se va a D y posiciona su PC
         this.stack.push(closure);
       } break;
 
@@ -297,7 +298,7 @@ class BiesVM {
         const closure = this.stack.pop(); // La closure es la función que vamos a aplicar
         const value = this.stack.pop(); // El valor que pasamos como argumento
         const [C, S, B, D] = closure; // Cuerpo de la función, stack, bindings y contexto de la closure
-      
+        // return $k
         // Empujamos el valor de entrada al nuevo contexto de bindings
         const newBindings = [...B]; // Hacemos una copia de los bindings
         newBindings.push(value);
