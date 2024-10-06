@@ -37,7 +37,7 @@ class BiesVM {
         return this.contexts[i][functionName]; // Retorna la closure
       }
     }
-    throw new Error(`Función ${functionName} no encontrada`);
+    return functionName;
   }
 
   /**
@@ -48,9 +48,10 @@ class BiesVM {
   * @param mnemonic El mnemónico de la instrucción a ejecutar.
   * @param args Los argumentos adicionales requeridos para la ejecución de la instrucción.
   */
-  executeInstruction(mnemonic, args) { // instruction es el ctx del arbol
+  executeInstruction(mnemonic, args, ctx) { // instruction es el ctx del arbol
     // Lógica para ejecutar cada instrucción
     // Ejemplo: LDV, ADD, POP, etc.
+   
     console.log(mnemonic, args);
     switch (mnemonic) {
       // Inicializar
@@ -296,30 +297,32 @@ class BiesVM {
 
       case 'APP': {
         const closure = this.stack.pop(); // La closure es la función que vamos a aplicar
-        const value = this.stack.pop(); // El valor que pasamos como argumento
-        const [C, S, B, D] = closure; // Cuerpo de la función, stack, bindings y contexto de la closure
+        //const value = this.stack.pop(); // El valor que pasamos como argumento
+        //const [C, S, B, D] = closure; // Cuerpo de la función, stack, bindings y contexto de la closure
         // return $k
         // Empujamos el valor de entrada al nuevo contexto de bindings
-        const newBindings = [...B]; // Hacemos una copia de los bindings
-        newBindings.push(value);
+        //const newBindings = [...B]; // Hacemos una copia de los bindings
+        //newBindings.push(value);
       
         // Guardamos el contexto actual para restaurarlo más tarde
-        this.contexts.push([this.code, this.stack, this.bindings]);
+        //this.contexts.push([this.code, this.stack, this.bindings]);
       
         // Ejecutamos el cuerpo de la closure
-        this.code = C;
-        this.stack = S;
-        this.bindings = newBindings;
+        //this.code = C;
+        //this.stack = S;
+        //this.bindings = newBindings;
+        return closure;
       } break;      
       
       case 'RET': {
-        const returnValue = this.stack.pop(); // Valor de retorno
-        const [savedCode, savedStack, savedBindings] = this.contexts.pop(); // Restauramos el contexto anterior
+        //const returnValue = this.stack.pop(); // Valor de retorno
+        //const [savedCode, savedStack, savedBindings] = this.contexts.pop(); // Restauramos el contexto anterior
       
         // Restauramos el contexto y apilamos el valor de retorno
-        this.code = savedCode;
-        this.stack = [returnValue, ...savedStack]; // Apilamos el valor de retorno
-        this.bindings = savedBindings;
+        //this.code = savedCode;
+        //this.stack = [returnValue, ...savedStack]; // Apilamos el valor de retorno
+        //this.bindings = savedBindings;
+        return "RET";
       } break;      
 
       case 'CST': {

@@ -49,7 +49,7 @@ class PrintVisitor extends biesGrammarVisitor {
         const args = ctx.arg().map(arg => this.visit(arg)).filter(arg => arg !== null); // Obtener los argumentos y filtrar los nulos
         
         // Ejecutar instrucción en la máquina virtual
-        this.VM.executeInstruction(mnemonic, args);
+        //this.VM.executeInstruction(mnemonic, args, ctx);
         // this.VM.executeInstruction(ctx);
         // VM.executeInstruction(mnemonic, args)(findFunctionbID())
         // if(this.VM.executeInstruction(mnemonic, args)!=null){
@@ -58,6 +58,9 @@ class PrintVisitor extends biesGrammarVisitor {
         // 
         // }
         //}
+        if(this.VM.executeInstruction(mnemonic, args, ctx)!=null){
+            this.executeFunctionById(ctx, this.VM.executeInstruction(mnemonic, args, ctx));
+        }
         return null;
     }
 
