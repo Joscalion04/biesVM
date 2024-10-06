@@ -59,8 +59,12 @@ const sharedContextCache = new antlr4.atn.PredictionContextCache();
 /**
 * @class que representa el analizador sintáctico para el lenguaje BIES.
 * Extiende la clase `antlr4.Parser`.
+*
+* @author Manuel Mora Sandi 
+* @author Derek Rojas Mendoza
+* @author Josué Vindas Pérez
+* @author Joseph León Cabezas
 */
-
 export default class biesParser extends antlr4.Parser {
 	
 	/** Nombre del archivo de gramática. */
@@ -268,9 +272,13 @@ biesParser.RULE_mnemonic = 2;
 biesParser.RULE_arg = 3;
 
 /**
- * @class que representa el contexto de inicio del parser en la gramática BIES.
- * Hereda de antlr4.ParserRuleContext.
- */
+* @class que representa el contexto de inicio del parser en la gramática BIES.
+* Hereda de antlr4.ParserRuleContext.
+* @author Manuel Mora Sandi 
+* @author Derek Rojas Mendoza
+* @author Josué Vindas Pérez
+* @author Joseph León Cabezas
+*/
 class StartContext extends antlr4.ParserRuleContext {
 
 	/**
@@ -327,6 +335,11 @@ class StartContext extends antlr4.ParserRuleContext {
 /**
 * Clase que representa el contexto de una instrucción en el parser de la gramática BIES.
 * Hereda de antlr4.ParserRuleContext.
+*
+* @author Manuel Mora Sandi 
+* @author Derek Rojas Mendoza
+* @author Josué Vindas Pérez
+* @author Joseph León Cabezas
 */
 class InstContext extends antlr4.ParserRuleContext {
 
@@ -393,6 +406,10 @@ class InstContext extends antlr4.ParserRuleContext {
 /**
 * Clase que representa el contexto de un mnemónico en el parser de la gramática BIES.
 * Hereda de antlr4.ParserRuleContext.
+* @author Manuel Mora Sandi 
+* @author Derek Rojas Mendoza
+* @author Josué Vindas Pérez
+* @author Joseph León Cabezas
 */
 class MnemonicContext extends antlr4.ParserRuleContext {
 
@@ -432,6 +449,11 @@ class MnemonicContext extends antlr4.ParserRuleContext {
 /**
 * Clase que representa el contexto de un argumento en el parser de la gramática BIES.
 * Hereda de antlr4.ParserRuleContext.
+*
+* @author Manuel Mora Sandi 
+* @author Derek Rojas Mendoza
+* @author Josué Vindas Pérez
+* @author Joseph León Cabezas
 */
 class ArgContext extends antlr4.ParserRuleContext {
 
