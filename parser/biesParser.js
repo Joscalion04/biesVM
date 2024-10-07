@@ -3,7 +3,7 @@
 import antlr4 from 'antlr4';
 import biesVisitor from './biesVisitor.js';
 
-const serializedATN = [4,1,48,53,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
+const serializedATN = [4,1,49,53,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
 2,5,7,5,1,0,1,0,4,0,15,8,0,11,0,12,0,16,1,1,1,1,1,1,3,1,22,8,1,1,1,1,1,3,
 1,26,8,1,1,1,4,1,29,8,1,11,1,12,1,30,1,1,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,
 5,3,42,8,3,10,3,12,3,45,9,3,3,3,47,8,3,1,4,1,4,1,5,1,5,1,5,0,0,6,0,2,4,6,
@@ -44,7 +44,7 @@ export default class biesParser extends antlr4.Parser {
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, "INT", "STR", "FUNCTION", 
-                             "FUN", "END", "WS" ];
+                             "FUN", "END", "WS", "COMMENT" ];
     static ruleNames = [ "start", "funDef", "argsDecl", "inst", "mnemonic", 
                          "arg" ];
 
@@ -380,6 +380,7 @@ biesParser.FUNCTION = 45;
 biesParser.FUN = 46;
 biesParser.END = 47;
 biesParser.WS = 48;
+biesParser.COMMENT = 49;
 
 biesParser.RULE_start = 0;
 biesParser.RULE_funDef = 1;

@@ -7,6 +7,8 @@ FUNCTION : '$' [0-9]+;
 FUN : '$FUN';
 END : '$END';
 WS : [ \t\r\n]+ -> skip;
+COMMENT : ';' .*? [\r\n] -> skip; // Comentario que comienza con ; y se ignora hasta el final de la línea
+
 
 // PARSER
 start : (funDef | inst)+ ; // Inicia con funciones o instrucciones, y debe haber al menos una

@@ -46,6 +46,7 @@ FUNCTION=45
 FUN=46
 END=47
 WS=48
+COMMENT=49
 'parent:'=1
 'args:'=2
 'INI'=3
