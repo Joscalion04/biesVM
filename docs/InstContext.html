@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: BiesVM</title>
+    <title>JSDoc: Class: InstContext</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: BiesVM</h1>
+    <h1 class="page-title">Class: InstContext</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BiesVM<span class="signature">(code, bindings, contexts, stack)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>InstContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Clase que representa una máquina virtual Bies, la cual ejecuta un conjunto de instrucciones</div>
+            <div class="class-description">Clase que representa el contexto de una instrucción en el parser de la gramática BIES.Hereda de antlr4.ParserRuleContext.</div>
         
     
 </header>
@@ -45,16 +45,12 @@
     
 
     
-    <h4 class="name" id="BiesVM"><span class="type-signature"></span>new BiesVM<span class="signature">(code, bindings, contexts, stack)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="InstContext"><span class="type-signature"></span>new InstContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
 
 
-
-<div class="description">
-    Constructor de la máquina virtual Bies con un conjunto de instrucciones y un entorno global
-</div>
 
 
 
@@ -77,7 +73,11 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -89,92 +89,113 @@
 
         <tr>
             
-                <td class="name"><code>code</code></td>
+                <td class="name"><code>parser</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Parser</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">Código fuente a ejecutar</td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">El parser que invoca este contexto.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>bindings</code></td>
+                <td class="name"><code>parent</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">ParserRuleContext</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">Entorno global</td>
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last">El contexto padre, si existe.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>contexts</code></td>
+                <td class="name"><code>invokingState</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">number</span>
 
 
             
             </td>
 
             
-
-            
-
-            <td class="description last">Contextos de ejecución</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>stack</code></td>
-            
-
-            <td class="type">
-            
+                <td class="attributes">
                 
-<span class="param-type">object</span>
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
+            
 
             
-            </td>
-
+                <td class="default">
+                
+                    -1
+                
+                </td>
             
 
-            
-
-            <td class="description last">Pila de ejecución</td>
+            <td class="description last">El estado de invocación de la regla.</td>
         </tr>
 
     
@@ -228,7 +249,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line10">line 10</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line744">line 744</a>
     </li></ul></dd>
     
 
@@ -273,6 +294,72 @@
 
     
 
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="arg"><span class="type-signature"></span>arg<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Recupera una o todas las instancias de ArgContext hijas.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line780">line 780</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
     
 
     
@@ -284,7 +371,7 @@
     
 
     
-    <h4 class="name" id="executeInstruction"><span class="type-signature"></span>executeInstruction<span class="signature">(mnemonic, args)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {*}</span></h4>
     
 
     
@@ -292,7 +379,7 @@
 
 
 <div class="description">
-    Ejecuta una instrucción basada en el mnemónico proporcionado. La lógica varía dependiendo del tipo de instrucción, incluyendo operaciones aritméticas, lógicas,manipulación de la pila y control de flujo.
+    Acepta un visitante y delega la visita al método correspondiente.
 </div>
 
 
@@ -328,10 +415,15 @@
 
         <tr>
             
-                <td class="name"><code>mnemonic</code></td>
+                <td class="name"><code>visitor</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">Visitor</span>
+
+
             
             </td>
 
@@ -339,25 +431,7 @@
 
             
 
-            <td class="description last">El mnemónico de la instrucción a ejecutar.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>args</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Los argumentos adicionales requeridos para la ejecución de la instrucción.</td>
+            <td class="description last">El visitante que se acepta.</td>
         </tr>
 
     
@@ -398,7 +472,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line51">line 51</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line797">line 797</a>
     </li></ul></dd>
     
 
@@ -421,160 +495,138 @@
 
 
 
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="findFunction"><span class="type-signature"></span>findFunction<span class="signature">(functionName)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Busca y devuelve la closure de una función por su nombre recorriendo los bindings desde el más reciente al más antiguo. Lanza un error si no se encuentra.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>functionName</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">El nombre de la función a buscar.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line34">line 34</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-    <div class="param-desc">
-    
-        Error Si la función no se encuentra en ningún binding.
-    
-    </div>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    La closure asociada a la función encontrada.
+    - El resultado de la visita del visitante.
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="mnemonic"><span class="type-signature"></span>mnemonic<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="MnemonicContext.html">MnemonicContext</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Recupera la instancia de MnemonicContext asociada a esta instrucción.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line770">line 770</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - La instancia de MnemonicContext.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="MnemonicContext.html">MnemonicContext</a></span>
+
+
+    </dd>
+</dl>
 
     
 
