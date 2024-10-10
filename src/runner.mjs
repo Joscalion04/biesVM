@@ -1,6 +1,5 @@
 import fs from 'fs';
 import antlr4 from 'antlr4';
-import Evaluator from "./Evaluator.mjs";
 import Loader from "./Loader.mjs";
 import biesGrammarLexer from '../parser/grammar/biesLexer.js';
 import biesGrammarParser from '../parser/grammar/biesParser.js';
@@ -59,12 +58,6 @@ function test_parser(input_file=default_input_file){
     //Visita el AST.
     const loader = new Loader();
     loader.visit(AST);
-
-    // Se necesita un Evaluator que ejecute la máquina virtual.
-
-    //Visita el AST.
-    // const visitor = new Evaluator();
-    // visitor.run();
 
     console.log(`PROCESADO ${input_file} !`)
 

@@ -52,8 +52,20 @@ En code hay:
     return this.contexts.find(context => context.FUN === functionClosure);
   }
 
-  createNewContext(arg, actual = false) {
-    this.contexts.push({context: {code: [], stack: [], bindings: [[]]}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null});
+  createNewContext(arg, actual = false, K) {
+    this.contexts.push({context: {code: [], stack: this.stack, bindings: this.bindings}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null, K: K});
+  }
+
+  pop() {
+    if (this.getActualContext().K === null || this.getActualContext().K > 0) {
+      const V = this.stack.pop();
+      if (this.getActualContext().K !== null) {
+        this.getActualContext().K--;
+      }
+      return V;
+    } else {
+      throw new Error('No se puede hacer POP con K = 0');
+    }
   }
 
   /**
@@ -67,14 +79,13 @@ En code hay:
   executeInstruction(arg) {// arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext()? this.code[this.getActualContext().PC] : null;
-    
-    // console.log(actualCode ? actualCode.args[0] : 'No hay args');
 
-    switch (arg[0] != null? arg[0] : actualCode) {
+    switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
         if (this.contexts.length === 0) {
-            this.createNewContext(arg[1], true);
+            this.createNewContext(arg[1], true, null);
+            this.getActualContext().PC = -1;
         }
       } break;
 
@@ -84,16 +95,17 @@ En code hay:
         this.stack = [];
         this.bindings = [[]];
         this.contexts = [];
+        return 'FIN';
       } break;
 
       case 'POP': {
-        this.stack.pop();
+        this.pop();
       } break;
 
       // Swap
       case 'SWP': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop();
+        const M = this.pop()
         this.stack.push(N);
         this.stack.push(M);
       } break;
@@ -110,39 +122,39 @@ En code hay:
       } break;
 
       case 'BST': {
-        const K = this.stack.pop(); // Variable
+        const K = this.pop();// Variable
         const E = parseInt(actualCode.args[0]); // Binding
         const V = parseInt(actualCode.args[1]); 
         this.bindings[E][V] = K;
       } break;
 
       case 'ADD': {
-        const N = parseInt(this.stack.pop()); 
-        const M = parseInt(this.stack.pop()); 
+        const N = parseInt(this.pop()); 
+        const M = parseInt(this.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N + M);
         }
       } break;
 
       case 'MUL': {
-        const N = parseInt(this.stack.pop());
-        const M = parseInt(this.stack.pop()); 
+        const N = parseInt(this.pop());
+        const M = parseInt(this.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N * M);
         }
       } break;
 
       case 'DIV': {
-        const N = parseInt(this.stack.pop()); 
-        const M = parseInt(this.stack.pop()); 
+        const N = parseInt(this.pop()); 
+        const M = parseInt(this.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N / M);
         }
       } break;
 
       case 'SUB': {
-        const N = parseInt(this.stack.pop()); 
-        const M = parseInt(this.stack.pop()); 
+        const N = parseInt(this.pop()); 
+        const M = parseInt(this.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N - M);
         }
@@ -150,7 +162,7 @@ En code hay:
       
       // Negación
       case 'NEG': {
-        const N = this.stack.pop();
+        const N = this.pop()
         if (typeof N === 'number') {
           this.stack.push(-N);
         }
@@ -158,7 +170,7 @@ En code hay:
 
       // Signo
       case 'SGN': {
-        const N = this.stack.pop();
+        const N = this.pop()
         if (typeof N === 'number') {
           this.stack.push(Math.sign(N) > 0 ? 1 : 0);//Revisar
         }
@@ -166,112 +178,112 @@ En code hay:
 
       // Igual
       case 'EQ': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N === M ? 1 : 0);
       } break;
 
       // Mayor que
       case 'GT': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N > M ? 1 : 0);
       } break;
 
       // Mayor o igual que
       case 'GTE': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N >= M ? 1 : 0);
       } break;
 
       // Menor que
       case 'LT': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N < M ? 1 : 0);
       } break;
 
       // Menor o igual que
       case 'LTE': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N <= M ? 1 : 0);
       } break;
 
       case 'AND': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N && M ? 1 : 0);
       } break;
 
       case 'OR': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N || M ? 1 : 0);
       } break;
 
       case 'XOR': {
-        const N = this.stack.pop();
-        const M = this.stack.pop();
+        const N = this.pop()
+        const M = this.pop()
         this.stack.push(N ^ M);// Funciona este operador?
       } break;
 
       case 'NOT': {
-        const N = this.stack.pop();
+        const N = this.pop()
         this.stack.push(N ? 0 : N);
       } break;
 
       // String null test
       case 'SNT': {
-        const V = this.stack.pop();
+        const V = this.pop()
         this.stack.push(V === "" ? 1 : 0);
       } break;
 
       // Concatenar strings
       case 'CAT': {
-        const H1 = this.stack.pop();
-        const H2 = this.stack.pop();
+        const H1 = this.pop()
+        const H2 = this.pop()
         this.stack.push(H1.concat(H2));
       } break;
 
       // Convertir a string
       case 'TOS': {
-        const V = this.stack.pop();
+        const V = this.pop()
         this.stack.push(V.toString());
       } break;
 
       // List null test
       case 'LNT': {
-        const V = this.stack.pop();
+        const V = this.pop()
         this.stack.push(Array.isArray(V) && V.length === 0 ? 1 : 0);
       } break;
 
       // Insertar al inicio de la lista
       case 'LIN': {
-        const V = this.stack.pop();
-        const L = this.stack.pop();
+        const V = this.pop()
+        const L = this.pop()
         L.unshift(V);
         this.stack.push(L);
       } break;
 
       // Tomar el k-ésimo elemento de la lista
       case 'LTK': {
-        const K = this.stack.pop();
-        const V = this.stack.pop();
+        const K = this.pop()
+        const V = this.pop()
         this.stack.push(V[K]);
       } break;
 
       // Tomar el resto después del k-ésimo elemento de la lista
       case 'LRK': {
-        const K = this.stack.pop();
-        const V = this.stack.pop();
+        const K = this.pop()
+        const V = this.pop()
         this.stack.push(V.slice(K));
       } break;
 
       // Convertir a lista
       case 'TOL': {
-        const V = this.stack.pop();
+        const V = this.pop()
         this.stack.push(Array.of(V));
       } break;
 
@@ -288,7 +300,7 @@ En code hay:
       // Salta N instrucciones si es verdadero
       case 'BT': {
         const N = args[0];
-        if (this.stack.pop()) {
+        if (this.pop()) {
           this.code += N;
         } else {
           this.code++;
@@ -298,7 +310,7 @@ En code hay:
       // Salta N instrucciones si es falso
       case 'BF': {
         const N = args[0];
-        if (!this.stack.pop()) {
+        if (!this.pop()) {
           this.code += N;
         } else {
           this.code++;
@@ -306,7 +318,7 @@ En code hay:
       } break;
 
       case 'LDF': {
-        const closure = this.findContextByFUN(actualCode.args[0]).FUN;
+        const closure = this.findContextByFUN(actualCode.args[0]) ? this.findContextByFUN(actualCode.args[0]).FUN : null;
         if (closure) {// Si la función ya existe, la metemos en la pila
           this.stack.push(closure);
         } else {  // Si no, creamos un nuevo contexto para esa función y la metemos en la pila
@@ -316,7 +328,7 @@ En code hay:
       } break;
 
       case 'APP': {
-        const closure = this.stack.pop(); // La closure es la función que vamos a aplicar
+        const closure = this.pop();// La closure es la función que vamos a aplicar
         
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
@@ -327,8 +339,8 @@ En code hay:
         const newContext = this.findContextByFUN(closure);
         newContext.ACTUAL = true;
         this.code = newContext.context.code;
-        this.stack = newContext.context.stack;
-        this.bindings = newContext.context.bindings;
+        console.log(actualCode.args[0] ? actualCode.args[0] : 1)
+        newContext.K = actualCode.args[0] ? actualCode.args[0] : 1;// Guardamos el K de la función
 
         // Inicializamos el PC
         newContext.PC = -1;// se pone en -1 para que al incrementar en la siguiente instrucción quede en 0
@@ -336,27 +348,25 @@ En code hay:
 
         // Incrementamos el PC antes de retornar
         this.getActualContext().PC++;
-
+        
         return closure;
       } break;      
       
       case 'RET': {
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
-        actualContext.context = {code: this.code, stack: this.stack, bindings: this.bindings};
+        actualContext.context = {code: []};
         actualContext.ACTUAL = false;
 
         // Ponemos el contexto anterior en actual
         const previousContext = this.findContextByFUN(actualContext.previousFUN);
         previousContext.ACTUAL = true;
         this.code = previousContext.context.code;
-        this.stack = previousContext.context.stack;
-        this.bindings = previousContext.context.bindings;
       } break;      
 
       case 'CST': {
         const type = actualCode.args[0]; // Tipo objetivo (number, list, string)
-        const value = this.stack.pop();
+        const value = this.pop()
       
         // Verificamos si el valor es del tipo adecuado
         if (
@@ -372,7 +382,7 @@ En code hay:
 
       case 'INO': {
         const type = actualCode.args[0]; // Tipo a verificar (number, list, string)
-        const value = this.stack.pop();
+        const value = this.pop()
         
         // Verificamos si el valor es del tipo indicado
         const isInstanceOf = 
@@ -384,7 +394,7 @@ En code hay:
       } break;      
 
       case 'PRN': {
-        const N = this.stack.pop();
+        const N = this.pop()
         console.log(N);
         this.stack.push(N);
       } break;

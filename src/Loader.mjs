@@ -48,20 +48,25 @@ class Loader extends biesGrammarVisitor {
         // Almacenar la instrucción en el array `code` de la VM
         this.VM.code.push({ mnemonic, args });
         
-        if (!ctx.children || ctx.children.length === 0) {
+        if (mnemonic === 'RET' || mnemonic === 'HLT') {
             this.run();
         }
+    
         return null;
     }
 
     run() {
         let continuar = true;
         while (continuar) {
-            const closure = this.VM.executeInstruction()
-            if (closure != null) {// Significa que viene un app
-                continuar = false;
-                this.executeFunctionById(this.firstNode, closure);
-                break;
+            const instruction = this.VM.executeInstruction();
+            if (instruction != null) {// Significa que viene algo
+                if (instruction === 'FIN') {
+                    continuar = false;
+                    break;
+                } else {
+                    this.executeFunctionById(this.firstNode, instruction);
+                    break;
+                }
             }
         } 
     }
