@@ -1,3 +1,5 @@
+import readline from 'readline';
+
 /**
 * Clase que representa una máquina virtual Bies, la cual ejecuta un conjunto de instrucciones
 * 
@@ -22,27 +24,6 @@ class BiesVM {
     this.bindings = [[]]; // B
     this.contexts = []; // D
   }
-
-/*
-
-En code hay:
-
-[
-  { mnemonic: 'LDV', args: [ '1' ] },
-  { mnemonic: 'BST', args: [ '0', '0' ] },
-  { mnemonic: 'LDV', args: [ '656' ] },
-  { mnemonic: 'BST', args: [ '0', '1' ] },
-  { mnemonic: 'LDV', args: [ '10' ] },
-  { mnemonic: 'BLD', args: [ '0', '0' ] },
-  { mnemonic: 'MUL', args: [] },
-  { mnemonic: 'BLD', args: [ '0', '1' ] },
-  { mnemonic: 'ADD', args: [] },
-  { mnemonic: 'BST', args: [ '0', '0' ] },
-  { mnemonic: 'LDF', args: [ '$1' ] },
-  { mnemonic: 'APP', args: [] },
-  { mnemonic: 'HLT', args: [] }
-]
-*/
 
   getActualContext() {
     return this.contexts.find(context => context.ACTUAL);
@@ -69,6 +50,23 @@ En code hay:
   }
 
   /**
+   * Obtiene la entrada del usuario de manera asíncrona.
+   * @returns {Promise<string>} - Retorna una promesa que se resuelve con la entrada del usuario.
+  */
+  getInput() {
+    return new Promise((resolve) => {
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+      rl.question('', (input) => {
+        rl.close();
+        resolve(input);
+      });
+    });
+  }
+
+  /**
   * Ejecuta una instrucción basada en el mnemónico proporcionado. La lógica varía 
   * dependiendo del tipo de instrucción, incluyendo operaciones aritméticas, lógicas,
   * manipulación de la pila y control de flujo.
@@ -76,10 +74,10 @@ En code hay:
   * @param mnemonic El mnemónico de la instrucción a ejecutar.
   * @param args Los argumentos adicionales requeridos para la ejecución de la instrucción.
   */
-  executeInstruction(arg) {// arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
+  async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext()? this.code[this.getActualContext().PC] : null;
-
+    
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -334,20 +332,16 @@ En code hay:
         const actualContext = this.getActualContext();
         actualContext.context = {code: this.code, stack: this.stack, bindings: this.bindings};
         actualContext.ACTUAL = false;
+        actualContext.PC++;
 
         // Ponemos el contexto de la nueva función en actual  
         const newContext = this.findContextByFUN(closure);
         newContext.ACTUAL = true;
         this.code = newContext.context.code;
-        console.log(actualCode.args[0] ? actualCode.args[0] : 1)
         newContext.K = actualCode.args[0] ? actualCode.args[0] : 1;// Guardamos el K de la función
 
         // Inicializamos el PC
         newContext.PC = -1;// se pone en -1 para que al incrementar en la siguiente instrucción quede en 0
-
-
-        // Incrementamos el PC antes de retornar
-        this.getActualContext().PC++;
         
         return closure;
       } break;      
@@ -398,6 +392,26 @@ En code hay:
         console.log(N);
         this.stack.push(N);
       } break;
+
+      // Tomar el k-ésimo elemento de un string
+      case 'STK': {
+        const K = this.pop()
+        const V = this.pop()
+        this.stack.push(V[K]);
+      } break;
+
+      // Tomar el resto después del k-ésimo elemento del string
+      case 'SRK': {
+        const K = this.pop()
+        const V = this.pop()
+        this.stack.push(V.slice(K));
+      } break;
+
+      // Guardar el input de consola en en stack
+      case 'INP': {
+        const input = await this.getInput();
+        this.stack.push(input);
+      } break;
     }
     // Incrementamos el PC
     this.getActualContext().PC++;
@@ -422,8 +436,6 @@ En code hay:
   //   }
   //   throw new Error(`Función ${functionName} no encontrada`);
   // }
-
-
 }
 
 export default BiesVM;

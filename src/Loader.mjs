@@ -30,7 +30,8 @@ class Loader extends biesGrammarVisitor {
             this.VM.executeInstruction(['INI', this.iniArgs]);
             this.executeFunctionById(ctx, this.iniArgs);
         } else {
-            this.visitChildren(ctx);
+            this.VM.executeInstruction(['INI', "$0"]);
+            this.executeFunctionById(ctx, "$0");
         }
         return null; 
     }
@@ -55,10 +56,10 @@ class Loader extends biesGrammarVisitor {
         return null;
     }
 
-    run() {
+    async run() {
         let continuar = true;
         while (continuar) {
-            const instruction = this.VM.executeInstruction();
+            const instruction = await this.VM.executeInstruction();
             if (instruction != null) {// Significa que viene algo
                 if (instruction === 'FIN') {
                     continuar = false;
@@ -101,6 +102,7 @@ class Loader extends biesGrammarVisitor {
         class FunctionFinder extends biesGrammarVisitor {
             visitFunDef(ctx) {
                 const currentFunctionId = ctx.FUNCTION(0).getText();
+                console.log(currentFunctionId);
                 if (currentFunctionId === functionId) {
                     foundNode = ctx; // Nodo encontrado
                     return ctx;
@@ -138,7 +140,7 @@ class Loader extends biesGrammarVisitor {
 
         class FunctionFinder extends biesGrammarVisitor {
             visitInst(ctx) {
-                const currentInstruction = ctx.mnemonic().getText();
+                const currentInstruction = ctx.mnemonic().getText() ? ctx.mnemonic().getText() : '';
                 if (currentInstruction === 'INI') {
                     foundNode = ctx; // Nodo encontrado
                     return ctx;

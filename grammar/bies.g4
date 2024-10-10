@@ -22,6 +22,6 @@ inst : mnemonic (arg (arg)*)? ; // Instrucciones pueden tener uno o más argumen
 mnemonic : 'INI' | 'HLT' | 'POP' | 'SWP' | 'LDV' | 'BLD' | 'BST' | 'ADD' | 'MUL' | 'DIV' | 'SUB' 
          | 'NEG' | 'SGN' | 'EQ' | 'GT' | 'GTE' | 'LT' | 'LTE' | 'AND' | 'OR' | 'XOR' | 'NOT' 
          | 'SNT' | 'CAT' | 'TOS' | 'LNT' | 'LIN' | 'LTK' | 'LRK' | 'TOL' | 'NOP' | 'BR' | 'BT' 
-         | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN';
+         | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN' | 'STK' | 'SRK' | 'INP';
 
-arg : INT | STR | FUNCTION | END;
+arg : INT | STR | FUNCTION;

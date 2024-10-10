@@ -59,8 +59,6 @@ function test_parser(input_file=default_input_file){
     const loader = new Loader();
     loader.visit(AST);
 
-    console.log(`PROCESADO ${input_file} !`)
-
     //console.log("BUSCAR FUNCION")
     // Supongamos que 'tree' es el árbol sintáctico completo
     //const functionId = '$1'; // El ID de la función que deseas buscar y ejecutar
