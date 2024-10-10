@@ -1,38 +1,37 @@
-import biesGrammarVisitor from '../parser/biesVisitor.js';
-import BiesVM from "../src/biesVM.mjs";
-import fs from 'fs';
-import antlr4 from 'antlr4';
-//@ts-check
+import biesGrammarVisitor from '../parser/grammar/biesVisitor.js';
+import BiesVM from "./BiesVM.mjs";
 
 /**
  * Visitor personalizado que extiende el `biesGrammarVisitor` para recorrer 
- * el árbol sintáctico y ejecutar la máquina virtual asociada (BiesVM).
- *
- * @author Manuel Mora Sandi 
- * @author Derek Rojas Mendoza
- * @author Josué Vindas Pérez
- * @author Joseph León Cabezas
+ * el árbol sintáctico y guardar las instrucciones de las funciones en la máquina virtual asociada (BiesVM).
  */
-class PrintVisitor extends biesGrammarVisitor {
+class Loader extends biesGrammarVisitor {
     VM = new BiesVM(); // Máquina virtual
-    PC = 0;
-    hasExecutedFunction = false; // Nuevo indicador para controlar la ejecución de la función $0
+    iniArgs = null;
+    firstNode = null;
 
     /**
-     * Inicia el recorrido del árbol, pero busca la función `funID $0` antes de procesar todo.
+     * Inicia el recorrido del árbol, pero busca la instrucción `INI` antes de procesar todo.
      * 
      * @param {Object} ctx El contexto del nodo de inicio en el árbol sintáctico.
-     * @return El resultado de visitar el nodo de la función `funID $0` o procesar normalmente.
+     * @return El resultado de visitar el nodo de la función indicada en la isntrucción `INI` o procesar normalmente.
      */
     visitStart(ctx) {
-        // Aquí se recorre el AST completo, pero controlando la ejecución de la función $0
-        this.executeFunctionById(ctx, "$0"); // MAIN
-        
-        // Una vez ejecutada la función $0, continuar con el recorrido normal si es necesario
-        if (!this.hasExecutedFunction) {
-            return this.visitChildren(ctx);
+
+        if (!this.iniArgs) {
+            this.iniArgs = this.findINI(ctx);
+        }
+        if (!this.firstNode) {
+            this.firstNode = ctx;
         }
 
+        // Aquí se recorre el AST completo, pero controlando la ejecución de la función que venga como argumento en INI
+        if (this.iniArgs) {
+            this.VM.executeInstruction(['INI', this.iniArgs]);
+            this.executeFunctionById(ctx, this.iniArgs);
+        } else {
+            this.visitChildren(ctx);
+        }
         return null; 
     }
 
@@ -41,27 +40,30 @@ class PrintVisitor extends biesGrammarVisitor {
      * 
      * @param {Object} ctx - El contexto del nodo actual en el árbol de análisis sintáctico (AST).
      * @returns {null} - No retorna ningún valor después de procesar la instrucción.
-     * 
-     * El método obtiene el mnemonico de la instrucción, los argumentos (si los hay) y los imprime en la consola. 
      */
     visitInst(ctx) {
         const mnemonic = ctx.mnemonic().getText(); // Obtiene la instrucción
         const args = ctx.arg().map(arg => this.visit(arg)).filter(arg => arg !== null); // Obtener los argumentos y filtrar los nulos
         
-        // Ejecutar instrucción en la máquina virtual
-        //this.VM.executeInstruction(mnemonic, args, ctx);
-        // this.VM.executeInstruction(ctx);
-        // VM.executeInstruction(mnemonic, args)(findFunctionbID())
-        // if(this.VM.executeInstruction(mnemonic, args)!=null){
-        // 
-        // executeFunctionById(tree, functionId){
-        // 
-        // }
-        //}
-        if(this.VM.executeInstruction(mnemonic, args, ctx)!=null){
-            this.executeFunctionById(ctx, this.VM.executeInstruction(mnemonic, args, ctx));
+        // Almacenar la instrucción en el array `code` de la VM
+        this.VM.code.push({ mnemonic, args });
+        
+        if (!ctx.children || ctx.children.length === 0) {
+            this.run();
         }
         return null;
+    }
+
+    run() {
+        let continuar = true;
+        while (continuar) {
+            const closure = this.VM.executeInstruction()
+            if (closure != null) {// Significa que viene un app
+                continuar = false;
+                this.executeFunctionById(this.firstNode, closure);
+                break;
+            }
+        } 
     }
 
     /**
@@ -82,19 +84,6 @@ class PrintVisitor extends biesGrammarVisitor {
     }
 
     /**
-     * Visita una definición de función y procesa el cuerpo de la función.
-     * 
-     * @param {Object} ctx - El contexto de la función en el árbol sintáctico.
-     * @returns {null}
-     */
-    visitFunDef(ctx) {
-        const functionId = ctx.FUNCTION(0).getText(); // Identificador de la función
-        console.log(`Definición de función: ${functionId}`);
-        // Recorrer el cuerpo de la función
-        return this.visitChildren(ctx);
-    }
-
-    /**
      * Busca un nodo de función por su `functionId` en el árbol sintáctico.
      * 
      * @param {Object} tree - El árbol sintáctico completo.
@@ -103,11 +92,7 @@ class PrintVisitor extends biesGrammarVisitor {
      */
     findFunctionById(tree, functionId) {
         let foundNode = null;
-        const visitor = new biesGrammarVisitor();
 
-        /**
-         * Visitor que busca la función por ID
-         */
         class FunctionFinder extends biesGrammarVisitor {
             visitFunDef(ctx) {
                 const currentFunctionId = ctx.FUNCTION(0).getText();
@@ -142,6 +127,31 @@ class PrintVisitor extends biesGrammarVisitor {
             console.log(`Función con ID ${functionId} no encontrada.`);
         }
     }
+
+    findINI(tree) {
+        let foundNode = null;
+
+        class FunctionFinder extends biesGrammarVisitor {
+            visitInst(ctx) {
+                const currentInstruction = ctx.mnemonic().getText();
+                if (currentInstruction === 'INI') {
+                    foundNode = ctx; // Nodo encontrado
+                    return ctx;
+                }
+                return this.visitChildren(ctx); // Continuar visitando hijos
+            }
+        }
+
+        // Ejecutar el visitor que busca la función
+        const finder = new FunctionFinder();
+        finder.visit(tree);
+
+        if (foundNode) {
+            return foundNode.arg().map(arg => this.visit(arg)).filter(arg => arg !== null)[0];
+        } else {
+            return null;
+        }
+    }
 }
 
-export default PrintVisitor;
+export default Loader;

@@ -23,21 +23,37 @@ class BiesVM {
     this.contexts = []; // D
   }
 
-  /**
-  * Busca y devuelve la closure de una función por su nombre recorriendo los bindings 
-  * desde el más reciente al más antiguo. Lanza un error si no se encuentra.
-  *
-  * @param functionName El nombre de la función a buscar.
-  * @return La closure asociada a la función encontrada.
-  * @throws Error Si la función no se encuentra en ningún binding.
-  */
-  findFunction(functionName) {
-    for (let i = this.contexts.length - 1; i >= 0; i--) {
-      if (this.contexts[i][functionName]) {
-        return this.contexts[i][functionName]; // Retorna la closure
-      }
-    }
-    return functionName;
+/*
+
+En code hay:
+
+[
+  { mnemonic: 'LDV', args: [ '1' ] },
+  { mnemonic: 'BST', args: [ '0', '0' ] },
+  { mnemonic: 'LDV', args: [ '656' ] },
+  { mnemonic: 'BST', args: [ '0', '1' ] },
+  { mnemonic: 'LDV', args: [ '10' ] },
+  { mnemonic: 'BLD', args: [ '0', '0' ] },
+  { mnemonic: 'MUL', args: [] },
+  { mnemonic: 'BLD', args: [ '0', '1' ] },
+  { mnemonic: 'ADD', args: [] },
+  { mnemonic: 'BST', args: [ '0', '0' ] },
+  { mnemonic: 'LDF', args: [ '$1' ] },
+  { mnemonic: 'APP', args: [] },
+  { mnemonic: 'HLT', args: [] }
+]
+*/
+
+  getActualContext() {
+    return this.contexts.find(context => context.ACTUAL);
+  }
+
+  findContextByFUN(functionClosure) {
+    return this.contexts.find(context => context.FUN === functionClosure);
+  }
+
+  createNewContext(arg, actual = false) {
+    this.contexts.push({context: {code: [], stack: [], bindings: [[]]}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null});
   }
 
   /**
@@ -48,17 +64,18 @@ class BiesVM {
   * @param mnemonic El mnemónico de la instrucción a ejecutar.
   * @param args Los argumentos adicionales requeridos para la ejecución de la instrucción.
   */
-  executeInstruction(mnemonic, args, ctx) { // instruction es el ctx del arbol
-    // Lógica para ejecutar cada instrucción
-    // Ejemplo: LDV, ADD, POP, etc.
-   
-    console.log(mnemonic, args);
-    switch (mnemonic) {
+  executeInstruction(arg) {// arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
+    
+    const actualCode = this.getActualContext()? this.code[this.getActualContext().PC] : null;
+    
+    // console.log(actualCode ? actualCode.args[0] : 'No hay args');
+
+    switch (arg[0] != null? arg[0] : actualCode) {
       // Inicializar
       case 'INI': {
-        const N = args[0];
-        this.contexts.push(N);
-        this.code = this.contexts[0];
+        if (this.contexts.length === 0) {
+            this.createNewContext(arg[1], true);
+        }
       } break;
 
       // Stop
@@ -83,19 +100,19 @@ class BiesVM {
 
       // Load Value
       case 'LDV': {
-        const V = args[0];
+        const V = actualCode.args[0];
         this.stack.push(V);
       } break;
 
       // Load desde ambiente
       case 'BLD': {
-        this.stack.push(this.bindings[args[0]][args[1]]);
+        this.stack.push(this.bindings[actualCode.args[0]][actualCode.args[1]]);
       } break;
 
       case 'BST': {
         const K = this.stack.pop(); // Variable
-        const E = parseInt(args[0]); // Binding
-        const V = parseInt(args[1]); 
+        const E = parseInt(actualCode.args[0]); // Binding
+        const V = parseInt(actualCode.args[1]); 
         this.bindings[E][V] = K;
       } break;
 
@@ -289,44 +306,56 @@ class BiesVM {
       } break;
 
       case 'LDF': {
-        const functionName = args[0];
-        // Buscar la función en los bindings (closure = función + entorno)
-        const closure = this.findFunction(functionName); // Se va a D y posiciona su PC
-        this.stack.push(closure);
+        const closure = this.findContextByFUN(actualCode.args[0]).FUN;
+        if (closure) {// Si la función ya existe, la metemos en la pila
+          this.stack.push(closure);
+        } else {  // Si no, creamos un nuevo contexto para esa función y la metemos en la pila
+          this.createNewContext(actualCode.args[0]);
+          this.stack.push(this.findContextByFUN(actualCode.args[0]).FUN);
+        }
       } break;
 
       case 'APP': {
         const closure = this.stack.pop(); // La closure es la función que vamos a aplicar
-        //const value = this.stack.pop(); // El valor que pasamos como argumento
-        //const [C, S, B, D] = closure; // Cuerpo de la función, stack, bindings y contexto de la closure
-        // return $k
-        // Empujamos el valor de entrada al nuevo contexto de bindings
-        //const newBindings = [...B]; // Hacemos una copia de los bindings
-        //newBindings.push(value);
-      
-        // Guardamos el contexto actual para restaurarlo más tarde
-        //this.contexts.push([this.code, this.stack, this.bindings]);
-      
-        // Ejecutamos el cuerpo de la closure
-        //this.code = C;
-        //this.stack = S;
-        //this.bindings = newBindings;
+        
+        // Guardamos el contexto actual
+        const actualContext = this.getActualContext();
+        actualContext.context = {code: this.code, stack: this.stack, bindings: this.bindings};
+        actualContext.ACTUAL = false;
+
+        // Ponemos el contexto de la nueva función en actual  
+        const newContext = this.findContextByFUN(closure);
+        newContext.ACTUAL = true;
+        this.code = newContext.context.code;
+        this.stack = newContext.context.stack;
+        this.bindings = newContext.context.bindings;
+
+        // Inicializamos el PC
+        newContext.PC = -1;// se pone en -1 para que al incrementar en la siguiente instrucción quede en 0
+
+
+        // Incrementamos el PC antes de retornar
+        this.getActualContext().PC++;
+
         return closure;
       } break;      
       
       case 'RET': {
-        //const returnValue = this.stack.pop(); // Valor de retorno
-        //const [savedCode, savedStack, savedBindings] = this.contexts.pop(); // Restauramos el contexto anterior
-      
-        // Restauramos el contexto y apilamos el valor de retorno
-        //this.code = savedCode;
-        //this.stack = [returnValue, ...savedStack]; // Apilamos el valor de retorno
-        //this.bindings = savedBindings;
-        return "RET";
+        // Guardamos el contexto actual
+        const actualContext = this.getActualContext();
+        actualContext.context = {code: this.code, stack: this.stack, bindings: this.bindings};
+        actualContext.ACTUAL = false;
+
+        // Ponemos el contexto anterior en actual
+        const previousContext = this.findContextByFUN(actualContext.previousFUN);
+        previousContext.ACTUAL = true;
+        this.code = previousContext.context.code;
+        this.stack = previousContext.context.stack;
+        this.bindings = previousContext.context.bindings;
       } break;      
 
       case 'CST': {
-        const type = args[0]; // Tipo objetivo (number, list, string)
+        const type = actualCode.args[0]; // Tipo objetivo (number, list, string)
         const value = this.stack.pop();
       
         // Verificamos si el valor es del tipo adecuado
@@ -342,7 +371,7 @@ class BiesVM {
       } break;      
 
       case 'INO': {
-        const type = args[0]; // Tipo a verificar (number, list, string)
+        const type = actualCode.args[0]; // Tipo a verificar (number, list, string)
         const value = this.stack.pop();
         
         // Verificamos si el valor es del tipo indicado
@@ -360,7 +389,31 @@ class BiesVM {
         this.stack.push(N);
       } break;
     }
+    // Incrementamos el PC
+    this.getActualContext().PC++;
+    return null;
   }
+
+  // /**
+  // * Busca y devuelve la closure de una función por su nombre recorriendo los contextos 
+  // * cada contexto va a tener algo parecido a un json: [{FUN: '$0', PC: '', ACTUAL: true}, {FUN: '$1', PC: '', ACTUAL: false}]
+  // *
+  // * @param functionName El nombre de la función a buscar.
+  // * @return La closure asociada a la función encontrada.
+  // * @throws Error Si la función no se encuentra en los contextos.
+  // */
+  // findFunction(functionName) {
+  //   for (let i = this.contexts.length - 1; i >= 0; i--) {
+  //     const context = this.contexts[i];
+  //     const closure = context.find(c => c.FUN === functionName);
+  //     if (closure) {
+  //       return closure;
+  //     }
+  //   }
+  //   throw new Error(`Función ${functionName} no encontrada`);
+  // }
+
+
 }
 
 export default BiesVM;

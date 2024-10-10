@@ -1,8 +1,9 @@
 import fs from 'fs';
 import antlr4 from 'antlr4';
-import PrintVisitor from "../src/processor.mjs";
-import biesGrammarLexer from '../parser/biesLexer.js';
-import biesGrammarParser from '../parser/biesParser.js';
+import Evaluator from "./Evaluator.mjs";
+import Loader from "./Loader.mjs";
+import biesGrammarLexer from '../parser/grammar/biesLexer.js';
+import biesGrammarParser from '../parser/grammar/biesParser.js';
 let default_input_file = './test/biesTest.txt'
 
 /**
@@ -53,9 +54,17 @@ function test_parser(input_file=default_input_file){
     */
     const AST = parser.start();
 
+    // Se necesita un loader que pase del AST a la máquina virtual.
+
     //Visita el AST.
-    const visitor = new PrintVisitor();
-    visitor.visit(AST);
+    const loader = new Loader();
+    loader.visit(AST);
+
+    // Se necesita un Evaluator que ejecute la máquina virtual.
+
+    //Visita el AST.
+    // const visitor = new Evaluator();
+    // visitor.run();
 
     console.log(`PROCESADO ${input_file} !`)
 

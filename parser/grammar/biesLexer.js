@@ -1,19 +1,8 @@
 // Generated from grammar/bies.g4 by ANTLR 4.13.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
-/**
-* Representa un lexer para la gramática BIES.
-* @author Manuel Mora Sandi 
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
 
-/**
-* ATN (Augmented Transition Network) serializado para el lexer.
-* @type {number[]}
-*
-*/
+
 const serializedATN = [4,0,49,317,6,-1,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,
 4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,
 12,2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,
@@ -117,36 +106,11 @@ const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
 const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
 
-
-/**
-* Lexer para la gramática BIES.
-* @extends antlr4.Lexer
-* 
-* @author Manuel Mora Sandi 
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
 export default class biesLexer extends antlr4.Lexer {
 
-    /**
-    * @override
-    * @returns {string} - El nombre de la gramática.
-    */
     static grammarFileName = "bies.g4";
     static channelNames = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN" ];
-
-    /**
-    * Los nombres de modo del lexer.
-    * @type {string[]}
-    */
 	static modeNames = [ "DEFAULT_MODE" ];
-
-    /**
-    * Los nombres literales de los tokens en la gramática BIES.
-    * @type {string[]}
-    * @static
-    */
 	static literalNames = [ null, "'parent:'", "'args:'", "'INI'", "'HLT'", 
                          "'POP'", "'SWP'", "'LDV'", "'BLD'", "'BST'", "'ADD'", 
                          "'MUL'", "'DIV'", "'SUB'", "'NEG'", "'SGN'", "'EQ'", 
@@ -155,12 +119,6 @@ export default class biesLexer extends antlr4.Lexer {
                          "'LIN'", "'LTK'", "'LRK'", "'TOL'", "'NOP'", "'BR'", 
                          "'BT'", "'BF'", "'LDF'", "'APP'", "'RET'", "'CST'", 
                          "'INO'", "'PRN'", null, null, null, "'$FUN'", "'$END'" ];
-    
-    /**
-    * Los nombres simbólicos de los tokens en la gramática BIES.
-    * @type {string[]}
-    * @static
-    */
 	static symbolicNames = [ null, null, null, null, null, null, null, null, 
                           null, null, null, null, null, null, null, null, 
                           null, null, null, null, null, null, null, null, 
@@ -168,11 +126,6 @@ export default class biesLexer extends antlr4.Lexer {
                           null, null, null, null, null, null, null, null, 
                           null, null, null, "INT", "STR", "FUNCTION", "FUN", 
                           "END", "WS", "COMMENT" ];
-
-    /**
-    * Los nombres de las reglas en la gramática BIES.
-    * @type {string[]}
-    */
 	static ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", 
                       "T__7", "T__8", "T__9", "T__10", "T__11", "T__12", 
                       "T__13", "T__14", "T__15", "T__16", "T__17", "T__18", 
@@ -182,10 +135,6 @@ export default class biesLexer extends antlr4.Lexer {
                       "T__37", "T__38", "T__39", "T__40", "T__41", "INT", 
                       "STR", "FUNCTION", "FUN", "END", "WS", "COMMENT" ];
 
-    /**
-    * @constructor 
-    * @param {antlr4.InputStream} input - El flujo de entrada para leer.
-    */
     constructor(input) {
         super(input)
         this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.atn.PredictionContextCache());
@@ -242,3 +191,6 @@ biesLexer.FUN = 46;
 biesLexer.END = 47;
 biesLexer.WS = 48;
 biesLexer.COMMENT = 49;
+
+
+
