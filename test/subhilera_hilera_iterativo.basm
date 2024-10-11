@@ -1,25 +1,21 @@
-$FUN $indiceSubhilera args:2 parent:$0
-LDV 0           ; Inicializar índice en 0
-STO 2
-$loop
-LDA 0           ; Cargar hilera completa
-LDA 2
-IDX             ; Cargar el valor en la posición actual
-LDA 1           ; Cargar subhilera
-LDA 0
-IDX             ; Cargar primer valor de subhilera
-EQ
-BF $increment   ; Si no coincide, incrementar y continuar
-PRN             ; Imprimir índice si coincide
+$FUN $0 args:2 parent:$0
+LDV 0            ; Inicializar índice en 0
+$1
+SWP              ; Intercambiar para acceder a la lista principal
+LTK              ; Tomar el índice-ésimo elemento de la lista principal
+BF $2          ; Si no hay más elementos, termina
+EQ               ; Comparar el elemento con la subhilera (segundo argumento)
+BT $3        ; Si son iguales, salta a $found
+LDV 1            ; Incrementar índice
+ADD
+SWP              ; Regresar a la lista principal
+BR $1         ; Repetir bucle
+$3
+POP              ; Eliminar lista de la pila
+PRN              ; Imprimir índice encontrado
 HLT
-$increment
-LDA 2
-LDV 1
-ADD             ; Incrementar índice
-STO 2
-BR $loop
-$end
-LDV -1          ; Retornar -1 si no se encuentra
+$2
+LDV -1           ; Si no se encontró, imprimir -1
 PRN
 HLT
 $END
