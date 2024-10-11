@@ -1,5 +1,5 @@
 import biesGrammarVisitor from '../parser/grammar/biesVisitor.js';
-import BiesVM from "./BiesVM.mjs";
+import BiesVM from "./biesVM.mjs";
 
 /**
  * Visitor personalizado que extiende el `biesGrammarVisitor` para recorrer 

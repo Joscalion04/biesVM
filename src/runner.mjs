@@ -3,7 +3,7 @@ import antlr4 from 'antlr4';
 import Loader from "./Loader.mjs";
 import biesGrammarLexer from '../parser/grammar/biesLexer.js';
 import biesGrammarParser from '../parser/grammar/biesParser.js';
-let default_input_file = './test/biesTest.txt'
+let default_input_file = './test/biesTest.basm'
 
 /**
 * Función para probar el parser utilizando un archivo de entrada opcional.
@@ -59,13 +59,6 @@ function test_parser(input_file=default_input_file){
     const loader = new Loader();
     loader.visit(AST);
 
-    //console.log("BUSCAR FUNCION")
-    // Supongamos que 'tree' es el árbol sintáctico completo
-    //const functionId = '$1'; // El ID de la función que deseas buscar y ejecutar
-    //const printVisitor = new PrintVisitor();
-
-    // Ejecutar la función con el ID especificado
-    //printVisitor.executeFunctionById(AST, functionId);
 }
 
 export default test_parser
