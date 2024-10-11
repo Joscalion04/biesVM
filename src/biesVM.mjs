@@ -34,7 +34,7 @@ class BiesVM {
   }
 
   createNewContext(arg, actual = false, K) {
-    this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null, K: K});
+    this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: null, K: K});
   }
 
   pop() {
@@ -77,7 +77,7 @@ class BiesVM {
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
-    console.log(actualCode);
+    
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -127,8 +127,8 @@ class BiesVM {
       } break;
 
       case 'ADD': {
-        const N = parseInt(this.pop()); console.log(N)
-        const M = parseInt(this.pop()); console.log(M)
+        const N = parseInt(this.pop());
+        const M = parseInt(this.pop());
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N + M);
         }
@@ -340,9 +340,8 @@ class BiesVM {
         this.code = newContext.context.code;
         newContext.K = actualCode.args[0] ? actualCode.args[0] : 1;// Guardamos el K de la función
         newContext.PC = 0;  // Inicializamos el PC
+        newContext.previousFUN = actualContext.FUN;
         this.bindings.push([V]); // Creamos un nuevo ambiente para la función
-        
-        console.log(`Entrando a función ${closure}\n`);
 
         return closure;
       } break;      
@@ -357,9 +356,6 @@ class BiesVM {
         const previousContext = this.findContextByFUN(actualContext.previousFUN);
         previousContext.ACTUAL = true;
         this.code = previousContext.context.code;
-
-        console.log(`Saliendo de función ${actualContext.FUN}\n`);
-        console.log(`Entrando a función ${previousContext.FUN}\n`);
       } break;      
 
       case 'CST': {
