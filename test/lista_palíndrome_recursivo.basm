@@ -1,0 +1,29 @@
+$FUN $palindromoRec args:3 parent:$0
+LDA 1           ; Cargar índice inicial
+LDA 2           ; Cargar índice final
+GT
+BT $end         ; Si índice inicial >= índice final, es palíndromo
+LDA 0           ; Cargar lista
+LDA 1
+IDX             ; Cargar lista[i]
+LDA 0
+LDA 2
+IDX             ; Cargar lista[j]
+EQ
+BF $no          ; Si lista[i] != lista[j], no es palíndromo
+LDA 1
+LDV 1
+ADD             ; Incrementar índice inicial
+LDA 2
+LDV 1
+SUB             ; Decrementar índice final
+BLD $0          ; Llamada recursiva
+$end
+LDV 1           ; Retornar 1 (es palíndromo)
+PRN
+HLT
+$no
+LDV 0           ; Retornar 0 (no es palíndromo)
+PRN
+HLT
+$END

@@ -1,0 +1,30 @@
+$FUN $0 args:1 parent: $0
+LDA 0         ; Cargar n
+LDV 0
+EQ
+BT $base      ; Si n == 0, retornar 0
+LDA 0
+LDV 1
+EQ
+BT $base_1    ; Si n == 1, retornar 1
+LDA 0         ; Llamar fib(n-1) + fib(n-2)
+LDA 0
+LDV 1
+SUB
+BLD $0
+LDA 0
+LDV 2
+SUB
+BLD $0
+ADD           ; fib(n-1) + fib(n-2)
+PRN
+HLT
+$base
+LDV 0         ; Retornar 0
+PRN
+HLT
+$base_1
+LDV 1         ; Retornar 1
+PRN
+HLT
+$END

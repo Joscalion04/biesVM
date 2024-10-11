@@ -1,0 +1,35 @@
+$FUN $0 args:1 parent: $0
+LDV 0         ; f0 = 0
+STO 1         ; Guardar f0
+LDV 1         ; f1 = 1
+STO 2         ; Guardar f1
+LDV 2         ; Inicializar contador en 2
+STO 3         ; Guardar contador
+LDA 0         ; Cargar n
+LDV 1
+EQ
+BT $end       ; Si n == 1, terminar con f1
+LDV 2         ; Iniciar bucle en 2
+$loop
+LDA 0         ; Cargar n
+LDA 3         ; Cargar contador
+LT
+BF $end       ; Si contador >= n, terminar
+LDA 1         ; Cargar f(n-2)
+LDA 2         ; Cargar f(n-1)
+ADD           ; f(n) = f(n-1) + f(n-2)
+STO 4         ; Guardar f(n)
+LDA 2         ; Actualizar f(n-1) = f(n)
+STO 1
+LDA 4         ; Actualizar f(n) = f(n)
+STO 2
+LDA 3         ; Incrementar contador
+LDV 1
+ADD
+STO 3
+BR $loop
+$end
+LDA 4         ; Resultado final f(n)
+PRN
+HLT
+$END

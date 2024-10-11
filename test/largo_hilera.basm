@@ -1,0 +1,18 @@
+$FUN $longitud args:1 parent:$0
+LDV 0           ; Inicializar longitud en 0
+STO 1
+$loop
+LDA 0           ; Cargar lista
+LDA 1           ; Cargar longitud
+IDX             ; Intentar acceder al elemento en la posición 'longitud'
+BF $end         ; Si no hay más elementos, terminar
+LDA 1
+LDV 1           ; Incrementar longitud
+ADD
+STO 1
+BR $loop
+$end
+LDA 1           ; Cargar la longitud final
+PRN
+HLT
+$END

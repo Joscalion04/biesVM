@@ -1,0 +1,38 @@
+$FUN $0 args:1 parent: $0
+LDV 0         ; Posición inicial
+STO 1         ; i = 0
+LDA 0         ; Cargar longitud de la lista
+LDV 1
+SUB           ; Longitud - 1
+STO 2         ; Guardar como posición final j
+$loop
+LDA 1         ; Cargar i
+LDA 2         ; Cargar j
+GT
+BT $end       ; Si i >= j, palíndromo confirmado
+LDA 0         ; Cargar lista
+LDA 1         ; Cargar posición i
+IDX           ; Obtener lista[i]
+LDA 0         ; Cargar lista
+LDA 2         ; Cargar posición j
+IDX           ; Obtener lista[j]
+EQ
+BF $no        ; Si lista[i] != lista[j], no es palíndromo
+LDA 1         ; Incrementar i
+LDV 1
+ADD
+STO 1
+LDA 2         ; Decrementar j
+LDV 1
+SUB
+STO 2
+BR $loop
+$end
+LDV 1         ; Es palíndromo, retornar 1
+PRN
+HLT
+$no
+LDV 0         ; No es palíndromo, retornar 0
+PRN
+HLT
+$END

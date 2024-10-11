@@ -1,0 +1,18 @@
+$FUN $0 args:1 parent: $0
+LDA 0         ; Cargar n
+LDV 1         ; Si n == 1
+EQ
+BT $base      ; Retornar 1 si n == 1
+LDA 0         ; n > 1, calcular n * factorial(n-1)
+LDA 0
+LDV 1
+SUB
+BLD $0        ; Llamada recursiva con n-1
+MUL           ; Multiplicar n * factorial(n-1)
+PRN
+HLT
+$base
+LDV 1         ; Retornar 1
+PRN
+HLT
+$END
