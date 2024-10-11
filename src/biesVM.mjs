@@ -38,7 +38,7 @@ class BiesVM {
   }
 
   pop() {
-    if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
+    if (this.getActualContext().K === null || this.getActualContext().K > 0) {
       const V = this.stack.pop();
       if (this.getActualContext().K !== null) {
         this.getActualContext().K--;
