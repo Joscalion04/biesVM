@@ -102,7 +102,6 @@ class Loader extends biesGrammarVisitor {
         class FunctionFinder extends biesGrammarVisitor {
             visitFunDef(ctx) {
                 const currentFunctionId = ctx.FUNCTION(0).getText();
-                console.log(currentFunctionId);
                 if (currentFunctionId === functionId) {
                     foundNode = ctx; // Nodo encontrado
                     return ctx;
@@ -128,10 +127,10 @@ class Loader extends biesGrammarVisitor {
     executeFunctionById(tree, functionId) {
         const functionNode = this.findFunctionById(tree, functionId);
         if (functionNode) {
-            console.log(`Ejecutando función con ID: ${functionId}`);
+            console.log(`Cargando función con ID: ${functionId}\n`);
             this.visit(functionNode); // Ejecutar el visitor sobre el nodo de la función
         } else {
-            console.log(`Función con ID ${functionId} no encontrada.`);
+            console.log(`Función con ID ${functionId} no encontrada.\n`);
         }
     }
 

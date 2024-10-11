@@ -34,7 +34,7 @@ class BiesVM {
   }
 
   createNewContext(arg, actual = false, K) {
-    this.contexts.push({context: {code: [], stack: this.stack, bindings: this.bindings}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null, K: K});
+    this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null, K: K});
   }
 
   pop() {
@@ -76,7 +76,7 @@ class BiesVM {
   */
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
-    const actualCode = this.getActualContext()? this.code[this.getActualContext().PC] : null;
+    const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
     
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
@@ -120,10 +120,10 @@ class BiesVM {
       } break;
 
       case 'BST': {
-        const K = this.pop();// Variable
+        const V = this.pop();// Variable
         const E = parseInt(actualCode.args[0]); // Binding
-        const V = parseInt(actualCode.args[1]); 
-        this.bindings[E][V] = K;
+        const K = parseInt(actualCode.args[1]); 
+        this.bindings[E][K] = V;
       } break;
 
       case 'ADD': {
@@ -327,22 +327,23 @@ class BiesVM {
 
       case 'APP': {
         const closure = this.pop();// La closure es la función que vamos a aplicar
-        
+        const V = this.pop();
+
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
-        actualContext.context = {code: this.code, stack: this.stack, bindings: this.bindings};
+        actualContext.context = {code: this.code};
         actualContext.ACTUAL = false;
-        actualContext.PC++;
 
         // Ponemos el contexto de la nueva función en actual  
         const newContext = this.findContextByFUN(closure);
         newContext.ACTUAL = true;
         this.code = newContext.context.code;
         newContext.K = actualCode.args[0] ? actualCode.args[0] : 1;// Guardamos el K de la función
-
-        // Inicializamos el PC
-        newContext.PC = -1;// se pone en -1 para que al incrementar en la siguiente instrucción quede en 0
+        newContext.PC = 0;  // Inicializamos el PC
+        this.bindings.push([V]); // Creamos un nuevo ambiente para la función
         
+        console.log(`Entrando a función ${closure}\n`);
+
         return closure;
       } break;      
       
@@ -356,6 +357,9 @@ class BiesVM {
         const previousContext = this.findContextByFUN(actualContext.previousFUN);
         previousContext.ACTUAL = true;
         this.code = previousContext.context.code;
+
+        console.log(`Saliendo de función ${actualContext.FUN}\n`);
+        console.log(`Entrando a función ${previousContext.FUN}\n`);
       } break;      
 
       case 'CST': {

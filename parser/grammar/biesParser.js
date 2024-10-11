@@ -3,21 +3,21 @@
 import antlr4 from 'antlr4';
 import biesVisitor from './biesVisitor.js';
 
-const serializedATN = [4,1,52,53,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
+const serializedATN = [4,1,52,52,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
 2,5,7,5,1,0,1,0,4,0,15,8,0,11,0,12,0,16,1,1,1,1,1,1,3,1,22,8,1,1,1,1,1,3,
-1,26,8,1,1,1,4,1,29,8,1,11,1,12,1,30,1,1,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,
-5,3,42,8,3,10,3,12,3,45,9,3,3,3,47,8,3,1,4,1,4,1,5,1,5,1,5,0,0,6,0,2,4,6,
-8,10,0,2,1,0,3,45,1,0,46,48,53,0,14,1,0,0,0,2,18,1,0,0,0,4,35,1,0,0,0,6,
-38,1,0,0,0,8,48,1,0,0,0,10,50,1,0,0,0,12,15,3,2,1,0,13,15,3,6,3,0,14,12,
-1,0,0,0,14,13,1,0,0,0,15,16,1,0,0,0,16,14,1,0,0,0,16,17,1,0,0,0,17,1,1,0,
-0,0,18,19,5,49,0,0,19,21,5,48,0,0,20,22,3,4,2,0,21,20,1,0,0,0,21,22,1,0,
-0,0,22,25,1,0,0,0,23,24,5,1,0,0,24,26,5,48,0,0,25,23,1,0,0,0,25,26,1,0,0,
-0,26,28,1,0,0,0,27,29,3,6,3,0,28,27,1,0,0,0,29,30,1,0,0,0,30,28,1,0,0,0,
-30,31,1,0,0,0,31,32,1,0,0,0,32,33,5,50,0,0,33,34,5,48,0,0,34,3,1,0,0,0,35,
-36,5,2,0,0,36,37,5,46,0,0,37,5,1,0,0,0,38,46,3,8,4,0,39,43,3,10,5,0,40,42,
-3,10,5,0,41,40,1,0,0,0,42,45,1,0,0,0,43,41,1,0,0,0,43,44,1,0,0,0,44,47,1,
-0,0,0,45,43,1,0,0,0,46,39,1,0,0,0,46,47,1,0,0,0,47,7,1,0,0,0,48,49,7,0,0,
-0,49,9,1,0,0,0,50,51,7,1,0,0,51,11,1,0,0,0,7,14,16,21,25,30,43,46];
+1,26,8,1,1,1,4,1,29,8,1,11,1,12,1,30,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,5,3,
+41,8,3,10,3,12,3,44,9,3,3,3,46,8,3,1,4,1,4,1,5,1,5,1,5,0,0,6,0,2,4,6,8,10,
+0,2,1,0,3,45,1,0,46,48,52,0,14,1,0,0,0,2,18,1,0,0,0,4,34,1,0,0,0,6,37,1,
+0,0,0,8,47,1,0,0,0,10,49,1,0,0,0,12,15,3,2,1,0,13,15,3,6,3,0,14,12,1,0,0,
+0,14,13,1,0,0,0,15,16,1,0,0,0,16,14,1,0,0,0,16,17,1,0,0,0,17,1,1,0,0,0,18,
+19,5,49,0,0,19,21,5,48,0,0,20,22,3,4,2,0,21,20,1,0,0,0,21,22,1,0,0,0,22,
+25,1,0,0,0,23,24,5,1,0,0,24,26,5,48,0,0,25,23,1,0,0,0,25,26,1,0,0,0,26,28,
+1,0,0,0,27,29,3,6,3,0,28,27,1,0,0,0,29,30,1,0,0,0,30,28,1,0,0,0,30,31,1,
+0,0,0,31,32,1,0,0,0,32,33,5,50,0,0,33,3,1,0,0,0,34,35,5,2,0,0,35,36,5,46,
+0,0,36,5,1,0,0,0,37,45,3,8,4,0,38,42,3,10,5,0,39,41,3,10,5,0,40,39,1,0,0,
+0,41,44,1,0,0,0,42,40,1,0,0,0,42,43,1,0,0,0,43,46,1,0,0,0,44,42,1,0,0,0,
+45,38,1,0,0,0,45,46,1,0,0,0,46,7,1,0,0,0,47,48,7,0,0,0,48,9,1,0,0,0,49,50,
+7,1,0,0,50,11,1,0,0,0,7,14,16,21,25,30,42,45];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -185,8 +185,6 @@ export default class biesParser extends antlr4.Parser {
 	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16383) !== 0));
 	        this.state = 32;
 	        this.match(biesParser.END);
-	        this.state = 33;
-	        this.match(biesParser.FUNCTION);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -208,9 +206,9 @@ export default class biesParser extends antlr4.Parser {
 	    this.enterRule(localctx, 4, biesParser.RULE_argsDecl);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 35;
+	        this.state = 34;
 	        this.match(biesParser.T__1);
-	        this.state = 36;
+	        this.state = 35;
 	        this.match(biesParser.INT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -234,21 +232,21 @@ export default class biesParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 38;
+	        this.state = 37;
 	        this.mnemonic();
-	        this.state = 46;
+	        this.state = 45;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
-	            this.state = 39;
+	            this.state = 38;
 	            this.arg();
-	            this.state = 43;
+	            this.state = 42;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            while(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
-	                this.state = 40;
+	                this.state = 39;
 	                this.arg();
-	                this.state = 45;
+	                this.state = 44;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	            }
@@ -276,7 +274,7 @@ export default class biesParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 48;
+	        this.state = 47;
 	        _la = this._input.LA(1);
 	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16383) !== 0))) {
 	        this._errHandler.recoverInline(this);
@@ -307,7 +305,7 @@ export default class biesParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 50;
+	        this.state = 49;
 	        _la = this._input.LA(1);
 	        if(!(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0))) {
 	        this._errHandler.recoverInline(this);

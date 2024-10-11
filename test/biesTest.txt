@@ -11,10 +11,12 @@ APP
 PRN
 HLT
 $END
+
 $FUN $1 args:1 parent: $0
 LDF $2
 RET
 $END
+
 $FUN $2 args:1 parent: $1
 BLD 1 0
 BLD 0 0
