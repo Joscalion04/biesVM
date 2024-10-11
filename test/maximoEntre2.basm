@@ -2,10 +2,9 @@ $FUN $0 args:0 parent:$0
 LDV 15        ; Cargar el primer número
 LDV 10        ; Cargar el segundo número
 GT            ; Comparar si el primer número es mayor que el segundo
-BF 4          ; Si es verdadero, saltar a la instrucción que imprime el primer número
+BF 3         ; Si es verdadero, saltar a la instrucción que imprime el primer número
 LDV 10        ; Cargar de nuevo el segundo número para imprimir
 PRN           ; Imprimir el segundo número
-BR 3          ; Saltar a la instrucción final
 LDV 15        ; Cargar de nuevo el primer número para imprimir
 PRN           ; Imprimir el primer número
 HLT           ; Detener la máquina

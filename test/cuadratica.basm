@@ -1,6 +1,47 @@
-$FUN $0 args:0 parent: $0
-LDV [1, 2, 3]
-LNT
-PRN
-HLT
+$FUN $0 args:0 parent:$0
+
+; Cargar los coeficientes a, b, y c (valores de la ecuación cuadrática ax^2 + bx + c = 0)
+LDV 1             ; Cargar a = 1
+LDV -3            ; Cargar b = -3
+LDV 2             ; Cargar c = 2
+
+; Resolver el discriminante: b^2 - 4ac
+SWP               ; Intercambiar para tener b en la cima de la pila
+LDV -3            ; Cargar de nuevo b = -3
+MUL               ; Calcular b^2, el resultado es 9
+SWP               ; Intercambiar para tener c en la cima
+LDV 1             ; Cargar de nuevo a = 1
+LDV 4             ; Cargar el número 4 (para multiplicar por 4ac)
+MUL               ; Multiplicar 4 * a, el resultado es 4
+MUL               ; Multiplicar 4a * c, el resultado es 8
+SWP 
+SUB               ; Restar b^2 - 4ac, el resultado es 9 - 8 = 1
+
+; Verificar si el discriminante es mayor o igual a 0
+SGN               ; Determinar el signo del discriminante
+BF 20            ; Si el discriminante es negativo (0), salta al final (no hay soluciones reales)
+
+; Calcular la primera raíz (-b + sqrt(discriminante)) / 2a
+LDV 1             ; Cargar el discriminante (1)
+PRN               ; Imprimir el discriminante por verificación
+SWP               ; Intercambiar para obtener b
+NEG               ; Cambiar el signo de b (de -3 a 3)
+ADD               ; Sumar -b + sqrt(discriminante), el resultado es 3 + 1 = 4
+LDV 2             ; Cargar el número 2
+LDV 1             ; Cargar el coeficiente a = 1
+MUL               ; Multiplicar 2 * a
+DIV               ; Dividir (3 + sqrt(discriminante)) / 2a, el resultado es 4 / 2 = 2
+PRN               ; Imprimir la primera raíz
+
+; Calcular la segunda raíz (-b - sqrt(discriminante)) / 2a
+LDV 1             ; Cargar el discriminante (1)
+NEG               ; Negar la raíz cuadrada del discriminante
+SWP               ; Intercambiar para obtener -b
+ADD               ; Sumar -b - sqrt(discriminante), el resultado es 3 - 1 = 2
+LDV 2             ; Cargar el número 2
+LDV 1             ; Cargar el coeficiente a = 1
+MUL               ; Multiplicar 2 * a
+DIV               ; Dividir (3 - sqrt(discriminante)) / 2a, el resultado es 2 / 2 = 1
+PRN               ; Imprimir la segunda raíz
+HLT               ; Detener la máquina virtual
 $END
