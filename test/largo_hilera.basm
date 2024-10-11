@@ -1,19 +1,59 @@
-$FUN $longitud args:1 parent:$0
-LDV 0           ; Inicializar longitud en 0 y ponerlo en la pila
-LDV 0           ; Inicializar índice en 0 y ponerlo en la pila (ambos se usarán para manipulación)
-$loop
-SWP             ; Intercambiar para acceder a la lista original
-LTK             ; Tomar el índice-ésimo elemento de la lista (LTK: List Take)
-BF $end         ; Si no hay más elementos, termina
-LDV 1           ; Incrementar longitud en 1
-ADD             ; Sumar longitud con 1
-SWP             ; Intercambiar para manejar el índice
-LDV 1           ; Incrementar índice en 1
-ADD             ; Sumar índice con 1
-SWP             ; Intercambiar nuevamente para manejar la lista original
-BR $loop        ; Repetir bucle
-$end
-POP             ; Eliminar el valor de la lista de la pila
-PRN             ; Imprimir la longitud final
-HLT             ; Terminar ejecución
+$FUN $0 args:1 parent: $0
+LDV 1
+LDF $1
+APP
+PRN
+HLT
+$END
+
+$FUN $1 args:1 parent: $0
+LDV 1
+LDC 0
+LDF $2
+APP
+RET
+$END
+
+$FUN $2 args:2 parent: $1
+LDV 1
+LDV 2
+LDC 1
+ADD
+LDF $3
+APP
+RET
+$END
+
+$FUN $3 args:2 parent: $2
+LDV 1
+LDV 2
+LDV 1
+LDC 1
+ADD
+LDV 2
+LDC 1
+ADD
+LDF $4
+APP
+RET
+$END
+
+$FUN $4 args:2 parent: $3
+LDV 1
+LDV 2
+LDC 0
+EQ
+JIF $5
+LDV 2
+RET
+$END
+
+$FUN $5 args:2 parent: $4
+LDV 1
+LDC 1
+ADD
+LDV 2
+LDF $3
+APP
+RET
 $END
