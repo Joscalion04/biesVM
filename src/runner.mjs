@@ -1,9 +1,9 @@
 import fs from 'fs';
 import antlr4 from 'antlr4';
-import PrintVisitor from "../src/processor.mjs";
-import biesGrammarLexer from '../parser/biesLexer.js';
-import biesGrammarParser from '../parser/biesParser.js';
-let default_input_file = './test/biesTest.txt'
+import Loader from "./Loader.mjs";
+import biesGrammarLexer from '../parser/grammar/biesLexer.js';
+import biesGrammarParser from '../parser/grammar/biesParser.js';
+let default_input_file = './test/biesTest.basm'
 
 /**
 * Función para probar el parser utilizando un archivo de entrada opcional.
@@ -53,19 +53,12 @@ function test_parser(input_file=default_input_file){
     */
     const AST = parser.start();
 
+    // Se necesita un loader que pase del AST a la máquina virtual.
+
     //Visita el AST.
-    const visitor = new PrintVisitor();
-    visitor.visit(AST);
+    const loader = new Loader();
+    loader.visit(AST);
 
-    console.log(`PROCESADO ${input_file} !`)
-
-    //console.log("BUSCAR FUNCION")
-    // Supongamos que 'tree' es el árbol sintáctico completo
-    //const functionId = '$1'; // El ID de la función que deseas buscar y ejecutar
-    //const printVisitor = new PrintVisitor();
-
-    // Ejecutar la función con el ID especificado
-    //printVisitor.executeFunctionById(AST, functionId);
 }
 
 export default test_parser
