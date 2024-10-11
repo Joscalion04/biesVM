@@ -1,8 +1,8 @@
 $FUN $0 args:0 parent: $0
-LDV 10
 LDV 15
+LDV 10
 GT
-BF 3
+BT 4
 LDV 10
 PRN
 BR 3

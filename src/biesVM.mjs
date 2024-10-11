@@ -77,8 +77,9 @@ class BiesVM {
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
-    console.log("STACK: ",this.stack);
+    console.log("\n\nSTACK: ",this.stack);
     console.log("CODE: ",actualCode);
+    console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -293,14 +294,15 @@ class BiesVM {
       // Salta N instrucciones
       case 'BR': {
         const N = actualCode.args[0];
-        this.getActualContext.PC += N;
+        this.getActualContext().PC += parseInt(N);
+        return null;
       } break;
 
       // Salta N instrucciones si es verdadero
       case 'BT': {
         const N = actualCode.args[0];
-        if (this.pop()) {
-          this.getActualContext.PC += N;
+        if (this.pop() === 1) {
+          this.getActualContext().PC += parseInt(N);
           return null;
         }
       } break;
@@ -308,8 +310,8 @@ class BiesVM {
       // Salta N instrucciones si es falso
       case 'BF': {
         const N = actualCode.args[0];
-        if (!this.pop() === 1) {
-          this.getActualContext.PC += N;
+        if (this.pop() === 0) {
+          this.getActualContext().PC += parseInt(N);
           return null;
         }
       } break;
