@@ -3,7 +3,7 @@ import antlr4 from 'antlr4';
 import Loader from "./Loader.mjs";
 import biesGrammarLexer from '../parser/grammar/biesLexer.js';
 import biesGrammarParser from '../parser/grammar/biesParser.js';
-let default_input_file = './test/biesTest.basm'
+let default_input_file = './test/maximoEntre2.basm'
 
 /**
 * Función para probar el parser utilizando un archivo de entrada opcional.

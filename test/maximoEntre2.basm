@@ -1,0 +1,12 @@
+$FUN $0 args:0 parent: $0
+LDV 10
+LDV 15
+GT
+BF 3
+LDV 10
+PRN
+BR 3
+LDV 15
+PRN
+HLT
+$END
