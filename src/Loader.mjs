@@ -1,4 +1,4 @@
-import biesGrammarVisitor from '../parser/grammar/biesVisitor.js';
+import biesGrammarVisitor from '../parser/biesVisitor.js';
 import BiesVM from "./biesVM.mjs";
 
 /**
