@@ -1,18 +1,14 @@
-$FUN $0 args:1 parent: $0
-LDA 0         ; Cargar n
-LDV 1         ; Si n == 1
-EQ
-BT $base      ; Retornar 1 si n == 1
-LDA 0         ; n > 1, calcular n * factorial(n-1)
-LDA 0
-LDV 1
-SUB
-BLD $0        ; Llamada recursiva con n-1
-MUL           ; Multiplicar n * factorial(n-1)
-PRN
-HLT
-$base
-LDV 1         ; Retornar 1
+$FUN $0 args:1 parent:$0
+LDV 1            ; Factorial de 0 es 1
+EQ               ; Comparar si n == 0
+BT $1          ; Si es 0, regresar
+LDF $0           ; Cargar la función recursiva
+SWP
+LDV -1           ; Decrementar n
+ADD
+APP 0            ; Aplicar factorial_rec(n - 1)
+MUL              ; Multiplicar por n
+$1
 PRN
 HLT
 $END
