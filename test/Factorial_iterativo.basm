@@ -1,0 +1,24 @@
+$FUN $0 args:1 parent: $0
+LDV 1        ; Factorial inicial en 1
+STO 1        ; Guardar en la posición 1
+LDV 1        ; Inicialización del contador
+STO 2        ; Guardar el contador en la posición 2
+$loop
+LDA 2        ; Cargar el contador
+LDA 0        ; Cargar n
+GT
+BT $end      ; Si el contador > n, terminar
+LDA 1        ; Cargar el valor acumulado de factorial
+LDA 2        ; Cargar el contador actual
+MUL          ; Multiplicar factorial * contador
+STO 1        ; Guardar el resultado en posición 1
+LDA 2        ; Cargar el contador
+LDV 1        ; Incrementar en 1
+ADD
+STO 2        ; Guardar el contador actualizado
+BR $loop     ; Repetir
+$end
+LDA 1        ; Cargar el factorial final
+PRN
+HLT
+$END
