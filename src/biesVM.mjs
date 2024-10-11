@@ -328,25 +328,29 @@ class BiesVM {
       } break;
 
       case 'APP': {
-        const closure = this.pop();// La closure es la función que vamos a aplicar
+        const closure = this.pop();  // La closure es la función que vamos a aplicar
         const V = this.pop();
-
+    
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
         actualContext.context = {code: this.code};
         actualContext.ACTUAL = false;
-
+    
         // Ponemos el contexto de la nueva función en actual  
         const newContext = this.findContextByFUN(closure);
+        if (!newContext) {
+            throw new Error(`La función ${closure} no existe.`);
+        }
         newContext.ACTUAL = true;
         this.code = newContext.context.code;
-        newContext.K = actualCode.args[0] ? actualCode.args[0] : 1;// Guardamos el K de la función
-        newContext.PC = 0;  // Inicializamos el PC
+        newContext.K = actualCode.args[0] ? actualCode.args[0] : 1; // Guardamos el K de la función
+        newContext.PC = 0;  // Inicializamos el PC para empezar desde el inicio
         newContext.previousFUN = actualContext.FUN;
         this.bindings.push([V]); // Creamos un nuevo ambiente para la función
-
+    
         return closure;
-      } break;      
+    }
+     
       
       case 'RET': {
         // Guardamos el contexto actual
