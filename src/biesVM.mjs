@@ -79,7 +79,7 @@ class BiesVM {
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
     console.log("\n\nSTACK: ",this.stack);
     console.log("CODE: ",actualCode);
-    console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
+    //console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -113,6 +113,7 @@ class BiesVM {
       // Load Value
       case 'LDV': {
         const V = actualCode.args[0];
+        console.log(V);
         this.stack.push(V);
       } break;
 
