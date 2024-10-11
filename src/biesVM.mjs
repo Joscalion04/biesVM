@@ -38,7 +38,7 @@ class BiesVM {
   }
 
   pop() {
-    if (this.getActualContext().K === null || this.getActualContext().K > 0) {
+    if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
       const V = this.stack.pop();
       if (this.getActualContext().K !== null) {
         this.getActualContext().K--;
@@ -77,7 +77,7 @@ class BiesVM {
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
-    
+    console.log(actualCode);
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -127,8 +127,8 @@ class BiesVM {
       } break;
 
       case 'ADD': {
-        const N = parseInt(this.pop()); 
-        const M = parseInt(this.pop()); 
+        const N = parseInt(this.pop()); console.log(N)
+        const M = parseInt(this.pop()); console.log(M)
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N + M);
         }
