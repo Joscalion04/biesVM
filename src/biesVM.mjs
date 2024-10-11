@@ -238,7 +238,9 @@ class BiesVM {
       // String null test
       case 'SNT': {
         const V = this.pop()
+        this.stack.push(V);
         this.stack.push(V === "" ? 1 : 0);
+      
       } break;
 
       // Concatenar strings
@@ -251,6 +253,7 @@ class BiesVM {
       // Convertir a string
       case 'TOS': {
         const V = this.pop()
+       
         this.stack.push(V.toString());
       } break;
 
@@ -277,10 +280,20 @@ class BiesVM {
 
       // Tomar el resto después del k-ésimo elemento de la lista
       case 'LRK': {
-        const K = this.pop()
-        const V = this.pop()
-        this.stack.push(V.slice(K));
-      } break;
+        const K = actualCode.args[0]; // Extraemos el índice K directamente desde los argumentos
+        const V = this.pop(); // Extraemos el valor V de la pila (debería ser una lista o cadena)
+    
+       
+    
+        // Verificamos si V es una cadena o una lista antes de aplicar slice
+        if (typeof V === 'string' || Array.isArray(V)) {
+    
+            this.stack.push(V.slice(K)); // Si es válido, aplicamos slice y empujamos el resultado
+        } else {
+            throw new Error(`El valor ${V} no es una cadena ni una lista, no se puede aplicar slice.`);
+        }
+    } break;
+    
 
       // Convertir a lista
       case 'TOL': {

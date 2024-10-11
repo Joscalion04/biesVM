@@ -25,5 +25,5 @@ mnemonic : 'INI' | 'HLT' | 'POP' | 'SWP' | 'LDV' | 'BLD' | 'BST' | 'ADD' | 'MUL'
          | 'SNT' | 'CAT' | 'TOS' | 'LNT' | 'LIN' | 'LTK' | 'LRK' | 'TOL' | 'NOP' | 'BR' | 'BT'
          | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN' | 'STK' | 'SRK' | 'INP';
 
-arg : INT | STR | FUNCTION | LIST ; // Argumentos posibles
+arg : INT | STR | FUNCTION | LIST | ID; // Argumentos posibles
 
