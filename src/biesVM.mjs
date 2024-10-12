@@ -39,7 +39,7 @@ class BiesVM {
 
   pop() {
  
-    if (this.getActualContext().K === null || this.getActualContext().K > 0) {
+    if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
      
       const V = this.stack.pop();
       
@@ -116,7 +116,7 @@ class BiesVM {
       // Load Value
       case 'LDV': {
         const V = actualCode.args[0];
-        console.log(V);
+        //console.log(V);
         this.stack.push(V);
       } break;
 
@@ -273,7 +273,6 @@ class BiesVM {
       // Convertir a string
       case 'TOS': {
         const V = this.pop()
-       
         this.stack.push(V.toString());
       } break;
 
@@ -438,8 +437,8 @@ class BiesVM {
 
       // Tomar el k-ésimo elemento de un string
       case 'STK': {
-        const K = this.pop()
-        const V = this.pop()
+        const K = this.pop(); console.log(K);
+        const V = this.pop(); console.log(V)
         this.stack.push(V[K]);
       } break;
 
