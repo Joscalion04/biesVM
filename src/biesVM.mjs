@@ -38,8 +38,11 @@ class BiesVM {
   }
 
   pop() {
+ 
     if (this.getActualContext().K === null || this.getActualContext().K > 0) {
+     
       const V = this.stack.pop();
+      
       if (this.getActualContext().K !== null) {
         this.getActualContext().K--;
       }
@@ -163,11 +166,27 @@ class BiesVM {
       
       // Negación
       case 'NEG': {
-        const N = this.pop()
+        const N = this.pop();
+        
+      
         if (typeof N === 'number') {
+          
           this.stack.push(-N);
+          
+        } else {
+          const numero = Number(N);
+          if (!isNaN(numero)) {
+           
+            this.stack.push(-numero);
+           
+          } else {
+            // Lanzar un error si la conversión falla
+            throw new Error(`Error: No se puede aplicar NEG. El valor '${N}' no es un número válido.`);
+          }
         }
       } break;
+    
+            
 
       // Signo
       case 'SGN': {
@@ -181,7 +200,8 @@ class BiesVM {
       case 'EQ': {
         const N = this.pop()
         const M = this.pop()
-        this.stack.push(N === M ? 1 : 0);
+       
+        this.stack.push(N == M ? 1 : 0);
       } break;
 
       // Mayor que
@@ -238,7 +258,7 @@ class BiesVM {
       // String null test
       case 'SNT': {
         const V = this.pop()
-        this.stack.push(V);
+        
         this.stack.push(V === "" ? 1 : 0);
       
       } break;
@@ -276,6 +296,7 @@ class BiesVM {
         const K = this.pop()
         const V = this.pop()
         this.stack.push(V[K]);
+        this.stack.push(K);
       } break;
 
       // Tomar el resto después del k-ésimo elemento de la lista
@@ -308,6 +329,7 @@ class BiesVM {
       // Salta N instrucciones
       case 'BR': {
         const N = actualCode.args[0];
+     
         this.getActualContext().PC += parseInt(N);
         return null;
       } break;
@@ -315,7 +337,9 @@ class BiesVM {
       // Salta N instrucciones si es verdadero
       case 'BT': {
         const N = actualCode.args[0];
+      
         if (this.pop() === 1) {
+          
           this.getActualContext().PC += parseInt(N);
           return null;
         }
@@ -343,7 +367,7 @@ class BiesVM {
       case 'APP': {
         const closure = this.pop();  // La closure es la función que vamos a aplicar
         const V = this.pop();
-    
+       
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
         actualContext.context = {code: this.code};

@@ -1,47 +1,108 @@
-
 $FUN $0 args:0 parent:$0
     ; Inicializamos la variable de conteo en 0
     LDV 0        ; Empuja 0 a la pila
     BST 0 0      ; Almacena el contador en el binding 0, posición 0
     
-    ; Cargamos la hilera en la pila
-    LDV "miCadena"  ; Cargar la hilera en la pila
+    ; Cargamos la hilera original en la pila
+    LDV "miCadena"  ; Cargar la hilera original en la pila
     BST 0 1         ; Guardamos la hilera en el binding 0, posición 1
 
     ; Llamamos a la función de conteo
     LDF $1          ; Cargamos la función de conteo en la pila
-    APP 0           ; Ejecutamos la función sin argumentos
+    APP 100          ; Ejecutamos la función sin argumentos
 
+    ; Guardamos el valor de retorno (longitud de la hilera) en el binding 0, posición 0
+    BST 0 0         ; Reemplazamos el valor del contador en el binding 0, posición 0
+
+    ; Llamamos a la función de inversión
+    LDF $2          ; Cargamos la función de inversión
+    APP 300          ; Ejecutamos la función sin argumentos
+    PRN
     ; Fin del programa
     HLT             ; Detenemos la ejecución
 $END
 
+; Funcion para contar caracteres
 $FUN $1 args:0 parent:$0
+    LDV 0            ; Inicializa el contador a 0
     ; Cargar la hilera actual desde el binding 0, posición 1
     BLD 0 1
-    SNT          ; Verificamos si la hilera está vacía
-    BT 2      ; Si la hilera está vacía, saltamos al final
-
-    ; Incrementamos el contador
-    BLD 0 0      ; Cargamos el valor actual del contador
-    LDV 1        ; Cargamos 1
-    ADD          ; Sumamos 1 al contador
-    BST 0 0      ; Guardamos el nuevo valor del contador
-
-    ; Eliminamos el primer carácter de la hilera
-    BLD 0 1      ; Cargamos la hilera
-    LDV 1        ; Cargamos el valor 1
-    SRK          ; Eliminamos el primer carácter de la hilera
-    BST 0 1      ; Guardamos la hilera actualizada en el binding
-
-    ; Volvemos a llamar la función recursivamente
-    LDF $1       ; Cargamos la función de conteo
-    APP 0        ; Ejecutamos la función sin argumentos
+    BST 1 0
+    BLD 1 0
+    TOS              ; Toma el carácter en la posición del índice de la cadena
+    SNT              ; Verifica si el carácter es nulo (fin de cadena)
+    BLD 1 0
+    SWP
+    BT 6         ; Si es nulo (fin de la cadena), salta al final
+    LRK 1
+    BST 1 0
+    LDV 1            ; Carga 1 para incrementar el contador
+    ADD              ; Incrementa el contador en 1
+    BR -10         ; Salta de vuelta al inicio del ciclo
+    POP
+    RET
 $END
 
-; Etiqueta para terminar el ciclo
-$2:
-    BLD 0 0      ; Cargamos el valor final del contador
-    PRN          ; Imprimimos el largo de la hilera
-    RET          ; Retornamos de la función
+; Función para invertir la hilera utilizando el contador
+$FUN $2 args:0 parent:$0
+   LDV ""
+   BST 2 0
+    LDV 0
+    BST 2 1
+    ; Verificamos si el contador ha llegado a 0
+    BLD 0 0      ; Cargamos el valor actual del contador
+    BLD 0 0      ; Cargamos el valor actual del contador
+    LDV 0
+    EQ
+    BF 4         ; Si es 1, terminamos la inversión
+    POP
+    BLD 2 0      ; Cargamos la hilera invertida
+    RET
+
+    ; Extraemos el último carácter usando el contador como índice
+    BLD 0 1      ; Cargamos la hilera original
+    SWP
+    LDV 1        ; Cargamos el valor 1
+    SWP
+    SUB          ; Restamos 1 para obtener el índice del último carácter
+    
+    
+    
+  
+    
+    LTK
+    
+    BLD 2 1
+    LDV 0
+    GTE
+     
+    
+    BT 7       ; Si es verdadero, saltar a la instrucción 
+    POP
+
+    
+    BLD 2 0      ; Cargamos la hilera invertida
+   
+
+    CAT          ; Concatenamos el carácter al final de la hilera invertida
+    BST 2 0      ; Guardamos la hilera invertida actualizada
+   
+    BR 6
+    POP
+    POP
+    
+    LDV 1
+    BST 2 1
+    
+    BST 2 0      ; Guardamos la hilera invertida actualizada
+
+
+    ; Decrementamos el contador
+    BLD 0 0      ; Cargamos el valor actual del contador
+   LDV 1        ; Cargamos 1
+    SWP
+    SUB          ; Restamos 1 al contador
+    BST 0 0      ; Guardamos el nuevo valor del contador
+
+    BR -34
 $END
