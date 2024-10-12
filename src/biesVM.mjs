@@ -34,7 +34,7 @@ class BiesVM {
   }
 
   createNewContext(arg, actual = false, K) {
-    this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: null, K: K});
+    this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: null, K: K, parent: this.getActualContext() ? this.getActualContext().FUN : arg});
   }
 
   pop() {
@@ -80,8 +80,10 @@ class BiesVM {
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
-    console.log("\n\nSTACK: ",this.stack);
-    console.log("CODE: ",actualCode);
+    // console.log("\n\n\n\nCODE: ",actualCode);
+    // console.log("STACK: ",this.stack);
+    // console.log("BINDINGS: ",this.bindings);
+    // console.log("CONTEXTS: ",this.contexts);
     //console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
@@ -265,9 +267,15 @@ class BiesVM {
 
       // Concatenar strings
       case 'CAT': {
-        const H1 = this.pop()
-        const H2 = this.pop()
-        this.stack.push(H1.concat(H2));
+        const H1 = this.pop();
+        const H2 = this.pop();
+        if (H1 === undefined || H1 === null) {
+          this.stack.push(H2);
+        } else if (H2 === undefined || H2 === null) {
+          this.stack.push(H1);
+        } else {
+          this.stack.push(H1.concat(H2));
+        }
       } break;
 
       // Convertir a string
@@ -360,12 +368,13 @@ class BiesVM {
         } else {  // Si no, creamos un nuevo contexto para esa función y la metemos en la pila
           this.createNewContext(actualCode.args[0]);
           this.stack.push(this.findContextByFUN(actualCode.args[0]).FUN);
+          this.bindings.unshift([]); // Creamos un nuevo ambiente
         }
       } break;
 
       case 'APP': {
         const closure = this.pop();  // La closure es la función que vamos a aplicar
-        const V = this.pop();
+        // const V = this.pop();
        
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
@@ -382,10 +391,10 @@ class BiesVM {
         newContext.K = actualCode.args[0] ? actualCode.args[0] : 1; // Guardamos el K de la función
         newContext.PC = 0;  // Inicializamos el PC para empezar desde el inicio
         newContext.previousFUN = actualContext.FUN;
-        this.bindings.push([V]); // Creamos un nuevo ambiente para la función
+        // this.bindings.unshift([V]); // Creamos un nuevo ambiente
     
         return closure;
-    }
+      }
      
       
       case 'RET': {
@@ -396,8 +405,11 @@ class BiesVM {
 
         // Ponemos el contexto anterior en actual
         const previousContext = this.findContextByFUN(actualContext.previousFUN);
-        previousContext.ACTUAL = true;
-        this.code = previousContext.context.code;
+        const parentContext = this.findContextByFUN(previousContext.parent);
+        const contextToActivate = previousContext.context.code.length === 0 ? parentContext : previousContext;// Si la función anterior no tiene código, activamos la función padre
+        
+        contextToActivate.ACTUAL = true;
+        this.code = contextToActivate.context.code;
       } break;      
 
       case 'CST': {
@@ -437,14 +449,14 @@ class BiesVM {
 
       // Tomar el k-ésimo elemento de un string
       case 'STK': {
-        const K = this.pop(); console.log(K);
-        const V = this.pop(); console.log(V)
+        const K = this.pop();
+        const V = this.pop();
         this.stack.push(V[K]);
       } break;
 
       // Tomar el resto después del k-ésimo elemento del string
       case 'SRK': {
-        const K = this.pop()
+        const K = this.pop();
         const V = this.pop()
         this.stack.push(V.slice(K));
       } break;
