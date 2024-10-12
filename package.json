@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "test": "jest test",
+    "simulate": "node simulationVM.js simulate",
     "docs": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "antlr4": "^4.13.1-patch-1"
+    "antlr4": "^4.13.1-patch-1",
+    "commander": "^12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.7",

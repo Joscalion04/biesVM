@@ -479,6 +479,80 @@ class BiesVM {
   //   }
   //   throw new Error(`Función ${functionName} no encontrada`);
   // }
+
+  //agregado para la simulacion
+  loadProgram(instructions) {
+    this.code = [];
+    this.labels = {};
+  
+    // Primer pase: identificar etiquetas
+    let instructionIndex = 0;
+    instructions.forEach(line => {
+      if (line.endsWith(':')) {
+        const label = line.slice(0, -1);
+        this.labels[label] = instructionIndex;
+      } else {
+        this.code.push(this.parseInstruction(line));
+        instructionIndex++;
+      }
+    });
+  }
+
+  setTrace(trace) {
+    this.trace = trace;
+  }
+
+  async run() {
+    if (!this.getActualContext()) {
+      this.createNewContext(null, true, null);
+      this.getActualContext().PC = 0;
+    }
+    
+    while (this.getActualContext().PC < this.code.length) {
+      const instruction = this.code[this.getActualContext().PC];
+      if (this.trace) {
+        console.log(`Instrucción: ${instruction.mnemonic}`);
+      }
+      const result = await this.executeInstruction(instruction);
+      if (result === 'FIN') break;
+      // El PC se incrementa dentro de executeInstruction
+    }
+    
+    console.log('Ejecución terminada.\n');
+  }
+
+
+  parseCode(content) {
+    return content.map(line => {
+      const parts = line.trim().split(/\s+/);
+      const mnemonic = parts[0];
+      const args = parts.slice(1).map(arg => parseInt(arg, 10));
+      return { mnemonic, args };
+    });
+  }
+
+  parseInstruction(line) {
+    const parts = line.trim().split(/\s+/);
+    const mnemonic = parts[0];
+    const args = parts.slice(1);
+    
+    if (mnemonic === 'LDF') {
+      // Reemplaza el nombre de la función por su índice
+      const label = args[0];
+      const address = this.labels[label];
+      if (address === undefined) {
+        throw new Error(`Etiqueta no encontrada: ${label}`);
+      }
+      return { mnemonic, args: [address] };
+    } else {
+      // Parsea los argumentos según el tipo
+      const parsedArgs = args.map(arg => {
+        const num = parseInt(arg, 10);
+        return isNaN(num) ? arg : num;
+      });
+      return { mnemonic, args: parsedArgs };
+    }
+  }
 }
 
 export default BiesVM;
