@@ -1,0 +1,26 @@
+$FUN $0 args:0 parent:$0
+LDV 0            ; Inicializa el contador a 0
+
+LDV "Hola, mundo!"  ; Carga la cadena en la pila
+BST 0 0
+BLD 0 0
+
+
+
+
+TOS              ; Toma el carácter en la posición del índice de la cadena
+SNT              ; Verifica si el carácter es nulo (fin de cadena)
+BLD 0 0
+SWP
+BT 6         ; Si es nulo (fin de la cadena), salta al final
+LRK 1
+BST 0 0
+LDV 1            ; Carga 1 para incrementar el contador
+
+ADD              ; Incrementa el contador en 1
+BR -10         ; Salta de vuelta al inicio del ciclo
+
+POP
+PRN              ; Imprime el largo de la hilera (el valor del contador)
+HLT              ; Detiene la máquina virtual
+$END

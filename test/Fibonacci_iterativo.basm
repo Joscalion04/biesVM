@@ -1,0 +1,17 @@
+$FUN $0 args:1 parent:$0
+LDV 0            ; f0 = 0
+LDV 1            ; f1 = 1
+LDV 1            ; Inicializar contador en 1
+$1
+EQ               ; Comparar si contador es igual a n
+BT $2          ; Si es igual, terminar
+SWP              ; Intercambiar para mantener valores en orden
+ADD              ; Calcular siguiente número Fibonacci
+SWP              ; Regresar f1 a la pila
+ADD              ; Sumar 1 al contador
+SWP              ; Intercambiar para mantener valores
+BR $1
+$2
+PRN
+HLT
+$END

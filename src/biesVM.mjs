@@ -34,12 +34,15 @@ class BiesVM {
   }
 
   createNewContext(arg, actual = false, K) {
-    this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null, K: K});
+    this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: null, K: K});
   }
 
   pop() {
-    if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
+ 
+    if (this.getActualContext().K === null || this.getActualContext().K > 0) {
+     
       const V = this.stack.pop();
+      
       if (this.getActualContext().K !== null) {
         this.getActualContext().K--;
       }
@@ -77,7 +80,9 @@ class BiesVM {
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
-    console.log(actualCode);
+    console.log("\n\nSTACK: ",this.stack);
+    console.log("CODE: ",actualCode);
+    //console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -111,6 +116,7 @@ class BiesVM {
       // Load Value
       case 'LDV': {
         const V = actualCode.args[0];
+        console.log(V);
         this.stack.push(V);
       } break;
 
@@ -127,8 +133,8 @@ class BiesVM {
       } break;
 
       case 'ADD': {
-        const N = parseInt(this.pop()); console.log(N)
-        const M = parseInt(this.pop()); console.log(M)
+        const N = parseInt(this.pop());
+        const M = parseInt(this.pop());
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N + M);
         }
@@ -160,11 +166,27 @@ class BiesVM {
       
       // Negación
       case 'NEG': {
-        const N = this.pop()
+        const N = this.pop();
+        
+      
         if (typeof N === 'number') {
+          
           this.stack.push(-N);
+          
+        } else {
+          const numero = Number(N);
+          if (!isNaN(numero)) {
+           
+            this.stack.push(-numero);
+           
+          } else {
+            // Lanzar un error si la conversión falla
+            throw new Error(`Error: No se puede aplicar NEG. El valor '${N}' no es un número válido.`);
+          }
         }
       } break;
+    
+            
 
       // Signo
       case 'SGN': {
@@ -178,7 +200,8 @@ class BiesVM {
       case 'EQ': {
         const N = this.pop()
         const M = this.pop()
-        this.stack.push(N === M ? 1 : 0);
+       
+        this.stack.push(N == M ? 1 : 0);
       } break;
 
       // Mayor que
@@ -235,7 +258,9 @@ class BiesVM {
       // String null test
       case 'SNT': {
         const V = this.pop()
+        
         this.stack.push(V === "" ? 1 : 0);
+      
       } break;
 
       // Concatenar strings
@@ -248,6 +273,7 @@ class BiesVM {
       // Convertir a string
       case 'TOS': {
         const V = this.pop()
+       
         this.stack.push(V.toString());
       } break;
 
@@ -270,14 +296,25 @@ class BiesVM {
         const K = this.pop()
         const V = this.pop()
         this.stack.push(V[K]);
+        this.stack.push(K);
       } break;
 
       // Tomar el resto después del k-ésimo elemento de la lista
       case 'LRK': {
-        const K = this.pop()
-        const V = this.pop()
-        this.stack.push(V.slice(K));
-      } break;
+        const K = actualCode.args[0]; // Extraemos el índice K directamente desde los argumentos
+        const V = this.pop(); // Extraemos el valor V de la pila (debería ser una lista o cadena)
+    
+       
+    
+        // Verificamos si V es una cadena o una lista antes de aplicar slice
+        if (typeof V === 'string' || Array.isArray(V)) {
+    
+            this.stack.push(V.slice(K)); // Si es válido, aplicamos slice y empujamos el resultado
+        } else {
+            throw new Error(`El valor ${V} no es una cadena ni una lista, no se puede aplicar slice.`);
+        }
+    } break;
+    
 
       // Convertir a lista
       case 'TOL': {
@@ -291,27 +328,29 @@ class BiesVM {
       
       // Salta N instrucciones
       case 'BR': {
-        const N = args[0];
-        this.code += N;
+        const N = actualCode.args[0];
+     
+        this.getActualContext().PC += parseInt(N);
+        return null;
       } break;
 
       // Salta N instrucciones si es verdadero
       case 'BT': {
-        const N = args[0];
-        if (this.pop()) {
-          this.code += N;
-        } else {
-          this.code++;
+        const N = actualCode.args[0];
+      
+        if (this.pop() === 1) {
+          
+          this.getActualContext().PC += parseInt(N);
+          return null;
         }
       } break;
 
       // Salta N instrucciones si es falso
       case 'BF': {
-        const N = args[0];
-        if (!this.pop()) {
-          this.code += N;
-        } else {
-          this.code++;
+        const N = actualCode.args[0];
+        if (this.pop() === 0) {
+          this.getActualContext().PC += parseInt(N);
+          return null;
         }
       } break;
 
@@ -326,26 +365,29 @@ class BiesVM {
       } break;
 
       case 'APP': {
-        const closure = this.pop();// La closure es la función que vamos a aplicar
+        const closure = this.pop();  // La closure es la función que vamos a aplicar
         const V = this.pop();
-
+       
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
         actualContext.context = {code: this.code};
         actualContext.ACTUAL = false;
-
+    
         // Ponemos el contexto de la nueva función en actual  
         const newContext = this.findContextByFUN(closure);
+        if (!newContext) {
+            throw new Error(`La función ${closure} no existe.`);
+        }
         newContext.ACTUAL = true;
         this.code = newContext.context.code;
-        newContext.K = actualCode.args[0] ? actualCode.args[0] : 1;// Guardamos el K de la función
-        newContext.PC = 0;  // Inicializamos el PC
+        newContext.K = actualCode.args[0] ? actualCode.args[0] : 1; // Guardamos el K de la función
+        newContext.PC = 0;  // Inicializamos el PC para empezar desde el inicio
+        newContext.previousFUN = actualContext.FUN;
         this.bindings.push([V]); // Creamos un nuevo ambiente para la función
-        
-        console.log(`Entrando a función ${closure}\n`);
-
+    
         return closure;
-      } break;      
+    }
+     
       
       case 'RET': {
         // Guardamos el contexto actual
@@ -357,9 +399,6 @@ class BiesVM {
         const previousContext = this.findContextByFUN(actualContext.previousFUN);
         previousContext.ACTUAL = true;
         this.code = previousContext.context.code;
-
-        console.log(`Saliendo de función ${actualContext.FUN}\n`);
-        console.log(`Entrando a función ${previousContext.FUN}\n`);
       } break;      
 
       case 'CST': {

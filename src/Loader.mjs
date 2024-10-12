@@ -1,4 +1,4 @@
-import biesGrammarVisitor from '../parser/grammar/biesVisitor.js';
+import biesGrammarVisitor from '../parser/biesVisitor.js';
 import BiesVM from "./biesVM.mjs";
 
 /**
@@ -128,11 +128,12 @@ class Loader extends biesGrammarVisitor {
         const functionNode = this.findFunctionById(tree, functionId);
         if (functionNode) {
             console.log(`Cargando función con ID: ${functionId}\n`);
-            this.visit(functionNode); // Ejecutar el visitor sobre el nodo de la función
+            this.visit(functionNode);  // Ejecutar el visitor sobre el nodo de la función
         } else {
             console.log(`Función con ID ${functionId} no encontrada.\n`);
         }
     }
+    
 
     findINI(tree) {
         let foundNode = null;

@@ -1,0 +1,16 @@
+$FUN $0 args:1 parent:$0
+LDV 1            ; Inicializar el resultado como 1
+$1
+SWP              ; Intercambiar para acceder a la variable inicial (número)
+LTK              ; Tomar el valor de la variable
+BF $2          ; Si el número es 0, termina
+MUL              ; Multiplicar resultado con el número actual
+LDV -1           ; Decrementar número en 1
+ADD
+SWP              ; Regresar a la pila
+BR $1         ; Repetir bucle
+$2
+POP              ; Limpiar la pila
+PRN              ; Imprimir resultado
+HLT
+$END
