@@ -12,7 +12,7 @@ WS : [ \t\r\n]+ -> skip ; // Espacios en blanco son ignorados
 COMMENT : ';' ~[\r\n]* -> skip ; // Comentarios ignorados
 PARENT : 'parent:'; // Literal para 'parent:'
 ARGS : 'args:'; // Literal para 'args:'
-
+ID : [a-zA-Z_][a-zA-Z_0-9]* ; // Identificadores como nombres de variables, etc.
 // PARSER
 start : (funDef | inst)+ ; // Debe haber al menos una función o instrucción
 
