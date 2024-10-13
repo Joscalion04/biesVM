@@ -405,17 +405,17 @@ class BiesVM {
         const isNewFunction = actualContext.FUN !== newContext.FUN;
     
         if (isNewFunction) {
-            // Si es una nueva función, creamos un nuevo ambiente
-            this.bindings.unshift({ fun: newContext.FUN, binding: V !== undefined ? [V] : [] });
+          // Si es una nueva función, creamos un nuevo ambiente
+          this.bindings.unshift({ fun: newContext.FUN, binding: V !== undefined ? [V] : [] });
         } else {
-            // Si es la misma función, actualizamos el ambiente existente
-            const bindingIndex = this.bindings.findIndex(binding => binding.fun === newContext.FUN);
-            const binding = this.bindings.splice(bindingIndex, 1)[0];
-            this.bindings.unshift(binding);
-    
-            if (V !== undefined) {
-                this.bindings[0].binding[0] = V;  // Actualizamos el valor de V en el ambiente
-            }
+          // Si es la misma función, actualizamos el ambiente existente
+          const bindingIndex = this.bindings.findIndex(binding => binding.fun === newContext.FUN);
+          const binding = this.bindings.splice(bindingIndex, 1)[0];
+          this.bindings.unshift(binding);
+  
+          if (V !== undefined) {
+              this.bindings[0].binding[0] = V;  // Actualizamos el valor de V en el ambiente
+          }
         }
     
         return closure;
@@ -493,10 +493,10 @@ class BiesVM {
     }
 
 
-    console.log("\n\n\n\nCODE: ",actualCode);
-    console.log("STACK: ",this.stack);
-    console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
-    console.log("CONTEXTS: ",this.contexts);
+    // console.log("\n\n\n\nCODE: ",actualCode);
+    // console.log("STACK: ",this.stack);
+    // console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
+    // console.log("CONTEXTS: ",this.contexts);
 
     // Incrementamos el PC
     this.getActualContext().PC++;
