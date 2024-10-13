@@ -12,6 +12,10 @@ $END
 
 ; Función recursiva para invertir la hilera
 $FUN $1 args:0 parent:$0
+
+    BLD 0 0         ; Carga el caracter guardado en el binding local
+    CAT             ; lo concatena
+
     ; Cargar la hilera original desde el binding 0
     BLD 1 0         ; Cargar la hilera original
     SNT              ; Verificar si la hilera está vacía (caso base)

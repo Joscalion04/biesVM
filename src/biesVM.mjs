@@ -21,7 +21,7 @@ class BiesVM {
   constructor() {
     this.code = []; // C
     this.stack = []; // S
-    this.bindings = [[]]; // B
+    this.bindings = [{fun: null, binding:[]}]; // B
     this.contexts = []; // D
   }
 
@@ -80,10 +80,17 @@ class BiesVM {
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
+
+
+
+
     // console.log("\n\n\n\nCODE: ",actualCode);
     // console.log("STACK: ",this.stack);
-    // console.log("BINDINGS: ",this.bindings);
+    // console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
     // console.log("CONTEXTS: ",this.contexts);
+
+
+
     //console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
@@ -91,6 +98,7 @@ class BiesVM {
         if (this.contexts.length === 0) {
             this.createNewContext(arg[1], true, null);
             this.getActualContext().PC = -1;
+            this.bindings[0].fun = this.getActualContext().FUN;
         }
       } break;
 
@@ -98,7 +106,7 @@ class BiesVM {
       case 'HLT': {
         this.code = [];
         this.stack = [];
-        this.bindings = [[]];
+        this.bindings = [{fun: null, binding:[]}];
         this.contexts = [];
         return 'FIN';
       } break;
@@ -124,14 +132,14 @@ class BiesVM {
 
       // Load desde ambiente
       case 'BLD': {
-        this.stack.push(this.bindings[actualCode.args[0]][actualCode.args[1]]);
+        this.stack.push(this.bindings[actualCode.args[0]].binding[actualCode.args[1]]);
       } break;
 
       case 'BST': {
         const V = this.pop();// Variable
         const E = parseInt(actualCode.args[0]); // Binding
         const K = parseInt(actualCode.args[1]); 
-        this.bindings[E][K] = V;
+        this.bindings[E].binding[K] = V;
       } break;
 
       case 'ADD': {
@@ -368,17 +376,16 @@ class BiesVM {
         } else {  // Si no, creamos un nuevo contexto para esa función y la metemos en la pila
           this.createNewContext(actualCode.args[0]);
           this.stack.push(this.findContextByFUN(actualCode.args[0]).FUN);
-          this.bindings.unshift([]); // Creamos un nuevo ambiente
         }
       } break;
 
       case 'APP': {
         const closure = this.pop();  // La closure es la función que vamos a aplicar
-        // const V = this.pop();
-       
+        const V = this.pop();
+        
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
-        actualContext.context = {code: this.code};
+        actualContext.context = { code: this.code };
         actualContext.ACTUAL = false;
     
         // Ponemos el contexto de la nueva función en actual  
@@ -386,17 +393,34 @@ class BiesVM {
         if (!newContext) {
             throw new Error(`La función ${closure} no existe.`);
         }
+    
+        // Actualizamos el nuevo contexto
         newContext.ACTUAL = true;
         this.code = newContext.context.code;
-        newContext.K = actualCode.args[0] ? actualCode.args[0] : 1; // Guardamos el K de la función
+        newContext.K = actualCode.args[0] || 1;  // Guardamos el K de la función
         newContext.PC = 0;  // Inicializamos el PC para empezar desde el inicio
         newContext.previousFUN = actualContext.FUN;
-        // this.bindings.unshift([V]); // Creamos un nuevo ambiente
+    
+        // Verificamos si el ambiente pertenece a una nueva función o la misma
+        const isNewFunction = actualContext.FUN !== newContext.FUN;
+    
+        if (isNewFunction) {
+            // Si es una nueva función, creamos un nuevo ambiente
+            this.bindings.unshift({ fun: newContext.FUN, binding: V !== undefined ? [V] : [] });
+        } else {
+            // Si es la misma función, actualizamos el ambiente existente
+            const bindingIndex = this.bindings.findIndex(binding => binding.fun === newContext.FUN);
+            const binding = this.bindings.splice(bindingIndex, 1)[0];
+            this.bindings.unshift(binding);
+    
+            if (V !== undefined) {
+                this.bindings[0].binding[0] = V;  // Actualizamos el valor de V en el ambiente
+            }
+        }
     
         return closure;
       }
-     
-      
+    
       case 'RET': {
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
@@ -467,6 +491,13 @@ class BiesVM {
         this.stack.push(input);
       } break;
     }
+
+
+    console.log("\n\n\n\nCODE: ",actualCode);
+    console.log("STACK: ",this.stack);
+    console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
+    console.log("CONTEXTS: ",this.contexts);
+
     // Incrementamos el PC
     this.getActualContext().PC++;
     return null;
