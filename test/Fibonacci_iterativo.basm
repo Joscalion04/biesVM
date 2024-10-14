@@ -16,7 +16,7 @@ $FUN $1 args:0 parent:$0
     BLD 0 3        ; Cargar el contador
     BLD 0 0        ; Cargar n
     LTE             ; Comparar contador con n
-    B 10          ; Si contador > n, saltar a fin del bucle
+    BF 14          ; Si contador > n, saltar a fin del bucle
 
     ; Cuerpo del bucle
     BLD 0 1        ; Cargar a
