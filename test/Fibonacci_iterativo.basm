@@ -1,17 +1,54 @@
-$FUN $0 args:1 parent:$0
-LDV 0            ; f0 = 0
-LDV 1            ; f1 = 1
-LDV 1            ; Inicializar contador en 1
-$1
-EQ               ; Comparar si contador es igual a n
-BT $2          ; Si es igual, terminar
-SWP              ; Intercambiar para mantener valores en orden
-ADD              ; Calcular siguiente número Fibonacci
-SWP              ; Regresar f1 a la pila
-ADD              ; Sumar 1 al contador
-SWP              ; Intercambiar para mantener valores
-BR $1
-$2
-PRN
-HLT
+$FUN $1 args:0 parent:$0
+
+    ; Inicializamos las variables para el cálculo
+    LDV 6          ; Cargar 6 en la pila (n)
+    BST 0 0        ; Guardar n en el binding 0, posición 0
+
+    LDV 0          ; a = 0
+    BST 0 1        ; Guardar a en el binding 0, posición 1
+
+    LDV 1          ; b = 1
+    BST 0 2        ; Guardar b en el binding 0, posición 2
+
+    LDV 2          ; Inicializar el contador en 2
+    BST 0 3        ; Guardar el contador en el binding 0, posición 3
+
+    BLD 0 3        ; Cargar el contador
+    BLD 0 0        ; Cargar n
+    LTE             ; Comparar contador con n
+    B 10          ; Si contador > n, saltar a fin del bucle
+
+    ; Cuerpo del bucle
+    BLD 0 1        ; Cargar a
+    BLD 0 2        ; Cargar b
+    ADD            ; Calcular a + b
+    BST 0 4        ; Guardar el resultado en temp (binding 0, posición 4)
+
+    BLD 0 2        ; Cargar b
+    BST 0 1        ; Actualizar a con el valor de b
+
+    BLD 0 4        ; Cargar temp
+    BST 0 2        ; Actualizar b con el valor de temp
+
+    ; Incrementar el contador
+    BLD 0 3        ; Cargar el contador
+    LDV 1          ; Cargar 1
+    ADD            ; Incrementar el contador
+    BST 0 3        ; Guardar el nuevo contador
+    BR -14         ; Regresar al inicio del bucle
+
+    ; Retornar el valor de b
+    BLD 0 2        ; Cargar el valor de b
+    RET             ; Retornar b
+
 $END
+
+$FUN $0 args:0 parent:$0
+    LDV 6          ; Cargar el valor de 'n' (6)
+    LDF $1         ; Cargar la función 'fibonacci'
+    APP 100          ; Llamar a la función 'fibonacci' con 1 argumento
+    PRN            ; Imprimir el valor retornado
+    HLT            ; Detener la ejecución
+$END
+
+INI $0           ; Iniciar el programa desde main

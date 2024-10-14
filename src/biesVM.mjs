@@ -83,10 +83,10 @@ class BiesVM {
 
 
 
-   // console.log("STACK: ",this.stack);
-   //  console.log("\n\n\n\nCODE: ",actualCode);
-     //console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
-    // console.log("CONTEXTS: ",this.contexts);
+    console.log("STACK: ",this.stack);
+    console.log("\n\n\n\nCODE: ",actualCode);
+    //console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
+    //console.log("CONTEXTS: ",this.contexts);
 
 
 
@@ -125,7 +125,6 @@ class BiesVM {
       // Load Value
       case 'LDV': {
         const V = actualCode.args[0];
-        //console.log(V);
         this.stack.push(V);
       } break;
 
