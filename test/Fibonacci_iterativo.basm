@@ -1,7 +1,7 @@
 $FUN $1 args:0 parent:$0
 
     ; Inicializamos las variables para el cálculo
-    LDV 6          ; Cargar 6 en la pila (n)
+    LDV 8          ; Cargar 6 en la pila (n)
     BST 0 0        ; Guardar n en el binding 0, posición 0
 
     LDV 0          ; a = 0
@@ -15,8 +15,8 @@ $FUN $1 args:0 parent:$0
 
     BLD 0 3        ; Cargar el contador
     BLD 0 0        ; Cargar n
-    LTE             ; Comparar contador con n
-    BF 14          ; Si contador > n, saltar a fin del bucle
+    LT             ; Comparar contador con n
+    BT 14          ; Si contador > n, saltar a fin del bucle
 
     ; Cuerpo del bucle
     BLD 0 1        ; Cargar a
@@ -35,7 +35,7 @@ $FUN $1 args:0 parent:$0
     LDV 1          ; Cargar 1
     ADD            ; Incrementar el contador
     BST 0 3        ; Guardar el nuevo contador
-    BR -14         ; Regresar al inicio del bucle
+    BR -16         ; Regresar al inicio del bucle
 
     ; Retornar el valor de b
     BLD 0 2        ; Cargar el valor de b
