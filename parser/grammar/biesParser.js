@@ -3,16 +3,16 @@
 import antlr4 from 'antlr4';
 import biesVisitor from './biesVisitor.js';
 
-const serializedATN = [4,1,55,46,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
+const serializedATN = [4,1,56,46,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
 1,0,1,0,4,0,13,8,0,11,0,12,0,14,1,1,1,1,1,1,1,1,1,1,1,1,3,1,23,8,1,1,1,4,
 1,26,8,1,11,1,12,1,27,1,1,1,1,1,2,1,2,1,2,5,2,35,8,2,10,2,12,2,38,9,2,3,
-2,40,8,2,1,3,1,3,1,4,1,4,1,4,0,0,5,0,2,4,6,8,0,2,1,0,1,43,3,0,44,46,48,48,
-55,55,46,0,12,1,0,0,0,2,16,1,0,0,0,4,31,1,0,0,0,6,41,1,0,0,0,8,43,1,0,0,
+2,40,8,2,1,3,1,3,1,4,1,4,1,4,0,0,5,0,2,4,6,8,0,2,1,0,1,43,3,0,44,47,49,49,
+56,56,46,0,12,1,0,0,0,2,16,1,0,0,0,4,31,1,0,0,0,6,41,1,0,0,0,8,43,1,0,0,
 0,10,13,3,2,1,0,11,13,3,4,2,0,12,10,1,0,0,0,12,11,1,0,0,0,13,14,1,0,0,0,
-14,12,1,0,0,0,14,15,1,0,0,0,15,1,1,0,0,0,16,17,5,49,0,0,17,18,5,48,0,0,18,
-19,5,54,0,0,19,22,5,44,0,0,20,21,5,53,0,0,21,23,5,48,0,0,22,20,1,0,0,0,22,
+14,12,1,0,0,0,14,15,1,0,0,0,15,1,1,0,0,0,16,17,5,50,0,0,17,18,5,49,0,0,18,
+19,5,55,0,0,19,22,5,44,0,0,20,21,5,54,0,0,21,23,5,49,0,0,22,20,1,0,0,0,22,
 23,1,0,0,0,23,25,1,0,0,0,24,26,3,4,2,0,25,24,1,0,0,0,26,27,1,0,0,0,27,25,
-1,0,0,0,27,28,1,0,0,0,28,29,1,0,0,0,29,30,5,50,0,0,30,3,1,0,0,0,31,39,3,
+1,0,0,0,27,28,1,0,0,0,28,29,1,0,0,0,29,30,5,51,0,0,30,3,1,0,0,0,31,39,3,
 6,3,0,32,36,3,8,4,0,33,35,3,8,4,0,34,33,1,0,0,0,35,38,1,0,0,0,36,34,1,0,
 0,0,36,37,1,0,0,0,37,40,1,0,0,0,38,36,1,0,0,0,39,32,1,0,0,0,39,40,1,0,0,
 0,40,5,1,0,0,0,41,42,7,0,0,0,42,7,1,0,0,0,43,44,7,1,0,0,44,9,1,0,0,0,6,12,
@@ -36,16 +36,16 @@ export default class biesParser extends antlr4.Parser {
                             "'LTK'", "'LRK'", "'TOL'", "'NOP'", "'BR'", 
                             "'BT'", "'BF'", "'LDF'", "'APP'", "'RET'", "'CST'", 
                             "'INO'", "'PRN'", "'STK'", "'SRK'", "'INP'", 
-                            null, null, null, null, null, "'$FUN'", "'$END'", 
-                            null, null, "'parent:'", "'args:'" ];
+                            null, null, null, null, null, null, "'$FUN'", 
+                            "'$END'", null, null, "'parent:'", "'args:'" ];
     static symbolicNames = [ null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
-                             null, null, null, null, "INT", "STR", "LIST", 
-                             "ELEMENT", "FUNCTION", "FUN", "END", "WS", 
-                             "COMMENT", "PARENT", "ARGS", "ID" ];
+                             null, null, null, null, "INT", "FLOAT", "STR", 
+                             "LIST", "ELEMENT", "FUNCTION", "FUN", "END", 
+                             "WS", "COMMENT", "PARENT", "ARGS", "ID" ];
     static ruleNames = [ "start", "funDef", "inst", "mnemonic", "arg" ];
 
     constructor(input) {
@@ -71,7 +71,7 @@ export default class biesParser extends antlr4.Parser {
 	            this.state = 12;
 	            this._errHandler.sync(this);
 	            switch(this._input.LA(1)) {
-	            case 49:
+	            case 50:
 	                this.state = 10;
 	                this.funDef();
 	                break;
@@ -127,7 +127,7 @@ export default class biesParser extends antlr4.Parser {
 	            this.state = 14; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967294) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 135167) !== 0));
+	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967294) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 266239) !== 0));
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -161,7 +161,7 @@ export default class biesParser extends antlr4.Parser {
 	        this.state = 22;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===53) {
+	        if(_la===54) {
 	            this.state = 20;
 	            this.match(biesParser.PARENT);
 	            this.state = 21;
@@ -207,13 +207,13 @@ export default class biesParser extends antlr4.Parser {
 	        this.state = 39;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 2071) !== 0)) {
+	        if(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 4143) !== 0)) {
 	            this.state = 32;
 	            this.arg();
 	            this.state = 36;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            while(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 2071) !== 0)) {
+	            while(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 4143) !== 0)) {
 	                this.state = 33;
 	                this.arg();
 	                this.state = 38;
@@ -277,7 +277,7 @@ export default class biesParser extends antlr4.Parser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 43;
 	        _la = this._input.LA(1);
-	        if(!(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 2071) !== 0))) {
+	        if(!(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 4143) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -346,17 +346,18 @@ biesParser.T__40 = 41;
 biesParser.T__41 = 42;
 biesParser.T__42 = 43;
 biesParser.INT = 44;
-biesParser.STR = 45;
-biesParser.LIST = 46;
-biesParser.ELEMENT = 47;
-biesParser.FUNCTION = 48;
-biesParser.FUN = 49;
-biesParser.END = 50;
-biesParser.WS = 51;
-biesParser.COMMENT = 52;
-biesParser.PARENT = 53;
-biesParser.ARGS = 54;
-biesParser.ID = 55;
+biesParser.FLOAT = 45;
+biesParser.STR = 46;
+biesParser.LIST = 47;
+biesParser.ELEMENT = 48;
+biesParser.FUNCTION = 49;
+biesParser.FUN = 50;
+biesParser.END = 51;
+biesParser.WS = 52;
+biesParser.COMMENT = 53;
+biesParser.PARENT = 54;
+biesParser.ARGS = 55;
+biesParser.ID = 56;
 
 biesParser.RULE_start = 0;
 biesParser.RULE_funDef = 1;
@@ -569,6 +570,10 @@ class ArgContext extends antlr4.ParserRuleContext {
 
 	INT() {
 	    return this.getToken(biesParser.INT, 0);
+	};
+
+	FLOAT() {
+	    return this.getToken(biesParser.FLOAT, 0);
 	};
 
 	STR() {

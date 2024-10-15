@@ -2,9 +2,10 @@ grammar bies;
 
 // LEXER
 INT : '-'? [0-9]+ ; // Números enteros
+FLOAT : '-'? [0-9]+ ('.' [0-9]+)? ; // Números decimales
 STR : '\'' ( ~['\\] | '\\' . )* '\'' | '"' ( ~["\\] | '\\' . )* '"' ; // Cadenas
 LIST : '[' (ELEMENT (',' ELEMENT)*)? ']' ;
-ELEMENT : STR | INT ;
+ELEMENT : STR | INT | FLOAT;
 FUNCTION : '$' [0-9]+ ; // Identificadores de funciones como $0, $1, etc.
 FUN : '$FUN' ; // Inicio de una función
 END : '$END' ; // Fin de una función
@@ -25,5 +26,5 @@ mnemonic : 'INI' | 'HLT' | 'POP' | 'SWP' | 'LDV' | 'BLD' | 'BST' | 'ADD' | 'MUL'
          | 'SNT' | 'CAT' | 'TOS' | 'LNT' | 'LIN' | 'LTK' | 'LRK' | 'TOL' | 'NOP' | 'BR' | 'BT'
          | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN' | 'STK' | 'SRK' | 'INP';
 
-arg : INT | STR | FUNCTION | LIST | ID; // Argumentos posibles
+arg : INT | FLOAT | STR | FUNCTION | LIST | ID; // Argumentos posibles
 
