@@ -19,7 +19,6 @@ SGN              ; Determinar el signo del discriminante
 BF 20            ; Si el discriminante es negativo (0), salta al final (no hay soluciones reales)
 
 ; Calcular la primera raíz (-b + sqrt(discriminante)) / 2a
-LDV 1             ; Cargar el discriminante (1)
 PRN               ; Imprimir el discriminante por verificación
 SWP               ; Intercambiar para obtener b
 NEG               ; Cambiar el signo de b (de -3 a 3)

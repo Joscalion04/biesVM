@@ -175,22 +175,13 @@ class BiesVM {
       // Negación
       case 'NEG': {
         const N = this.pop();
-        
-      
-        if (typeof N === 'number') {
-          
-          this.stack.push(-N);
-          
+        const numero = Number(N);
+        if (!isNaN(numero)) {
+          this.stack.push(-numero);
         } else {
-          const numero = Number(N);
-          if (!isNaN(numero)) {
-           
-            this.stack.push(-numero);
-           
-          } else {
-            // Lanzar un error si la conversión falla
-            throw new Error(`Error: No se puede aplicar NEG. El valor '${N}' no es un número válido.`);
-          }
+          this.stack.push(N);// Devolver el valor original
+          // Lanzar un error si la conversión falla
+          throw new Error(`Error: No se puede aplicar NEG. El valor '${N}' no es un número válido.`);
         }
       } break;
     
@@ -472,17 +463,20 @@ class BiesVM {
           if (!isNaN(number)) {
             this.stack.push(number);
           } else {
+            this.stack.push(value);// Devolver el valor original
             throw new Error(`Casting fallido: ${value} no es un número`);
           }
         } else if (type === 'list') {
           if (Array.isArray(value)) {
             this.stack.push(value);
           } else {
+            this.stack.push(value);// Devolver el valor original
             throw new Error(`Casting fallido: ${value} no es una lista`);
           }
         } else if (type === 'string') {
           this.stack.push(String(value));
         } else {
+          this.stack.push(value);// Devolver el valor original
           throw new Error(`Casting fallido: ${value} no es del tipo ${type}`);
         }
       } break;      
@@ -521,7 +515,7 @@ class BiesVM {
         const K = this.pop();
         const V = this.pop()
         this.stack.push(V);
-        
+
         this.stack.push(V.slice(K));
       } break;
 
