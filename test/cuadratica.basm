@@ -1,24 +1,21 @@
 $FUN $0 args:0 parent:$0
 
 ; Cargar los coeficientes a, b, y c (valores de la ecuación cuadrática ax^2 + bx + c = 0)
-LDV 1             ; Cargar a = 1
 LDV -3            ; Cargar b = -3
-LDV 2             ; Cargar c = 2
 
 ; Resolver el discriminante: b^2 - 4ac
-SWP               ; Intercambiar para tener b en la cima de la pila
 LDV -3            ; Cargar de nuevo b = -3
 MUL               ; Calcular b^2, el resultado es 9
-SWP               ; Intercambiar para tener c en la cima
-LDV 1             ; Cargar de nuevo a = 1
+LDV 1             ; Cargar a = 1
 LDV 4             ; Cargar el número 4 (para multiplicar por 4ac)
 MUL               ; Multiplicar 4 * a, el resultado es 4
+LDV 2             ; Cargar c = 2
 MUL               ; Multiplicar 4a * c, el resultado es 8
 SWP 
 SUB               ; Restar b^2 - 4ac, el resultado es 9 - 8 = 1
 
 ; Verificar si el discriminante es mayor o igual a 0
-SGN               ; Determinar el signo del discriminante
+SGN              ; Determinar el signo del discriminante
 BF 20            ; Si el discriminante es negativo (0), salta al final (no hay soluciones reales)
 
 ; Calcular la primera raíz (-b + sqrt(discriminante)) / 2a
