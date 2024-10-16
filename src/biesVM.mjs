@@ -34,11 +34,14 @@ class BiesVM {
     }
 
     async executeInstruction(arg) {
-        const actualContext = this.getActualContext();
-        const actualCode = actualContext ? this.code[actualContext.PC] : null;
-        const mnemonic = arg ? (arg[0] != null ? arg[0] : actualCode?.mnemonic) : actualCode?.mnemonic;
+        const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
+        
+        // console.log("\n\n\n\nCODE: ",actualCode);
+        // console.log("STACK: ",this.stack);
+        // console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
+        // console.log("CONTEXTS: ",this.contexts);
 
-        switch (mnemonic) {
+        switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
             case 'INI':
                 this.initialize(arg);
                 break;
@@ -48,7 +51,7 @@ class BiesVM {
             case 'SWP':
             case 'BLD':
             case 'BST':
-                executeStack(mnemonic, this);
+                executeStack(actualCode.mnemonic, this);
                 break;
             case 'ADD':
             case 'SUB':
@@ -76,9 +79,9 @@ class BiesVM {
                 throw new Error(`Unknown instruction: ${mnemonic}`);
         }
 
-        if (actualContext) {
-            actualContext.PC++;
-        }
+        // Incrementamos el PC
+        this.getActualContext().PC++;
+        return null;
     }
 
     initialize(arg) {

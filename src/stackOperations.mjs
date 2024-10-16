@@ -12,18 +12,16 @@ export function executeStack(mnemonic, vm) {
             break;
         }
         case 'BLD': {
-            const actualContext = vm.getActualContext();
-            const value = vm.bindings[vm.code[actualContext.PC].args[0]]
-                          .binding[vm.code[actualContext.PC].args[1]];
-            vm.stack.push(value);
+            const actualCode = vm.code[vm.getActualContext().PC];
+            this.stack.push(vm.bindings[actualCode.args[0]].binding[actualCode.args[1]]);
             break;
         }
         case 'BST': {
-            const actualContext = vm.getActualContext();
-            const variable = vm.stack.pop();
-            const bindingIndex = vm.code[actualContext.PC].args[0];
-            const bindingPosition = vm.code[actualContext.PC].args[1];
-            vm.bindings[bindingIndex].binding[bindingPosition] = variable;
+            const actualCode = vm.code[vm.getActualContext().PC];
+            const V = vm.stack.pop();
+            const E = parseInt(actualCode.args[0]); // Binding
+            const K = parseInt(actualCode.args[1]); 
+            vm.bindings[E].binding[K] = V;
             break;
         }
         default:
