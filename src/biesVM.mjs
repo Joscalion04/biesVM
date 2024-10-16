@@ -25,18 +25,51 @@ class BiesVM {
     this.contexts = []; // D
   }
 
+  /** 
+  * Este método busca en la lista de contextos disponibles y devuelve el que está marcado como 
+  * `ACTUAL`.
+  * @method getActualContext
+  * 
+  * @returns {Object|undefined} El contexto actual o `undefined` si no existe.
+  */
   getActualContext() {
     return this.contexts.find(context => context.ACTUAL);
   }
 
+  /** 
+  * Este método busca en la lista de contextos disponibles y devuelve el que coincide 
+  * con el valor de `FUN` proporcionado.
+  * @method findContextByFUN
+  * 
+  * @param {string} functionClosure - El valor de `FUN` que se busca en los contextos.
+  * @returns {Object|undefined} El contexto que coincide con `FUN` o `undefined` si no existe.
+  */
   findContextByFUN(functionClosure) {
     return this.contexts.find(context => context.FUN === functionClosure);
   }
 
+  /** 
+  * Este método crea un nuevo contexto y lo agrega a la lista de contextos.
+  * 
+  * @method createNewContext
+  * 
+  * @param {string} arg - El valor de `FUN` para el nuevo contexto.
+  * @param {boolean} [actual=false] - Indica si el nuevo contexto es el actual.
+  * @param {any} K - Un valor asociado al nuevo contexto.
+  */
   createNewContext(arg, actual = false, K) {
     this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: this.getActualContext()? this.getActualContext().FUN : null, K: K});
   }
 
+  /** 
+  * Este método elimina y retorna el último elemento de la pila si se cumplen las condiciones 
+  * relacionadas con el valor de `K` en el contexto actual.
+  * 
+  * @method pop
+  * 
+  * @returns {any} El valor eliminado de la pila.
+  * @throws {Error} Lanza un error si `K` es igual a 0.
+  */
   pop() {
     if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
       const V = this.stack.pop();
@@ -49,9 +82,13 @@ class BiesVM {
     }
   }
 
-  /**
-   * Obtiene la entrada del usuario de manera asíncrona.
-   * @returns {Promise<string>} - Retorna una promesa que se resuelve con la entrada del usuario.
+  /** 
+  * Este método solicita una entrada del usuario a través de la consola y 
+  * retorna una promesa que se resuelve con el valor ingresado.
+  * 
+  * @method getInput
+  * 
+  * @returns {Promise<string>} Una promesa que se resuelve con la entrada del usuario.
   */
   getInput() {
     return new Promise((resolve) => {
@@ -66,14 +103,21 @@ class BiesVM {
     });
   }
 
-  /**
-  * Ejecuta una instrucción basada en el mnemónico proporcionado. La lógica varía 
-  * dependiendo del tipo de instrucción, incluyendo operaciones aritméticas, lógicas,
-  * manipulación de la pila y control de flujo.
-  *
-  * @param mnemonic El mnemónico de la instrucción a ejecutar.
-  * @param args Los argumentos adicionales requeridos para la ejecución de la instrucción.
-  */
+  /** 
+  * Ejecuta una instrucción basada en el argumento proporcionado o la instrucción actual.
+  * El método maneja diferentes tipos de instrucciones, modificando la pila y los contextos según sea necesario.
+  * 
+  * @async
+  * @method executeInstruction
+  * 
+  * @param {Array<string>} [arg] - Argumento auxiliar para ejecutar el comando 'INI', que debe ser un array que contenga 
+  *                                  una cadena (como 'INI') y un valor adicional.
+  * 
+  * @returns {Promise<string|null>} Retorna una promesa que se resuelve con 'FIN' si se ejecuta la instrucción 'HLT', 
+  *                                  o null si la instrucción se ejecuta normalmente.
+  * 
+  * @throws {Error} Lanza un error si ocurre un fallo en el casteo de tipos en la instrucción 'CST'.
+ */
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;

@@ -1,4 +1,32 @@
-// Generated from grammar/bies.g4 by ANTLR 4.13.1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: parser/grammar/biesParser.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: parser/grammar/biesParser.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Generated from grammar/bies.g4 by ANTLR 4.13.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import biesVisitor from './biesVisitor.js';
@@ -150,7 +178,7 @@ export default class biesParser extends antlr4.Parser {
 	            this.state = 16; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 147455) !== 0));
+	        } while((((_la) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; _la) &amp; 4294967288) !== 0) || ((((_la - 32)) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; (_la - 32)) &amp; 147455) !== 0));
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -214,7 +242,7 @@ export default class biesParser extends antlr4.Parser {
 	            this.state = 30; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16383) !== 0));
+	        } while((((_la) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; _la) &amp; 4294967288) !== 0) || ((((_la - 32)) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; (_la - 32)) &amp; 16383) !== 0));
 	        this.state = 32;
 	        this.match(biesParser.END);
 	    } catch (re) {
@@ -289,13 +317,13 @@ export default class biesParser extends antlr4.Parser {
 	        this.state = 45;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
+	        if(((((_la - 46)) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; (_la - 46)) &amp; 7) !== 0)) {
 	            this.state = 38;
 	            this.arg();
 	            this.state = 42;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            while(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
+	            while(((((_la - 46)) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; (_la - 46)) &amp; 7) !== 0)) {
 	                this.state = 39;
 	                this.arg();
 	                this.state = 44;
@@ -339,7 +367,7 @@ export default class biesParser extends antlr4.Parser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 47;
 	        _la = this._input.LA(1);
-	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16383) !== 0))) {
+	        if(!((((_la) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; _la) &amp; 4294967288) !== 0) || ((((_la - 32)) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; (_la - 32)) &amp; 16383) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -381,7 +409,7 @@ export default class biesParser extends antlr4.Parser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 49;
 	        _la = this._input.LA(1);
-	        if(!(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0))) {
+	        if(!(((((_la - 46)) &amp; ~0x1f) === 0 &amp;&amp; ((1 &lt;&lt; (_la - 46)) &amp; 7) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -518,7 +546,7 @@ class StartContext extends antlr4.ParserRuleContext {
 	* @method funDef
 	* @param {number|null} [i=null] - El índice del contexto de definición de funciones a obtener, 
 	*                                  o null para obtener todos los contextos.
-	* @returns {Array<FunDefContext>|FunDefContext} Un array de contextos de definición de funciones 
+	* @returns {Array&lt;FunDefContext>|FunDefContext} Un array de contextos de definición de funciones 
 	*                                                si se proporciona `null`, o el contexto específico 
 	*                                                si se proporciona un índice.
 	* 
@@ -545,7 +573,7 @@ class StartContext extends antlr4.ParserRuleContext {
 	* @method inst
 	* @param {number|null} [i=null] - El índice del contexto de instrucción a obtener, 
 	*                                  o null para obtener todos los contextos.
-	* @returns {Array<InstContext>|InstContext} Un array de contextos de instrucciones 
+	* @returns {Array&lt;InstContext>|InstContext} Un array de contextos de instrucciones 
 	*                                            si se proporciona `null`, o el contexto específico 
 	*                                            si se proporciona un índice.
 	* 
@@ -1044,3 +1072,26 @@ biesParser.ArgsDeclContext = ArgsDeclContext;
 biesParser.InstContext = InstContext; 
 biesParser.MnemonicContext = MnemonicContext; 
 biesParser.ArgContext = ArgContext; 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#END">END</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 12:05:24 GMT-0600 (hora estándar central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
