@@ -1,57 +1,14 @@
-$FUN $0 args:0 parent:$0
-    ; Cargamos el valor n (por ejemplo, 6) en la pila
-    LDV 6          ; Cargar el valor de n en la pila
-    BST 0 0        ; Guardamos n en el binding 0, posición 0
-
-    ; Llamamos a la función recursiva para calcular Fibonacci
-    LDF $1         ; Cargar la función recursiva de Fibonacci
-    APP 100        ; Ejecutar la función con el valor n
-    PRN            ; Imprimir el valor de Fibonacci
-    HLT            ; Detener la ejecución
+$FUN $0 args:1 parent:$0
+LDV 1            ; Factorial de 0 es 1
+EQ               ; Comparar si n == 0
+BT $1          ; Si es 0, regresar
+LDF $0           ; Cargar la función recursiva
+SWP
+LDV -1           ; Decrementar n
+ADD
+APP 0            ; Aplicar factorial_rec(n - 1)
+MUL              ; Multiplicar por n
+$1
+PRN
+HLT
 $END
-
-; Función recursiva para calcular Fibonacci
-$FUN $1 args:0 parent:$0
-    ; Cargar el valor de n desde el binding
-    BLD 0 0        ; Cargar el valor de n
-    SNT             ; Verificar si n es cero (caso base)
-    BT 18           ; Si es cero, retornar 0
-
-    ; Caso base: si n es 1, retornar 1
-    LDV 1          ; Cargar 1 en la pila
-    BLD 0 0        ; Cargar el valor de n
-    EQ             ; Comparar n == 1
-    BT 20          ; Si es uno, retornar 1
-
-    ; Calcular Fibonacci(n - 1)
-    BLD 0 0        ; Cargar el valor de n
-    LDV 1          ; Cargar 1
-    SUB            ; Calcular n - 1
-    BST 1 0       ; Guardar n - 1 en el binding 1, posición 0
-    LDF $1         ; Cargar la función Fibonacci
-    APP 100        ; Llamada recursiva a Fibonacci(n - 1)
-    BST 1 1       ; Guardar el resultado de Fibonacci(n - 1) en el binding 1, posición 1
-
-    ; Calcular Fibonacci(n - 2)
-    BLD 0 0        ; Cargar el valor de n
-    LDV 2          ; Cargar 2
-    SUB            ; Calcular n - 2
-    BST 1 0       ; Guardar n - 2 en el binding 1, posición 0
-    LDF $1         ; Cargar la función Fibonacci
-    APP 100        ; Llamada recursiva a Fibonacci(n - 2)
-
-    ; Sumar Fibonacci(n - 1) + Fibonacci(n - 2)
-    BLD 1 1        ; Cargar el resultado de Fibonacci(n - 1)
-    ADD            ; Sumar el resultado de Fibonacci(n - 2)
-    RET            ; Retornar el valor de Fibonacci(n)
-
-    ; Retorno de 0
-    LDV 0          ; Retornar 0
-    RET
-
-    ; Retorno de 1
-    LDV 1          ; Retornar 1
-    RET
-$END
-
-INI $0           ; Iniciar el programa desde main

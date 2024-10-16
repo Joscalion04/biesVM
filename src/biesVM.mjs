@@ -37,20 +37,19 @@ class BiesVM {
     this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: null, K: K, parent: this.getActualContext() ? this.getActualContext().FUN : arg});
   }
 
-  pop() {
- 
-    if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
+  // pop() {
+  //   if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
      
-      const V = this.stack.pop();
+  //     const V = this.stack.pop();
       
-      if (this.getActualContext().K !== null) {
-        this.getActualContext().K--;
-      }
-      return V;
-    } else {
-      throw new Error('No se puede hacer POP con K = 0');
-    }
-  }
+  //     if (this.getActualContext().K !== null) {
+  //       this.getActualContext().K--;
+  //     }
+  //     return V;
+  //   } else {
+  //     throw new Error('No se puede hacer POP con K = 0');
+  //   }
+  // }
 
   /**
    * Obtiene la entrada del usuario de manera asíncrona.
@@ -107,13 +106,13 @@ class BiesVM {
       } break;
 
       case 'POP': {
-        this.pop();
+        this.stack.pop();
       } break;
 
       // Swap
       case 'SWP': {
-        const N = this.pop();
-        const M = this.pop()
+        const N = this.stack.pop();
+        const M = this.stack.pop()
         this.stack.push(N);
         this.stack.push(M);
       } break;
@@ -130,39 +129,39 @@ class BiesVM {
       } break;
 
       case 'BST': {
-        const V = this.pop();// Variable
+        const V = this.stack.pop();// Variable
         const E = parseInt(actualCode.args[0]); // Binding
         const K = parseInt(actualCode.args[1]); 
         this.bindings[E].binding[K] = V;
       } break;
 
       case 'ADD': {
-        const N = parseInt(this.pop());
-        const M = parseInt(this.pop());
+        const N = parseInt(this.stack.pop());
+        const M = parseInt(this.stack.pop());
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N + M);
         }
       } break;
 
       case 'MUL': {
-        const N = parseInt(this.pop());
-        const M = parseInt(this.pop()); 
+        const N = parseInt(this.stack.pop());
+        const M = parseInt(this.stack.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N * M);
         }
       } break;
 
       case 'DIV': {
-        const N = parseInt(this.pop()); 
-        const M = parseInt(this.pop()); 
+        const N = parseInt(this.stack.pop()); 
+        const M = parseInt(this.stack.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N / M);
         }
       } break;
 
       case 'SUB': {
-        const N = parseInt(this.pop()); 
-        const M = parseInt(this.pop()); 
+        const N = parseInt(this.stack.pop()); 
+        const M = parseInt(this.stack.pop()); 
         if (typeof N === 'number' && typeof M === 'number') {
           this.stack.push(N - M);
         }
@@ -170,7 +169,7 @@ class BiesVM {
       
       // Negación
       case 'NEG': {
-        const N = this.pop();
+        const N = this.stack.pop();
         const numero = Number(N);
         if (!isNaN(numero)) {
           this.stack.push(-numero);
@@ -183,7 +182,7 @@ class BiesVM {
     
       // Signo
       case 'SGN': {
-        const N = this.pop();
+        const N = this.stack.pop();
         if (typeof N === 'number') {
           this.stack.push(Math.sign(N) >= 0 ? 1 : 0);//Revisar
         }
@@ -191,73 +190,73 @@ class BiesVM {
 
       // Igual
       case 'EQ': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
        
         this.stack.push(N == M ? 1 : 0);
       } break;
 
       // Mayor que
       case 'GT': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
         this.stack.push(N > M ? 1 : 0);
       } break;
 
       // Mayor o igual que
       case 'GTE': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
 
         this.stack.push(N >= M ? 1 : 0);
       } break;
 
       // Menor que
       case 'LT': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
 
         this.stack.push(N < M ? 1 : 0);
       } break;
 
       // Menor o igual que
       case 'LTE': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
 
         this.stack.push(N <= M ? 1 : 0);
       } break;
 
       case 'AND': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
         
         this.stack.push(N && M ? 1 : 0);
       } break;
 
       case 'OR': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
 
         this.stack.push(N || M ? 1 : 0);
       } break;
 
       case 'XOR': {
-        const N = this.pop();
-        const M = this.pop();
+        const N = this.stack.pop();
+        const M = this.stack.pop();
 
         this.stack.push(N ^ M);// Funciona este operador?
       } break;
 
       case 'NOT': {
-        const N = this.pop();
+        const N = this.stack.pop();
 
         this.stack.push(N ? 0 : N);
       } break;
 
       // String null test
       case 'SNT': {
-        const V = this.pop()
+        const V = this.stack.pop()
         
         this.stack.push(V === "" ? 1 : 0);
       
@@ -265,8 +264,8 @@ class BiesVM {
 
       // Concatenar strings
       case 'CAT': {
-        const H1 = this.pop();
-        const H2 = this.pop();
+        const H1 = this.stack.pop();
+        const H2 = this.stack.pop();
         if (H1 === undefined || H1 === null) {
           this.stack.push(H2);
         } else if (H2 === undefined || H2 === null) {
@@ -278,29 +277,29 @@ class BiesVM {
 
       // Convertir a string
       case 'TOS': {
-        const V = this.pop()
+        const V = this.stack.pop()
         this.stack.push(V.toString());
       } break;
 
       // List null test
       case 'LNT': {
-        const V = this.pop()
+        const V = this.stack.pop()
 
         this.stack.push(Array.isArray(V) && V.length === 0 ? 1 : 0);
       } break;
 
       // Insertar al inicio de la lista
       case 'LIN': {
-        const V = this.pop(); console.log(V);
-        const L = this.pop(); console.log(L)
+        const V = this.stack.pop(); console.log(V);
+        const L = this.stack.pop(); console.log(L)
         L.unshift(V);
         this.stack.push(L);
       } break;
 
       // Tomar el k-ésimo elemento de la lista
       case 'LTK': {
-        const K = this.pop();
-        const V = this.pop();
+        const K = this.stack.pop();
+        const V = this.stack.pop();
 
         this.stack.push(V[K]);// meter el k-ésimo elemento en la pila
       } break;
@@ -308,7 +307,7 @@ class BiesVM {
       // Tomar el resto después del k-ésimo elemento de la lista
       case 'LRK': {
         const K = actualCode.args[0]; // Extraemos el índice K directamente desde los argumentos
-        const V = this.pop(); // Extraemos el valor V de la pila (debería ser una lista o cadena)
+        const V = this.stack.pop(); // Extraemos el valor V de la pila (debería ser una lista o cadena)
 
         // Verificamos si V es una cadena o una lista antes de aplicar slice
         if (typeof V === 'string' || Array.isArray(V)) {
@@ -321,7 +320,7 @@ class BiesVM {
 
       // Convertir a lista
       case 'TOL': {
-        const V = this.pop()
+        const V = this.stack.pop()
         this.stack.push(Array.of(V));
       } break;
 
@@ -341,7 +340,7 @@ class BiesVM {
       case 'BT': {
         const N = actualCode.args[0];
       
-        if (this.pop() === 1) {
+        if (this.stack.pop() === 1) {
           
           this.getActualContext().PC += parseInt(N);
           return null;
@@ -351,7 +350,7 @@ class BiesVM {
       // Salta N instrucciones si es falso
       case 'BF': {
         const N = actualCode.args[0];
-        if (this.pop() === 0) {
+        if (this.stack.pop() === 0) {
           this.getActualContext().PC += parseInt(N);
           return null;
         }
@@ -368,9 +367,8 @@ class BiesVM {
       } break;
 
       case 'APP': {
-        const closure = this.pop();  // La closure es la función que vamos a aplicar
-        const V = this.pop();
-        
+        const closure = this.stack.pop();  // La closure es la función que vamos a aplicar
+
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
         actualContext.context = { code: this.code };
@@ -388,22 +386,25 @@ class BiesVM {
         newContext.K = actualCode.args[0] || 1;  // Guardamos el K de la función
         newContext.PC = 0;  // Inicializamos el PC para empezar desde el inicio
         newContext.previousFUN = actualContext.FUN;
+
+        const arr = [];
+
+        for (let i = 0; i < newContext.K; i++) {
+          arr.push(this.stack.pop());
+        }
     
         // Verificamos si el ambiente pertenece a una nueva función o la misma
         const isNewFunction = actualContext.FUN !== newContext.FUN;
     
         if (isNewFunction) {
           // Si es una nueva función, creamos un nuevo ambiente
-          this.bindings.unshift({ fun: newContext.FUN, binding: V !== undefined ? [V] : [] });
+          this.bindings.unshift({ fun: newContext.FUN, binding: arr });
         } else {
           // Si es la misma función, actualizamos el ambiente existente
           const bindingIndex = this.bindings.findIndex(binding => binding.fun === newContext.FUN);
           const binding = this.bindings.splice(bindingIndex, 1)[0];
           this.bindings.unshift(binding);
-  
-          if (V !== undefined) {
-              this.bindings[0].binding[0] = V;  // Actualizamos el valor de V en el ambiente
-          }
+          this.bindings[0].binding = arr;
         }
     
         return closure;
@@ -431,7 +432,7 @@ class BiesVM {
 
       case 'CST': {
         const type = actualCode.args[0]; // Tipo objetivo (number, list, string)
-        const value = this.pop()
+        const value = this.stack.pop()
       
         // Verificamos si el valor es del tipo adecuado
         if (type === 'number') {
@@ -459,7 +460,7 @@ class BiesVM {
 
       case 'INO': {
         const type = actualCode.args[0]; // Tipo a verificar (number, list, string)
-        const value = this.pop()
+        const value = this.stack.pop()
         
         // Verificamos si el valor es del tipo indicado
         const isInstanceOf = 
@@ -471,22 +472,22 @@ class BiesVM {
       } break;      
 
       case 'PRN': {
-        const N = this.pop()
+        const N = this.stack.pop()
         console.log(N);
       } break;
 
       // Tomar el k-ésimo elemento de un string
       case 'STK': {
-        const K = this.pop();
-        const V = this.pop();
+        const K = this.stack.pop();
+        const V = this.stack.pop();
 
         this.stack.push(V[K]);
       } break;
 
       // Tomar el resto después del k-ésimo elemento del string
       case 'SRK': {
-        const K = this.pop();
-        const V = this.pop();
+        const K = this.stack.pop();
+        const V = this.stack.pop();
 
         this.stack.push(V.slice(K));
       } break;
@@ -508,25 +509,6 @@ class BiesVM {
     this.getActualContext().PC++;
     return null;
   }
-
-  // /**
-  // * Busca y devuelve la closure de una función por su nombre recorriendo los contextos 
-  // * cada contexto va a tener algo parecido a un json: [{FUN: '$0', PC: '', ACTUAL: true}, {FUN: '$1', PC: '', ACTUAL: false}]
-  // *
-  // * @param functionName El nombre de la función a buscar.
-  // * @return La closure asociada a la función encontrada.
-  // * @throws Error Si la función no se encuentra en los contextos.
-  // */
-  // findFunction(functionName) {
-  //   for (let i = this.contexts.length - 1; i >= 0; i--) {
-  //     const context = this.contexts[i];
-  //     const closure = context.find(c => c.FUN === functionName);
-  //     if (closure) {
-  //       return closure;
-  //     }
-  //   }
-  //   throw new Error(`Función ${functionName} no encontrada`);
-  // }
 }
 
 export default BiesVM;
