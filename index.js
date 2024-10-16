@@ -10,4 +10,4 @@
 import test_parser from "./src/runner.mjs";
 import readline from 'readline';
 
-test_parser("./test/Pruebas.basm");
+test_parser("./test/lista_palíndrome_recursivo.basm");

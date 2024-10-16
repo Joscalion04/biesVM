@@ -1,0 +1,12 @@
+$FUN $0 args:0 parent: $0
+LDV "45"
+CST number
+PRN
+LDV 45
+CST string
+PRN
+LDV ["H","o","l","a"]
+CST string
+PRN
+HLT
+$END

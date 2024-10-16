@@ -360,6 +360,7 @@ class BiesVM {
 
       case 'CST': {
         const value = this.stack.pop();
+
         // Función para manejar el casting
         const castValue = (value, type) => {
             const castingFunctions = {
@@ -368,14 +369,22 @@ class BiesVM {
                     return !isNaN(number) ? number : undefined;
                 },
                 list: (v) => (Array.isArray(v) ? v : undefined),
-                string: (v) => String(v),
+                string: (v) => {
+                    // Si v es una lista, unir los elementos en un string sin comas
+                    return Array.isArray(v) ? v.join(' ') : String(v);
+                },
             };
             return castingFunctions[type] ? castingFunctions[type](value) : value;
         };
+
         // Verificamos el resultado y manejamos los errores
-        if (castValue(value, actualCode.args[0]) !== undefined) {
-            this.stack.push(castValue(value, actualCode.args[0]));
-        } else {this.stack.push(value); throw new Error(`Casting fallido: ${value} no es del tipo ${actualCode.args[0]}`);}
+        const castedValue = castValue(value, actualCode.args[0]);
+        if (castedValue !== undefined) {
+            this.stack.push(castedValue);
+        } else {
+            this.stack.push(value);
+            throw new Error(`Casting fallido: ${value} no es del tipo ${actualCode.args[0]}`);
+        }
 
       } break;      
 

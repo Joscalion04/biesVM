@@ -1,9 +1,4 @@
 $FUN $0 args:0 parent: $0
-LDV "Mi hilera, la cual esta aca"
-LDV "K-SIMO?"
-PRN
-INP
-SRK
-PRN
+
 HLT
 $END
