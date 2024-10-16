@@ -3,7 +3,7 @@ import antlr4 from 'antlr4';
 import Loader from "./Loader.mjs";
 import biesGrammarLexer from '../parser/biesLexer.js';
 import biesGrammarParser from '../parser/biesParser.js';
-let default_input_file = './test/cuadratica.basm'
+let default_input_file = './test/maximoEntre2.basm'
 
 /**
 * Función para probar el parser utilizando un archivo de entrada opcional.
