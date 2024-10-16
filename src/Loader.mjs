@@ -1,4 +1,4 @@
-import biesGrammarVisitor from '../parser/grammar/biesVisitor.js';
+import biesGrammarVisitor from '../parser/biesVisitor.js';
 import BiesVM from "./biesVM.mjs";
 
 
@@ -59,7 +59,6 @@ class Loader extends biesGrammarVisitor {
     visitInst(ctx) {
         const mnemonic = ctx.mnemonic().getText(); // Obtiene la instrucción
         const args = ctx.arg().map(arg => this.visit(arg)).filter(arg => arg !== null); // Obtener los argumentos y filtrar los nulos
-        
         // Almacenar la instrucción en el array `code` de la VM
         this.VM.code.push({ mnemonic, args });
         
@@ -85,8 +84,7 @@ class Loader extends biesGrammarVisitor {
             const instruction = await this.VM.executeInstruction();
             if (instruction != null) {// Significa que viene algo
                 if (instruction === 'FIN') {
-                    continuar = false;
-                    break;
+                    return;
                 } else {
                     this.executeFunctionById(this.firstNode, instruction);
                     break;
@@ -105,16 +103,43 @@ class Loader extends biesGrammarVisitor {
     * @returns {string|null} La representación del argumento como texto o `null` si no se reconoce.
     */
     visitArg(ctx) {
+        // Si es un entero
         if (ctx.INT()) {
-            return ctx.INT().getText();
-        } else if (ctx.STR()) {
-            return ctx.STR().getText();
-        } else if (ctx.getText().startsWith('$')) { // Maneja argumentos como $1
-            return ctx.getText();
+            return parseInt(ctx.INT().getText(), 10);
         }
-        return null;
+        // Si es una cadena
+        else if (ctx.STR()) {
+            return ctx.STR().getText().slice(1, -1); // Remover las comillas alrededor
+        }
+        // Si es una lista
+        else if (ctx.list()) {
+            const listCtx = ctx.list();
+            // Mapeo de los elementos de la lista
+            const elements = listCtx.element().map(elementCtx => {
+                // Proceso manual para asegurarse de que se manejan correctamente enteros y cadenas
+                if (elementCtx.INT()) {
+                    return parseInt(elementCtx.INT().getText(), 10);
+                } else if (elementCtx.STR()) {
+                    return elementCtx.STR().getText().slice(1, -1);
+                } else {
+                    console.error("Elemento no reconocido:", elementCtx.getText());
+                    return undefined;
+                }
+            });
+            return elements;
+        }
+        // Si es una función
+        else if (ctx.FUNCTION()) {
+            return ctx.FUNCTION().getText();
+        }
+        // Si es un identificador
+        else if (ctx.ID()) {
+            return ctx.ID().getText();
+        }
+        return undefined; // Si no es ninguno de los anteriores, retornar undefined
     }
-
+    
+    
     /**
     * Busca un nodo de definición de función en el árbol de sintaxis abstracta (AST) 
     * basado en el identificador de la función proporcionado.
@@ -160,12 +185,13 @@ class Loader extends biesGrammarVisitor {
     executeFunctionById(tree, functionId) {
         const functionNode = this.findFunctionById(tree, functionId);
         if (functionNode) {
-            console.log(`Cargando función con ID: ${functionId}\n`);
-            this.visit(functionNode); // Ejecutar el visitor sobre el nodo de la función
+            //console.log(`Cargando función con ID: ${functionId}\n`);
+            this.visit(functionNode);  // Ejecutar el visitor sobre el nodo de la función
         } else {
             console.log(`Función con ID ${functionId} no encontrada.\n`);
         }
     }
+    
 
     /**
     * Busca la instrucción `INI` en el árbol de sintaxis abstracta (AST) 

@@ -1,0 +1,45 @@
+$FUN $1 args:0 parent:$0
+    LDV 0
+    BLD 0 0         ; Cargamos n
+    LTE             ; n <= 0
+    BT 22
+
+    LDV 1
+    BLD 0 0         ; Cargamos n
+    EQ             ; n == 1
+    BT 20
+
+    LDV 1
+    BLD 0 0         ; Cargamos n
+    SUB             ; n - 1
+    BST 0 0         ; Guardamos n - 1
+    BLD 0 0         ; Cargamos n - 1 para APP
+    LDF $1
+    APP 1           ; f(n - 1)
+    BST 0 1         ; Guardamos el resultado de f(n - 1)
+
+    LDV 1
+    BLD 0 0         ; Cargamos n - 1
+    SUB             ; n - 2
+    BLD 0 0         ; Guardamos n - 2
+    LDF $1
+    APP 1           ; f(n - 2)
+
+    BLD 0 1
+    ADD
+    BR 4
+    LDV 0           ; Si n <= 0, retornamos 0
+    BR 2
+    LDV 1           ; Si n == 1, retornamos 1
+    RET             ; Retornar b
+$END
+
+$FUN $0 args:0 parent:$0
+    LDV 2          ; Cargar el valor de 'n'
+    LDF $1         ; Cargar la función 'fibonacci'
+    APP 1          ; Llamar a la función 'fibonacci' con 1 argumento
+    PRN            ; Imprimir el valor retornado
+    HLT            ; Detener la ejecución
+$END
+
+INI $0           ; Iniciar el programa desde main

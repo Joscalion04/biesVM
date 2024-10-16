@@ -1,0 +1,37 @@
+$FUN $0 args:0 parent:$0
+    ; Cargamos la hilera original en la pila
+    LDV "miCadena"  ; Cargar la hilera original en la pila
+    BST 0 0         ; Guardamos la hilera en el binding 0, posición 1
+    ; Llamamos a la función de conteo
+    LDF $1          ; Cargamos la función de conteo en la pila
+    APP 1          ; Ejecutamos la función sin argumentos
+    PRN
+    ; Fin del programa
+    HLT             ; Detenemos la ejecución
+$END
+
+
+
+; Función para invertir la hilera utilizando el contador
+$FUN $1 args:0 parent:$0
+    ; Cargar la hilera original desde el binding 0
+    BLD 1 0         ; Cargar la hilera original
+    SNT              ; Verificar si la hilera está vacía (caso base)
+    BT 10            ; Si es nula (fin de la cadena), retornar la hilera vacía
+    
+    ; Extraer el último carácter de la hilera
+    BLD 1 0         ; Cargar la hilera original
+    LDV 0
+    STK             ; Tomar el caracter en la posicion 0
+
+    ; Llamada recursiva para invertir el resto de la hilera
+    BLD 1 0         ; Cargar nuevamente la hilera original
+    LDV 1
+    SRK             ; Se toma la hilera sin el primer caracter
+    BST 1 0         ; Se guarda la hilera sin el primer caracter
+    CAT             ; Concatenar el carácter al final de la hilera invertida
+     BR -11
+    
+    ; Concatenar el carácter extraído al final de la hilera invertida
+    RET              ; Retornar la hilera invertida
+$END

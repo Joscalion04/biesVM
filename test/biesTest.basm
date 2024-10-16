@@ -1,25 +1,5 @@
 $FUN $0 args:0 parent: $0
-LDV 1
-BST 0 0
-LDF $1
-BST 0 1
-LDV 4
-LDV 3
-BLD 0 1
-APP
-APP
+LDV ["1","2",["1"]]
 PRN
 HLT
-$END
-
-$FUN $1 args:1 parent: $0
-LDF $2
-RET
-$END
-
-$FUN $2 args:1 parent: $1
-BLD 1 0
-BLD 0 0
-ADD
-RET
 $END

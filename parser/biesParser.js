@@ -3,21 +3,31 @@
 import antlr4 from 'antlr4';
 import biesVisitor from './biesVisitor.js';
 
-const serializedATN = [4,1,52,52,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
-2,5,7,5,1,0,1,0,4,0,15,8,0,11,0,12,0,16,1,1,1,1,1,1,3,1,22,8,1,1,1,1,1,3,
-1,26,8,1,1,1,4,1,29,8,1,11,1,12,1,30,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,5,3,
-41,8,3,10,3,12,3,44,9,3,3,3,46,8,3,1,4,1,4,1,5,1,5,1,5,0,0,6,0,2,4,6,8,10,
-0,2,1,0,3,45,1,0,46,48,52,0,14,1,0,0,0,2,18,1,0,0,0,4,34,1,0,0,0,6,37,1,
-0,0,0,8,47,1,0,0,0,10,49,1,0,0,0,12,15,3,2,1,0,13,15,3,6,3,0,14,12,1,0,0,
-0,14,13,1,0,0,0,15,16,1,0,0,0,16,14,1,0,0,0,16,17,1,0,0,0,17,1,1,0,0,0,18,
-19,5,49,0,0,19,21,5,48,0,0,20,22,3,4,2,0,21,20,1,0,0,0,21,22,1,0,0,0,22,
-25,1,0,0,0,23,24,5,1,0,0,24,26,5,48,0,0,25,23,1,0,0,0,25,26,1,0,0,0,26,28,
-1,0,0,0,27,29,3,6,3,0,28,27,1,0,0,0,29,30,1,0,0,0,30,28,1,0,0,0,30,31,1,
-0,0,0,31,32,1,0,0,0,32,33,5,50,0,0,33,3,1,0,0,0,34,35,5,2,0,0,35,36,5,46,
-0,0,36,5,1,0,0,0,37,45,3,8,4,0,38,42,3,10,5,0,39,41,3,10,5,0,40,39,1,0,0,
-0,41,44,1,0,0,0,42,40,1,0,0,0,42,43,1,0,0,0,43,46,1,0,0,0,44,42,1,0,0,0,
-45,38,1,0,0,0,45,46,1,0,0,0,46,7,1,0,0,0,47,48,7,0,0,0,48,9,1,0,0,0,49,50,
-7,1,0,0,50,11,1,0,0,0,7,14,16,21,25,30,42,45];
+const serializedATN = [4,1,57,81,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
+2,5,7,5,2,6,7,6,1,0,1,0,4,0,17,8,0,11,0,12,0,18,1,1,1,1,1,1,1,1,1,1,1,1,
+3,1,27,8,1,1,1,4,1,30,8,1,11,1,12,1,31,1,1,1,1,1,2,1,2,1,2,5,2,39,8,2,10,
+2,12,2,42,9,2,3,2,44,8,2,1,3,1,3,1,4,1,4,1,4,1,4,1,4,1,4,3,4,54,8,4,1,5,
+1,5,3,5,58,8,5,1,5,1,5,3,5,62,8,5,1,5,1,5,3,5,66,8,5,1,5,5,5,69,8,5,10,5,
+12,5,72,9,5,1,5,3,5,75,8,5,1,5,1,5,1,6,1,6,1,6,0,0,7,0,2,4,6,8,10,12,0,2,
+1,0,1,43,1,0,46,48,89,0,16,1,0,0,0,2,20,1,0,0,0,4,35,1,0,0,0,6,45,1,0,0,
+0,8,53,1,0,0,0,10,55,1,0,0,0,12,78,1,0,0,0,14,17,3,2,1,0,15,17,3,4,2,0,16,
+14,1,0,0,0,16,15,1,0,0,0,17,18,1,0,0,0,18,16,1,0,0,0,18,19,1,0,0,0,19,1,
+1,0,0,0,20,21,5,50,0,0,21,22,5,49,0,0,22,23,5,55,0,0,23,26,5,46,0,0,24,25,
+5,54,0,0,25,27,5,49,0,0,26,24,1,0,0,0,26,27,1,0,0,0,27,29,1,0,0,0,28,30,
+3,4,2,0,29,28,1,0,0,0,30,31,1,0,0,0,31,29,1,0,0,0,31,32,1,0,0,0,32,33,1,
+0,0,0,33,34,5,51,0,0,34,3,1,0,0,0,35,43,3,6,3,0,36,40,3,8,4,0,37,39,3,8,
+4,0,38,37,1,0,0,0,39,42,1,0,0,0,40,38,1,0,0,0,40,41,1,0,0,0,41,44,1,0,0,
+0,42,40,1,0,0,0,43,36,1,0,0,0,43,44,1,0,0,0,44,5,1,0,0,0,45,46,7,0,0,0,46,
+7,1,0,0,0,47,54,5,46,0,0,48,54,5,47,0,0,49,54,5,48,0,0,50,54,5,49,0,0,51,
+54,3,10,5,0,52,54,5,56,0,0,53,47,1,0,0,0,53,48,1,0,0,0,53,49,1,0,0,0,53,
+50,1,0,0,0,53,51,1,0,0,0,53,52,1,0,0,0,54,9,1,0,0,0,55,57,5,44,0,0,56,58,
+5,52,0,0,57,56,1,0,0,0,57,58,1,0,0,0,58,59,1,0,0,0,59,70,3,12,6,0,60,62,
+5,52,0,0,61,60,1,0,0,0,61,62,1,0,0,0,62,63,1,0,0,0,63,65,5,57,0,0,64,66,
+5,52,0,0,65,64,1,0,0,0,65,66,1,0,0,0,66,67,1,0,0,0,67,69,3,12,6,0,68,61,
+1,0,0,0,69,72,1,0,0,0,70,68,1,0,0,0,70,71,1,0,0,0,71,74,1,0,0,0,72,70,1,
+0,0,0,73,75,5,52,0,0,74,73,1,0,0,0,74,75,1,0,0,0,75,76,1,0,0,0,76,77,5,45,
+0,0,77,11,1,0,0,0,78,79,7,1,0,0,79,13,1,0,0,0,12,16,18,26,31,40,43,53,57,
+61,65,70,74];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -41,25 +51,27 @@ const sharedContextCache = new antlr4.atn.PredictionContextCache();
 export default class biesParser extends antlr4.Parser {
 
     static grammarFileName = "bies.g4";
-    static literalNames = [ null, "'parent:'", "'args:'", "'INI'", "'HLT'", 
-                            "'POP'", "'SWP'", "'LDV'", "'BLD'", "'BST'", 
-                            "'ADD'", "'MUL'", "'DIV'", "'SUB'", "'NEG'", 
-                            "'SGN'", "'EQ'", "'GT'", "'GTE'", "'LT'", "'LTE'", 
-                            "'AND'", "'OR'", "'XOR'", "'NOT'", "'SNT'", 
-                            "'CAT'", "'TOS'", "'LNT'", "'LIN'", "'LTK'", 
-                            "'LRK'", "'TOL'", "'NOP'", "'BR'", "'BT'", "'BF'", 
-                            "'LDF'", "'APP'", "'RET'", "'CST'", "'INO'", 
-                            "'PRN'", "'STK'", "'SRK'", "'INP'", null, null, 
-                            null, "'$FUN'", "'$END'" ];
+    static literalNames = [ null, "'INI'", "'HLT'", "'POP'", "'SWP'", "'LDV'", 
+                            "'BLD'", "'BST'", "'ADD'", "'MUL'", "'DIV'", 
+                            "'SUB'", "'NEG'", "'SGN'", "'EQ'", "'GT'", "'GTE'", 
+                            "'LT'", "'LTE'", "'AND'", "'OR'", "'XOR'", "'NOT'", 
+                            "'SNT'", "'CAT'", "'TOS'", "'LNT'", "'LIN'", 
+                            "'LTK'", "'LRK'", "'TOL'", "'NOP'", "'BR'", 
+                            "'BT'", "'BF'", "'LDF'", "'APP'", "'RET'", "'CST'", 
+                            "'INO'", "'PRN'", "'STK'", "'SRK'", "'INP'", 
+                            "'['", "']'", null, null, null, null, "'$FUN'", 
+                            "'$END'", null, null, "'parent:'", "'args:'", 
+                            null, "','" ];
     static symbolicNames = [ null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, null, null, 
                              null, null, null, null, null, null, "INT", 
-                             "STR", "FUNCTION", "FUN", "END", "WS", "COMMENT" ];
-    static ruleNames = [ "start", "funDef", "argsDecl", "inst", "mnemonic", 
-                         "arg" ];
+                             "FLOAT", "STR", "FUNCTION", "FUN", "END", "WS", 
+                             "COMMENT", "PARENT", "ARGS", "ID", "COMMA" ];
+    static ruleNames = [ "start", "funDef", "inst", "mnemonic", "arg", "list", 
+                         "element" ];
 
     constructor(input) {
         super(input);
@@ -87,17 +99,19 @@ export default class biesParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 14; 
+	        this.state = 16; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 14;
+	            this.state = 16;
 	            this._errHandler.sync(this);
 	            switch(this._input.LA(1)) {
-	            case 49:
-	                this.state = 12;
+	            case 50:
+	                this.state = 14;
 	                this.funDef();
 	                break;
+	            case 1:
+	            case 2:
 	            case 3:
 	            case 4:
 	            case 5:
@@ -139,18 +153,16 @@ export default class biesParser extends antlr4.Parser {
 	            case 41:
 	            case 42:
 	            case 43:
-	            case 44:
-	            case 45:
-	                this.state = 13;
+	                this.state = 15;
 	                this.inst();
 	                break;
 	            default:
 	                throw new antlr4.error.NoViableAltException(this);
 	            }
-	            this.state = 16; 
+	            this.state = 18; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 147455) !== 0));
+	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967294) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 266239) !== 0));
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -183,39 +195,35 @@ export default class biesParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 18;
+	        this.state = 20;
 	        this.match(biesParser.FUN);
-	        this.state = 19;
-	        this.match(biesParser.FUNCTION);
 	        this.state = 21;
+	        this.match(biesParser.FUNCTION);
+	        this.state = 22;
+	        this.match(biesParser.ARGS);
+	        this.state = 23;
+	        this.match(biesParser.INT);
+	        this.state = 26;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(_la===2) {
-	            this.state = 20;
-	            this.argsDecl();
-	        }
-
-	        this.state = 25;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        if(_la===1) {
-	            this.state = 23;
-	            this.match(biesParser.T__0);
+	        if(_la===54) {
 	            this.state = 24;
+	            this.match(biesParser.PARENT);
+	            this.state = 25;
 	            this.match(biesParser.FUNCTION);
 	        }
 
-	        this.state = 28; 
+	        this.state = 29; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 27;
+	            this.state = 28;
 	            this.inst();
-	            this.state = 30; 
+	            this.state = 31; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16383) !== 0));
-	        this.state = 32;
+	        } while((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967294) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 4095) !== 0));
+	        this.state = 33;
 	        this.match(biesParser.END);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -231,6 +239,7 @@ export default class biesParser extends antlr4.Parser {
 	    return localctx;
 	}
 
+<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Define el análisis de una declaración de argumentos en la gramática de BIES.
 	* Este método maneja el reconocimiento de una estructura que comienza con
@@ -278,27 +287,31 @@ export default class biesParser extends antlr4.Parser {
 	* @throws {antlr4.error.RecognitionException} Lanza una excepción si se encuentra un error de 
 	* reconocimiento durante el análisis sintáctico.
 	*/
+=======
+
+
+>>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	inst() {
 	    let localctx = new InstContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 6, biesParser.RULE_inst);
+	    this.enterRule(localctx, 4, biesParser.RULE_inst);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 37;
+	        this.state = 35;
 	        this.mnemonic();
-	        this.state = 45;
+	        this.state = 43;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
-	            this.state = 38;
+	        if(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 4157) !== 0)) {
+	            this.state = 36;
 	            this.arg();
-	            this.state = 42;
+	            this.state = 40;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            while(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
-	                this.state = 39;
+	            while(((((_la - 44)) & ~0x1f) === 0 && ((1 << (_la - 44)) & 4157) !== 0)) {
+	                this.state = 37;
 	                this.arg();
-	                this.state = 44;
+	                this.state = 42;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	            }
@@ -333,13 +346,13 @@ export default class biesParser extends antlr4.Parser {
 	*/
 	mnemonic() {
 	    let localctx = new MnemonicContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 8, biesParser.RULE_mnemonic);
+	    this.enterRule(localctx, 6, biesParser.RULE_mnemonic);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 47;
+	        this.state = 45;
 	        _la = this._input.LA(1);
-	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967288) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 16383) !== 0))) {
+	        if(!((((_la) & ~0x1f) === 0 && ((1 << _la) & 4294967294) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 4095) !== 0))) {
 	        this._errHandler.recoverInline(this);
 	        }
 	        else {
@@ -375,11 +388,142 @@ export default class biesParser extends antlr4.Parser {
 	*/
 	arg() {
 	    let localctx = new ArgContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 10, biesParser.RULE_arg);
+	    this.enterRule(localctx, 8, biesParser.RULE_arg);
+	    try {
+	        this.state = 53;
+	        this._errHandler.sync(this);
+	        switch(this._input.LA(1)) {
+	        case 46:
+	            this.enterOuterAlt(localctx, 1);
+	            this.state = 47;
+	            this.match(biesParser.INT);
+	            break;
+	        case 47:
+	            this.enterOuterAlt(localctx, 2);
+	            this.state = 48;
+	            this.match(biesParser.FLOAT);
+	            break;
+	        case 48:
+	            this.enterOuterAlt(localctx, 3);
+	            this.state = 49;
+	            this.match(biesParser.STR);
+	            break;
+	        case 49:
+	            this.enterOuterAlt(localctx, 4);
+	            this.state = 50;
+	            this.match(biesParser.FUNCTION);
+	            break;
+	        case 44:
+	            this.enterOuterAlt(localctx, 5);
+	            this.state = 51;
+	            this.list();
+	            break;
+	        case 56:
+	            this.enterOuterAlt(localctx, 6);
+	            this.state = 52;
+	            this.match(biesParser.ID);
+	            break;
+	        default:
+	            throw new antlr4.error.NoViableAltException(this);
+	        }
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	list() {
+	    let localctx = new ListContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 10, biesParser.RULE_list);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 49;
+	        this.state = 55;
+	        this.match(biesParser.T__43);
+	        this.state = 57;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        if(_la===52) {
+	            this.state = 56;
+	            this.match(biesParser.WS);
+	        }
+
+	        this.state = 59;
+	        this.element();
+	        this.state = 70;
+	        this._errHandler.sync(this);
+	        var _alt = this._interp.adaptivePredict(this._input,10,this._ctx)
+	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+	            if(_alt===1) {
+	                this.state = 61;
+	                this._errHandler.sync(this);
+	                _la = this._input.LA(1);
+	                if(_la===52) {
+	                    this.state = 60;
+	                    this.match(biesParser.WS);
+	                }
+
+	                this.state = 63;
+	                this.match(biesParser.COMMA);
+	                this.state = 65;
+	                this._errHandler.sync(this);
+	                _la = this._input.LA(1);
+	                if(_la===52) {
+	                    this.state = 64;
+	                    this.match(biesParser.WS);
+	                }
+
+	                this.state = 67;
+	                this.element(); 
+	            }
+	            this.state = 72;
+	            this._errHandler.sync(this);
+	            _alt = this._interp.adaptivePredict(this._input,10,this._ctx);
+	        }
+
+	        this.state = 74;
+	        this._errHandler.sync(this);
+	        _la = this._input.LA(1);
+	        if(_la===52) {
+	            this.state = 73;
+	            this.match(biesParser.WS);
+	        }
+
+	        this.state = 76;
+	        this.match(biesParser.T__44);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	element() {
+	    let localctx = new ElementContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 12, biesParser.RULE_element);
+	    var _la = 0;
+	    try {
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 78;
 	        _la = this._input.LA(1);
 	        if(!(((((_la - 46)) & ~0x1f) === 0 && ((1 << (_la - 46)) & 7) !== 0))) {
 	        this._errHandler.recoverInline(this);
@@ -450,19 +594,25 @@ biesParser.T__42 = 43;
 biesParser.T__43 = 44;
 biesParser.T__44 = 45;
 biesParser.INT = 46;
-biesParser.STR = 47;
-biesParser.FUNCTION = 48;
-biesParser.FUN = 49;
-biesParser.END = 50;
-biesParser.WS = 51;
-biesParser.COMMENT = 52;
+biesParser.FLOAT = 47;
+biesParser.STR = 48;
+biesParser.FUNCTION = 49;
+biesParser.FUN = 50;
+biesParser.END = 51;
+biesParser.WS = 52;
+biesParser.COMMENT = 53;
+biesParser.PARENT = 54;
+biesParser.ARGS = 55;
+biesParser.ID = 56;
+biesParser.COMMA = 57;
 
 biesParser.RULE_start = 0;
 biesParser.RULE_funDef = 1;
-biesParser.RULE_argsDecl = 2;
-biesParser.RULE_inst = 3;
-biesParser.RULE_mnemonic = 4;
-biesParser.RULE_arg = 5;
+biesParser.RULE_inst = 2;
+biesParser.RULE_mnemonic = 3;
+biesParser.RULE_arg = 4;
+biesParser.RULE_list = 5;
+biesParser.RULE_element = 6;
 
 /**
 * Clase que representa el contexto inicial en el análisis sintáctico de la gramática de BIES.
@@ -656,6 +806,7 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
+<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Obtiene el token correspondiente a la palabra clave 'END' en la gramática BIES.
 	* Este método permite acceder al token que indica el final de una estructura 
@@ -664,10 +815,22 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	* @method END
 	* @returns {Token} El token de 'END' correspondiente en la gramática BIES.
 	*/
+=======
+
+	ARGS() {
+	    return this.getToken(biesParser.ARGS, 0);
+	};
+
+	INT() {
+	    return this.getToken(biesParser.INT, 0);
+	};
+
+>>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	END() {
 	    return this.getToken(biesParser.END, 0);
 	};
 
+<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Obtiene el contexto de declaración de argumentos en la gramática BIES.
 	* Este método permite acceder a la parte del árbol de análisis sintáctico 
@@ -679,6 +842,10 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	*/
 	argsDecl() {
 	    return this.getTypedRuleContext(ArgsDeclContext,0);
+=======
+	PARENT() {
+	    return this.getToken(biesParser.PARENT, 0);
+>>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	};
 
 	/**
@@ -729,6 +896,7 @@ class FunDefContext extends antlr4.ParserRuleContext {
 }
 
 
+<<<<<<< HEAD:parser/grammar/biesParser.js
 /**
 * Clase que representa el contexto de la declaración de argumentos en el análisis sintáctico de la gramática de BIES.
 * Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
@@ -815,6 +983,9 @@ class ArgsDeclContext extends antlr4.ParserRuleContext {
 * @author Josué Vindas Pérez
 * @author Joseph León Cabezas
 */
+=======
+
+>>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 class InstContext extends antlr4.ParserRuleContext {
 
 	/**
@@ -994,6 +1165,7 @@ class ArgContext extends antlr4.ParserRuleContext {
 	    return this.getToken(biesParser.INT, 0);
 	};
 
+<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Obtiene el token que representa una cadena de caracteres en la declaración de argumentos.
 	* Este método se utiliza para acceder al token de tipo `STR` en el contexto actual del análisis sintáctico,
@@ -1001,6 +1173,12 @@ class ArgContext extends antlr4.ParserRuleContext {
 	* 
 	* @returns {antlr4.Token} El token que representa una cadena de caracteres.
 	*/
+=======
+	FLOAT() {
+	    return this.getToken(biesParser.FLOAT, 0);
+	};
+
+>>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	STR() {
 	    return this.getToken(biesParser.STR, 0);
 	};
@@ -1016,6 +1194,7 @@ class ArgContext extends antlr4.ParserRuleContext {
 	    return this.getToken(biesParser.FUNCTION, 0);
 	};
 
+<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Acepta un visitante en el contexto del argumento.
 	* Este método permite que un visitante realice operaciones específicas en el contexto del argumento 
@@ -1024,6 +1203,16 @@ class ArgContext extends antlr4.ParserRuleContext {
 	* @param {Object} visitor - El visitante que se aplicará al contexto del argumento.
 	* @returns {Object} El resultado de la visita al contexto del argumento.
 	*/
+=======
+	list() {
+	    return this.getTypedRuleContext(ListContext,0);
+	};
+
+	ID() {
+	    return this.getToken(biesParser.ID, 0);
+	};
+
+>>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	accept(visitor) {
 	    if ( visitor instanceof biesVisitor ) {
 	        return visitor.visitArg(this);
@@ -1037,10 +1226,112 @@ class ArgContext extends antlr4.ParserRuleContext {
 
 
 
+class ListContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = biesParser.RULE_list;
+    }
+
+	element = function(i) {
+	    if(i===undefined) {
+	        i = null;
+	    }
+	    if(i===null) {
+	        return this.getTypedRuleContexts(ElementContext);
+	    } else {
+	        return this.getTypedRuleContext(ElementContext,i);
+	    }
+	};
+
+	WS = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
+	        return this.getTokens(biesParser.WS);
+	    } else {
+	        return this.getToken(biesParser.WS, i);
+	    }
+	};
+
+
+	COMMA = function(i) {
+		if(i===undefined) {
+			i = null;
+		}
+	    if(i===null) {
+	        return this.getTokens(biesParser.COMMA);
+	    } else {
+	        return this.getToken(biesParser.COMMA, i);
+	    }
+	};
+
+
+	accept(visitor) {
+	    if ( visitor instanceof biesVisitor ) {
+	        return visitor.visitList(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+
+
+class ElementContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = biesParser.RULE_element;
+    }
+
+	INT() {
+	    return this.getToken(biesParser.INT, 0);
+	};
+
+	FLOAT() {
+	    return this.getToken(biesParser.FLOAT, 0);
+	};
+
+	STR() {
+	    return this.getToken(biesParser.STR, 0);
+	};
+
+	accept(visitor) {
+	    if ( visitor instanceof biesVisitor ) {
+	        return visitor.visitElement(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+
+
 
 biesParser.StartContext = StartContext; 
 biesParser.FunDefContext = FunDefContext; 
-biesParser.ArgsDeclContext = ArgsDeclContext; 
 biesParser.InstContext = InstContext; 
 biesParser.MnemonicContext = MnemonicContext; 
 biesParser.ArgContext = ArgContext; 
+biesParser.ListContext = ListContext; 
+biesParser.ElementContext = ElementContext; 

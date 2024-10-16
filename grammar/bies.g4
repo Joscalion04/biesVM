@@ -1,26 +1,35 @@
 grammar bies;
 
 // LEXER
-INT : '-'?[0-9]+;
-STR : '\'' .*? '\'';
-FUNCTION : '$' [0-9]+; // Para identificadores de funciones como $0, $1, etc.
-FUN : '$FUN'; // Para marcar el inicio de una función
-END : '$END'; // Para marcar el final de una función
-WS : [ \t\r\n]+ -> skip;
-COMMENT : ';' .*? [\r\n] -> skip; // Comentarios ignorados
+INT : '-'? [0-9]+ ; // Números enteros
+FLOAT : '-'? [0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)? ; // Números decimales y en notación científica
+STR : '\'' ( ~['\\] | '\\' . )* '\'' | '"' ( ~["\\] | '\\' . )* '"' ; // Cadenas
+FUNCTION : '$' [0-9]+ ; // Identificadores de funciones como $0, $1, etc.
+FUN : '$FUN' ; // Inicio de una función
+END : '$END' ; // Fin de una función
+WS : [ \t\r\n]+ -> skip ; // Espacios en blanco son ignorados
+COMMENT : ';' ~[\r\n]* -> skip ; // Comentarios ignorados
+PARENT : 'parent:'; // Literal para 'parent:'
+ARGS : 'args:'; // Literal para 'args:'
+ID : [a-zA-Z_][a-zA-Z_0-9]* ; // Identificadores como nombres de variables, etc.
+COMMA : ',' ; // Coma para separar elementos en listas
 
 // PARSER
-start : (funDef | inst)+ ; // Inicia con funciones o instrucciones, debe haber al menos una
+start : (funDef | inst)+ ; // Debe haber al menos una función o instrucción
 
-funDef : FUN FUNCTION (argsDecl)? ('parent:' FUNCTION)? inst+ END ; // Define una función con argumentos opcionales y un padre opcional
+funDef : FUN FUNCTION ARGS INT (PARENT FUNCTION)? inst+ END ; // Definición de función
 
-argsDecl : 'args:' INT ; // Definición de los argumentos
-
-inst : mnemonic (arg (arg)*)? ; // Instrucciones pueden tener uno o más argumentos
+inst : mnemonic (arg (arg)*)? ; // Instrucciones con uno o más argumentos
 
 mnemonic : 'INI' | 'HLT' | 'POP' | 'SWP' | 'LDV' | 'BLD' | 'BST' | 'ADD' | 'MUL' | 'DIV' | 'SUB'
          | 'NEG' | 'SGN' | 'EQ' | 'GT' | 'GTE' | 'LT' | 'LTE' | 'AND' | 'OR' | 'XOR' | 'NOT'
          | 'SNT' | 'CAT' | 'TOS' | 'LNT' | 'LIN' | 'LTK' | 'LRK' | 'TOL' | 'NOP' | 'BR' | 'BT'
          | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN' | 'STK' | 'SRK' | 'INP';
 
-arg : INT | STR | FUNCTION;
+arg : INT | FLOAT | STR | FUNCTION | list | ID ; // Argumentos posibles
+
+// Producción para listas con manejo de espacios opcionales
+list : '[' WS? element (WS? COMMA WS? element)* WS? ']' ; // Definición de listas
+
+// Elementos de la lista pueden ser enteros, decimales o cadenas
+element : INT | FLOAT | STR ; // Elementos posibles dentro de una lista

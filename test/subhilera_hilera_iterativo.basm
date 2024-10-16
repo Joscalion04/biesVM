@@ -1,0 +1,54 @@
+$FUN $0 args:2 parent:$0
+    ; Cargamos la hilera original en la pila
+    LDV "miCadena"      ; Cargar la hilera original en la pila
+    BST 0 0             ; Guardamos la hilera en el binding 0, posición 1
+
+    ; Cargamos los índices de inicio y fin
+    LDV 0               ; Cargar índice de inicio
+    BST 0 1             ; Guardar índice de inicio en el binding 1
+    LDV 1               ; Cargar índice de fin
+    BST 0 2             ; Guardar índice de fin en el binding 2
+
+    ; Inicializamos el índice actual
+    CST 0               ; Inicializar índice actual en 0
+    BST 0 3             ; Guardar el índice actual en el binding 3
+
+; Bucle para extraer la subhilera
+    BLD 0 3             ; Cargar índice actual
+    BLD 0 2             ; Cargar índice de fin
+    EQ                  ; Comparar índice actual con el índice de fin
+    BT 8                ; Si son iguales, ir al final
+
+    ; Cargar la hilera original y el índice actual
+    BLD 0 0             ; Cargar la hilera original
+    BLD 0 3             ; Cargar índice actual
+    LTK                 ; Tomar el carácter en la posición actual de la hilera
+
+    ; Comparar índice actual con el índice de inicio
+    BLD 0 3             ; Cargar índice actual
+    BLD 0 1             ; Cargar índice de inicio
+    EQ                  ; Comparar índice actual con el índice de inicio
+    BT 6                ; Si es igual, ir a agregar el carácter
+
+; Incrementar el índice actual
+    BLD 0 3             ; Cargar índice actual
+    CST 1               ; Cargar 1
+    ADD                 ; Incrementar índice actual
+    BST 3 0             ; Guardar nuevo índice actual
+    BR -14              ; Volver a la comparación
+
+; Agregar el carácter a la subhilera
+    ; Aquí se debe implementar el código para guardar el carácter en la subhilera
+    ; ...
+
+    ; Incrementar el índice actual
+    BLD 0 3             ; Cargar índice actual
+    CST 1               ; Cargar 1
+    ADD                 ; Incrementar índice actual
+    BST 0 3             ; Guardar nuevo índice actual
+    BR -21              ; Volver a la comparación
+
+; Fin del proceso
+    ; Aquí se puede agregar código para manejar la subhilera resultante
+    RET                  ; Retornar de la función
+$END

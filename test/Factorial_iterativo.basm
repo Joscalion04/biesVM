@@ -1,0 +1,26 @@
+$FUN $0 args:0 parent:$0
+    LDV 5          ; Cargar el valor de 'n' (6)
+    BST 0 0
+    LDV 5          ; Cargar el valor del contador a decrementar
+    BST 0 1
+    BLD 0 1        ; Trae el contador    
+    LDV 1           
+    LT             ; Compara que no sea 0
+    BF 12           ; Si es 0, rompe el ciclo
+    LDV 1          ; Carga un 1
+    BLD 0 1        ; Carga el contador
+    SUB            ; Decrementa el contador
+    BLD 0 0        ; Trae el valor
+    MUL            ; Multiplica contador * valor
+    BST 0 0        ; Guarda nuevo valor
+    LDV 1
+    BLD 0 1
+    SUB
+    BST 0 1        ; Guarda contador decrementado
+    BR -14
+    BLD 0 0
+    PRN
+    HLT            ; Detener la ejecución
+$END
+
+INI $0           ; Iniciar el programa desde main
