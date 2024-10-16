@@ -36,18 +36,6 @@ const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DF
 
 const sharedContextCache = new antlr4.atn.PredictionContextCache();
 
-/**
-* Clase que se encarga de realizar el parseo de la gramática de BIES
-* utilizando la librería ANTLR4. Esta clase extiende de `antlr4.Parser`.
-*
-* @class biesParser
-* @extends antlr4.parser
-*
-* @author Manuel Mora Sandi 
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
 export default class biesParser extends antlr4.Parser {
 
     static grammarFileName = "bies.g4";
@@ -82,17 +70,7 @@ export default class biesParser extends antlr4.Parser {
     }
 
 
-	/**
-	* Método que representa el inicio de la regla de análisis para el contexto `start`.
-	* Este método se encarga de procesar las definiciones de funciones y las instrucciones
-	* dentro del contexto del análisis sintáctico. Se basa en la gramática definida por ANTLR.
-	*
-	* @method start
-	* @returns {StartContext} El contexto `StartContext` que contiene la información sobre
-	*                         las funciones y las instrucciones procesadas.
-	* @throws {antlr4.error.NoViableAltException} Lanza una excepción si no se encuentra
-	*                                            ninguna alternativa viable durante el análisis.
-	*/
+
 	start() {
 	    let localctx = new StartContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 0, biesParser.RULE_start);
@@ -177,18 +155,8 @@ export default class biesParser extends antlr4.Parser {
 	    return localctx;
 	}
 
-	/**
-	* Define una función en el análisis sintáctico de BIES.
-	* Este método maneja la definición de una función, incluyendo su nombre, 
-	* parámetros opcionales y las instrucciones que la componen. 
-	* Además, asegura que la sintaxis de la función siga las reglas definidas en la gramática.
-	* 
-	* @method funDef
-	* @returns {FunDefContext} El contexto de la definición de la función.
-	* 
-	* @throws {antlr4.error.RecognitionException} Lanza una excepción si se encuentra un error de 
-	* reconocimiento durante el análisis sintáctico.
-	*/
+
+
 	funDef() {
 	    let localctx = new FunDefContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 2, biesParser.RULE_funDef);
@@ -239,53 +207,8 @@ export default class biesParser extends antlr4.Parser {
 	    return localctx;
 	}
 
-	/**
-	* Define el análisis de una declaración de argumentos en la gramática de BIES.
-	* Este método maneja el reconocimiento de una estructura que comienza con
-	* un símbolo específico seguido de un tipo de dato entero.
-	* Asegura que la sintaxis de la declaración de argumentos siga las reglas definidas en la gramática.
- 	* 
-	* @method argsDecl
-	* @returns {ArgsDeclContext} El contexto de la declaración de argumentos analizada.
-	* 
-	* @throws {antlr4.error.RecognitionException} Lanza una excepción si se encuentra un error de 
-	* reconocimiento durante el análisis sintáctico.
-    */
-	argsDecl() {
-	    let localctx = new ArgsDeclContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 4, biesParser.RULE_argsDecl);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 34;
-	        this.match(biesParser.T__1);
-	        this.state = 35;
-	        this.match(biesParser.INT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
 
-	/**
-	* Define el análisis de una instrucción en la gramática de BIES.
-	* Este método maneja el reconocimiento de una instrucción, comenzando con 
-	* un mnemotécnico seguido de uno o más argumentos opcionales. 
-	* Asegura que la sintaxis de la instrucción siga las reglas definidas en la gramática.
-	* 
-	* @method inst
-	* @returns {InstContext} El contexto de la instrucción analizada.
-	* 
-	* @throws {antlr4.error.RecognitionException} Lanza una excepción si se encuentra un error de 
-	* reconocimiento durante el análisis sintáctico.
-	*/
+
 	inst() {
 	    let localctx = new InstContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 4, biesParser.RULE_inst);
@@ -326,19 +249,8 @@ export default class biesParser extends antlr4.Parser {
 	    return localctx;
 	}
 
-	/**
-	* Analiza y recupera un mnemotécnico en el análisis sintáctico de BIES.
-	* Este método verifica si el siguiente token en la entrada coincide con
-	* uno de los mnemotécnicos permitidos según la gramática.
-	* Si el token coincide, se consume; de lo contrario, se gestiona el error 
- 	* de manera apropiada.
-	*
-	* @method mnemonic
-	* @returns {MnemonicContext} El contexto del mnemotécnico reconocido.
-	* 
- 	* @throws {antlr4.error.RecognitionException} Lanza una excepción si se encuentra un error de 
-	* reconocimiento durante el análisis sintáctico.
-	*/
+
+
 	mnemonic() {
 	    let localctx = new MnemonicContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 6, biesParser.RULE_mnemonic);
@@ -368,19 +280,8 @@ export default class biesParser extends antlr4.Parser {
 	    return localctx;
 	}
 
-	/**
-	* Analiza y recupera un argumento en el análisis sintáctico de BIES.
-	* Este método verifica si el siguiente token en la entrada coincide 
-	* con uno de los argumentos permitidos según la gramática.
-	* Si el token coincide, se consume; de lo contrario, se gestiona el 
-	* error de manera apropiada.
-	*
-	* @method arg
-	* @returns {ArgContext} El contexto del argumento reconocido.
-	* 
-	* @throws {antlr4.error.RecognitionException} Lanza una excepción si se encuentra un error de 
-	* reconocimiento durante el análisis sintáctico.
-	*/
+
+
 	arg() {
 	    let localctx = new ArgContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 8, biesParser.RULE_arg);
@@ -540,6 +441,8 @@ export default class biesParser extends antlr4.Parser {
 	    }
 	    return localctx;
 	}
+
+
 }
 
 biesParser.EOF = antlr4.Token.EOF;
@@ -609,38 +512,8 @@ biesParser.RULE_arg = 4;
 biesParser.RULE_list = 5;
 biesParser.RULE_element = 6;
 
-/**
-* Clase que representa el contexto inicial en el análisis sintáctico de la gramática de BIES.
-* Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
-* relevante durante la ejecución de la regla de inicio en el parser.
-* 
-* El contexto de inicio puede incluir detalles sobre las instrucciones y elementos 
-* que componen la estructura principal del programa BIES, así como métodos para 
-* acceder a estos elementos.
-* 
-* @class StartContext
-* @extends {antlr4.ParserRuleContext}
-* 
-* @author Manuel Mora Sandi
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
 class StartContext extends antlr4.ParserRuleContext {
 
-	/**
-	* Crea una instancia del contexto de inicio para el análisis sintáctico en la gramática de BIES.
-	* Este constructor inicializa el contexto, estableciendo el parser, el contexto padre 
-	* y el estado de invocación. Se utiliza en la regla de inicio del parser para almacenar 
-	* información relevante sobre el análisis sintáctico en esta etapa.
-	* 
-	* @constructor
-	* @param {Object} parser - El parser asociado con este contexto, responsable del análisis sintáctico.
-	* @param {StartContext|null} [parent=null] - El contexto padre, o null si no hay un contexto padre.
-	* @param {number} [invokingState=-1] - El estado de invocación, que indica el estado actual del parser.
-	* 
-	* @throws {TypeError} Lanza un error si el tipo de `parser` no es válido.
- 	*/
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
             parent = null;
@@ -653,22 +526,6 @@ class StartContext extends antlr4.ParserRuleContext {
         this.ruleIndex = biesParser.RULE_start;
     }
 
-	/**
-	* Obtiene el contexto de definición de funciones desde el árbol de análisis sintáctico.
-	* Este método permite acceder a todos los contextos de definición de funciones presentes 
-	* en la entrada analizada. Si se proporciona un índice, devuelve el contexto correspondiente 
-	* a ese índice. Si no se proporciona un índice, se devuelven todos los contextos de 
-	* definición de funciones.
-	* 
-	* @method funDef
-	* @param {number|null} [i=null] - El índice del contexto de definición de funciones a obtener, 
-	*                                  o null para obtener todos los contextos.
-	* @returns {Array<FunDefContext>|FunDefContext} Un array de contextos de definición de funciones 
-	*                                                si se proporciona `null`, o el contexto específico 
-	*                                                si se proporciona un índice.
-	* 
-	* @throws {TypeError} Lanza un error si el índice no es un número válido.
-	*/
 	funDef = function(i) {
 	    if(i===undefined) {
 	        i = null;
@@ -680,22 +537,6 @@ class StartContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	/**
-	* Obtiene el contexto de las instrucciones desde el árbol de análisis sintáctico.
-	* Este método permite acceder a todos los contextos de instrucciones presentes 
-	* en la entrada analizada. Si se proporciona un índice, devuelve el contexto correspondiente 
-	* a ese índice. Si no se proporciona un índice, se devuelven todos los contextos de 
-	* instrucciones.
-	* 
-	* @method inst
-	* @param {number|null} [i=null] - El índice del contexto de instrucción a obtener, 
-	*                                  o null para obtener todos los contextos.
-	* @returns {Array<InstContext>|InstContext} Un array de contextos de instrucciones 
-	*                                            si se proporciona `null`, o el contexto específico 
-	*                                            si se proporciona un índice.
-	* 
-    * @throws {TypeError} Lanza un error si el índice no es un número válido.
-	*/
 	inst = function(i) {
 	    if(i===undefined) {
 	        i = null;
@@ -707,21 +548,6 @@ class StartContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	/**
-	* Permite que un visitante procese el contexto de inicio en el árbol de análisis sintáctico.
-	* Este método acepta un objeto visitante y, si el visitante es una instancia de 
-	* `biesVisitor`, invoca su método `visitStart` pasándole el contexto actual. 
-	* Si no es un `biesVisitor`, llama al método `visitChildren` para procesar los 
-	* hijos del contexto actual.
-	* 
-	* @method accept
-	* @param {Object} visitor - El objeto visitante que realiza el procesamiento del 
-	*                            árbol de análisis sintáctico.
-	* 
-	* @returns {any} El resultado del procesamiento por parte del visitante.
-	* 
-	* @throws {TypeError} Lanza un error si el visitante no es un objeto válido.
-	*/
 	accept(visitor) {
 	    if ( visitor instanceof biesVisitor ) {
 	        return visitor.visitStart(this);
@@ -729,32 +555,14 @@ class StartContext extends antlr4.ParserRuleContext {
 	        return visitor.visitChildren(this);
 	    }
 	}
+
+
 }
 
 
-/**
-* Clase que representa el contexto de definición de una función en el árbol de análisis sintáctico.
-* Esta clase extiende `antlr4.ParserRuleContext` y encapsula la información relevante 
-* sobre la definición de la función, incluyendo su nombre, parámetros y el cuerpo de la función.
-* 
-* @class FunDefContext
-* @extends antlr4.ParserRuleContext
-* 
-* @param {Object} parser - La instancia del parser que genera este contexto.
-* @param {ParserRuleContext} parent - El contexto padre en el árbol de análisis.
-* @param {number} invokingState - El estado de invocación de la regla de análisis.
-*/
+
 class FunDefContext extends antlr4.ParserRuleContext {
 
-	/**
-	* Crea una instancia del contexto de definición de una función en el árbol de análisis sintáctico.
-	* Este constructor inicializa el parser, el contexto padre y el estado de invocación de la regla de análisis.
-	* 
-	* @constructor
-	* @param {Object} parser - La instancia del parser que genera este contexto.
-	* @param {ParserRuleContext} [parent=null] - El contexto padre en el árbol de análisis. Por defecto es null.
-	* @param {number} [invokingState=-1] - El estado de invocación de la regla de análisis. Por defecto es -1.
-	*/
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
             parent = null;
@@ -767,29 +575,10 @@ class FunDefContext extends antlr4.ParserRuleContext {
         this.ruleIndex = biesParser.RULE_funDef;
     }
 
-	/**
-	* Obtiene el token correspondiente a la palabra clave 'FUN' en la gramática BIES.
-	* Este método permite acceder al token de la función que se está definiendo,
-	* facilitando su uso en el análisis sintáctico.
-	* 
-	* @method FUN
-	* @returns {Token|null} El token de la palabra clave 'FUN' si está presente; de lo contrario, null.
-	*/
 	FUN() {
 	    return this.getToken(biesParser.FUN, 0);
 	};
 
-	/**
-	* Obtiene el token correspondiente a la palabra clave 'FUNCTION' en la gramática BIES.
-	* Este método permite acceder a todos los tokens de la función que se están definiendo,
-	* o a un token específico si se proporciona un índice.
-	* 
-	* @method FUNCTION
-	* @param {number|null} [i=null] - El índice del token 'FUNCTION' que se desea obtener. 
-	* Si no se proporciona, se devolverán todos los tokens de 'FUNCTION'.
-	* @returns {Token[]|Token|null} Un arreglo de tokens de 'FUNCTION' si no se proporciona un índice; 
-	* un token específico si se indica un índice; o null si no hay tokens disponibles.
-	*/
 	FUNCTION = function(i) {
 		if(i===undefined) {
 			i = null;
@@ -801,44 +590,23 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	/**
-	* Obtiene el token correspondiente a la palabra clave 'END' en la gramática BIES.
-	* Este método permite acceder al token que indica el final de una estructura 
-	* o bloque en el análisis sintáctico.
-	* 
-	* @method END
-	* @returns {Token} El token de 'END' correspondiente en la gramática BIES.
-	*/
+
+	ARGS() {
+	    return this.getToken(biesParser.ARGS, 0);
+	};
+
+	INT() {
+	    return this.getToken(biesParser.INT, 0);
+	};
+
 	END() {
 	    return this.getToken(biesParser.END, 0);
 	};
 
-	/**
-	* Obtiene el contexto de declaración de argumentos en la gramática BIES.
-	* Este método permite acceder a la parte del árbol de análisis sintáctico 
-	* que corresponde a la declaración de argumentos de una función, asegurando 
-	* que se sigan las reglas de la gramática.
-	* 
-	* @method argsDecl
-	* @returns {ArgsDeclContext} El contexto de declaración de argumentos.
-	*/
-	argsDecl() {
-	    return this.getTypedRuleContext(ArgsDeclContext,0);
+	PARENT() {
+	    return this.getToken(biesParser.PARENT, 0);
 	};
 
-	/**
-	* Obtiene el contexto de instrucciones en la gramática BIES.
-	* Este método permite acceder a la parte del árbol de análisis sintáctico 
-	* que corresponde a las instrucciones dentro de una función o bloque de código.
-	* Puede devolver una lista de contextos de instrucción o un contexto específico 
-	* según el índice proporcionado.
-	* 
-	* @method inst
-	* @param {number|null} [i=null] - El índice de la instrucción a obtener. 
-	* Si no se proporciona, se devolverán todas las instancias de `InstContext`.
-	* @returns {InstContext|InstContext[]} El contexto de la instrucción o una lista 
-	* de contextos de instrucción si no se proporciona un índice.
-	*/
 	inst = function(i) {
 	    if(i===undefined) {
 	        i = null;
@@ -850,20 +618,6 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	/**
-	* Permite que un visitante visite el contexto de definición de función.
-	* Este método es parte del patrón Visitor, que facilita la operación sobre 
-	* los nodos del árbol de análisis sintáctico. Si el visitante es una instancia
-	* de `biesVisitor`, se llama al método específico para manejar la 
-	* definición de función; de lo contrario, se llama a `visitChildren` 
-	* para visitar los nodos hijos.
-	* 
-	* @method accept
-	* @param {Object} visitor - El visitante que realiza la operación sobre el 
-	* contexto de definición de función.
-	* @returns {Object} El resultado de la visita, que puede ser el resultado de 
-	* `visitFunDef` o el resultado de `visitChildren`.
-	*/
 	accept(visitor) {
 	    if ( visitor instanceof biesVisitor ) {
 	        return visitor.visitFunDef(this);
@@ -871,105 +625,14 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	        return visitor.visitChildren(this);
 	    }
 	}
+
+
 }
 
 
-/**
-* Clase que representa el contexto de la declaración de argumentos en el análisis sintáctico de la gramática de BIES.
-* Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
-* relevante durante la ejecución de la regla de declaración de argumentos en el parser.
-* 
-* El contexto de la declaración de argumentos puede incluir detalles sobre el tipo y número de 
-* argumentos que una función puede aceptar, proporcionando métodos para acceder a esta información.
-* 
-* @class ArgsDeclContext
-* @extends {antlr4.ParserRuleContext}
-* 
-* @author Manuel Mora Sandi
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
-class ArgsDeclContext extends antlr4.ParserRuleContext {
 
-	/**
-	* Crea una instancia de `ArgsDeclContext`.
-	* Este constructor inicializa el contexto de la declaración de argumentos
-	* en el análisis sintáctico de la gramática de BIES.
-	* 
-	* @constructor
-	* @param {antlr4.Parser} parser - El parser que está utilizando esta regla.
-	* @param {antlr4.ParserRuleContext} parent - El contexto del padre en la jerarquía de análisis sintáctico.
-	* @param {number} invokingState - El estado de invocación de la regla.
-	*/
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = biesParser.RULE_argsDecl;
-    }
-
-	/**
-	* Obtiene el token de tipo `INT` de la entrada del parser.
-	* Este método se utiliza para acceder al token que representa
-	* un número entero en el análisis sintáctico de la gramática de BIES.
-	* 
-	* @returns {antlr4.Token} El token de tipo `INT`.
-	*/
-	INT() {
-	    return this.getToken(biesParser.INT, 0);
-	};
-
-	/**
-	* Permite que un visitante recorra el contexto de declaración de argumentos.
-	* Este método es parte del patrón Visitor y se utiliza para realizar
-	* operaciones específicas en el contexto de la declaración de argumentos
-	* en el análisis sintáctico de la gramática de BIES.
-	* 
-	* @param {biesVisitor} visitor - El visitante que realiza la operación.
-	* @returns {any} El resultado de la operación del visitante.
-	*/
-	accept(visitor) {
-	    if ( visitor instanceof biesVisitor ) {
-	        return visitor.visitArgsDecl(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-}
-
-
-/**
-* Clase que representa el contexto de una instrucción en el análisis sintáctico de la gramática de BIES.
-* Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
-* relevante durante la ejecución de la regla de instrucción en el parser.
-* 
-* El contexto de la instrucción puede incluir detalles sobre el mnemónico y los argumentos 
-* que componen la instrucción, proporcionando métodos para acceder a esta información.
-* 
-* @class InstContext
-* @extends {antlr4.ParserRuleContext}
-* 
-* @author Manuel Mora Sandi
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
 class InstContext extends antlr4.ParserRuleContext {
 
-	/**
-	* Crea una instancia del contexto de instrucción en el análisis sintáctico de la gramática de BIES.
-	* Este constructor inicializa el contexto con el parser asociado, el contexto padre y el estado de invocación.
-	* 
-	* @param {antlr4.Parser} parser - El parser que está usando este contexto.
-	* @param {antlr4.ParserRuleContext|null} parent - El contexto padre, o null si no hay uno.
-	* @param {number} invokingState - El estado de invocación de este contexto; por defecto es -1 si no se proporciona.
-	*/
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
             parent = null;
@@ -982,25 +645,10 @@ class InstContext extends antlr4.ParserRuleContext {
         this.ruleIndex = biesParser.RULE_inst;
     }
 
-	/**
-	* Obtiene el contexto de la mnemotécnica en la instrucción actual del análisis sintáctico de la gramática de BIES.
-	* Este método proporciona acceso al contexto que representa la mnemotécnica utilizada en la instrucción,
-	* permitiendo la recuperación de la información asociada a ella.
-	* 
-	* @returns {MnemonicContext} El contexto de la mnemotécnica.
-	*/
 	mnemonic() {
 	    return this.getTypedRuleContext(MnemonicContext,0);
 	};
 
-	/**
-	* Obtiene el contexto de los argumentos en la instrucción actual del análisis sintáctico de la gramática de BIES.
-	* Este método permite acceder a un argumento específico si se proporciona un índice, o a todos los argumentos
-	* asociados a la instrucción si no se especifica ningún índice.
-	* 
-	* @param {number} [i=null] - El índice del argumento a recuperar. Si no se proporciona, se obtienen todos los argumentos.
-	* @returns {ArgContext|ArgContext[]} El contexto del argumento específico o una lista de contextos de argumentos.
-	*/
 	arg = function(i) {
 	    if(i===undefined) {
 	        i = null;
@@ -1012,15 +660,6 @@ class InstContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	/**
-	* Permite que un visitante interactúe con el contexto de la instrucción durante el análisis sintáctico de la gramática de BIES.
-	* Este método determina si el visitante proporcionado es una instancia de `biesVisitor` y, si es así,
-	* invoca el método correspondiente para procesar el contexto de la instrucción. En caso contrario, llama al método
-	* para procesar los hijos del contexto.
-	* 
-	* @param {Visitor} visitor - El visitante que interactúa con el contexto de la instrucción.
-	* @returns {*} El resultado de la visita, que puede variar según la implementación del visitante.
- 	*/
 	accept(visitor) {
 	    if ( visitor instanceof biesVisitor ) {
 	        return visitor.visitInst(this);
@@ -1028,36 +667,14 @@ class InstContext extends antlr4.ParserRuleContext {
 	        return visitor.visitChildren(this);
 	    }
 	}
+
+
 }
 
 
-/**
-* Clase que representa el contexto de un mnemotécnico en el análisis sintáctico de la gramática de BIES.
-* Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
-* relevante durante la ejecución de la regla que define un mnemotécnico en el parser.
-* 
-* El contexto de un mnemotécnico puede incluir detalles sobre la instrucción que se está definiendo,
-* proporcionando métodos para acceder a esta información y a los argumentos asociados.
-* 
-* @class MnemonicContext
-* @extends {antlr4.ParserRuleContext}
-* 
-* @author Manuel Mora Sandi
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
+
 class MnemonicContext extends antlr4.ParserRuleContext {
 
-	/**
-	* Crea una instancia de `MnemonicContext`.
-	* Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
-	* relevante durante la ejecución de la regla que define un mnemotécnico en el parser.
-	* 
-	* @param {antlr4.Parser} parser - El parser asociado a este contexto.
-	* @param {antlr4.ParserRuleContext} parent - El contexto padre, si existe.
-	* @param {number} invokingState - El estado de invocación del contexto.
-	*/
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
             parent = null;
@@ -1070,15 +687,7 @@ class MnemonicContext extends antlr4.ParserRuleContext {
         this.ruleIndex = biesParser.RULE_mnemonic;
     }
 
-	/**
-	* Permite que un visitante procese este contexto de mnemotécnico.
-	* Si el visitante es una instancia de `biesVisitor`, se invoca el método 
-	* `visitMnemonic` pasándole este contexto. De lo contrario, se llama 
-	* al método `visitChildren` para procesar los nodos hijos de este contexto.
-	* 
-	* @param {biesVisitor} visitor - El visitante que procesa este contexto.
-	* @returns {any} El resultado del procesamiento del visitante.
-	*/
+
 	accept(visitor) {
 	    if ( visitor instanceof biesVisitor ) {
 	        return visitor.visitMnemonic(this);
@@ -1086,36 +695,14 @@ class MnemonicContext extends antlr4.ParserRuleContext {
 	        return visitor.visitChildren(this);
 	    }
 	}
+
+
 }
 
 
-/**
-* Clase que representa el contexto de un argumento en el análisis sintáctico de la gramática de BIES.
-* Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
-* relevante durante la ejecución de la regla de declaración de argumentos en el parser.
-* 
-* El contexto de un argumento puede incluir detalles sobre el tipo y valor del argumento 
-* que se está procesando, así como métodos para acceder a esta información.
-* 
-* @class ArgContext
-* @extends {antlr4.ParserRuleContext}
-* 
-* @author Manuel Mora Sandi
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas 
-*/
+
 class ArgContext extends antlr4.ParserRuleContext {
 
-	/**
-	* Crea una instancia de `ArgContext`.
-	* Este constructor inicializa el contexto del argumento en el análisis sintáctico de la gramática de BIES.
-	* 
-	* @param {antlr4.Parser} parser - El parser que está procesando la entrada.
-	* @param {antlr4.ParserRuleContext} [parent=null] - El contexto padre en la jerarquía de análisis.
-	* @param {number} [invokingState=-1] - El estado de invocación del parser. 
-	* Si no se proporciona, se establece en -1.
-	*/
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
             parent = null;
@@ -1128,47 +715,30 @@ class ArgContext extends antlr4.ParserRuleContext {
         this.ruleIndex = biesParser.RULE_arg;
     }
 
-	/**
-	 * Obtiene el token que representa un entero en la declaración de argumentos.
-	 * Este método se utiliza para acceder al token de tipo `INT` en el contexto actual del análisis sintáctico,
-	 * permitiendo que otras partes del código interactúen con el valor del entero declarado.
-	 * 
-	 * @returns {antlr4.Token} El token que representa un entero.
-	 */
 	INT() {
 	    return this.getToken(biesParser.INT, 0);
 	};
 
-	/**
-	* Obtiene el token que representa una cadena de caracteres en la declaración de argumentos.
-	* Este método se utiliza para acceder al token de tipo `STR` en el contexto actual del análisis sintáctico,
-	* permitiendo que otras partes del código interactúen con el valor de la cadena declarada.
-	* 
-	* @returns {antlr4.Token} El token que representa una cadena de caracteres.
-	*/
+	FLOAT() {
+	    return this.getToken(biesParser.FLOAT, 0);
+	};
+
 	STR() {
 	    return this.getToken(biesParser.STR, 0);
 	};
 
-	/**
-	* Obtiene el token que representa la palabra clave `FUNCTION` en la declaración de funciones.
-	* Este método se utiliza para acceder al token de tipo `FUNCTION` en el contexto actual del análisis sintáctico,
-	* permitiendo que otras partes del código interactúen con la declaración de funciones en la gramática BIES.
-	* 
-	* @returns {antlr4.Token} El token que representa la palabra clave `FUNCTION`.
-	*/
 	FUNCTION() {
 	    return this.getToken(biesParser.FUNCTION, 0);
 	};
 
-	/**
-	* Acepta un visitante en el contexto del argumento.
-	* Este método permite que un visitante realice operaciones específicas en el contexto del argumento 
-	* durante el análisis sintáctico, facilitando el patrón de diseño Visitor.
-	* 
-	* @param {Object} visitor - El visitante que se aplicará al contexto del argumento.
-	* @returns {Object} El resultado de la visita al contexto del argumento.
-	*/
+	list() {
+	    return this.getTypedRuleContext(ListContext,0);
+	};
+
+	ID() {
+	    return this.getToken(biesParser.ID, 0);
+	};
+
 	accept(visitor) {
 	    if ( visitor instanceof biesVisitor ) {
 	        return visitor.visitArg(this);
