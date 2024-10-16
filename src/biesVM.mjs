@@ -80,10 +80,10 @@ class BiesVM {
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
 
-    // console.log("STACK: ",this.stack);
-    // console.log("\n\n\n\nCODE: ",actualCode);
-    // console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
-    // console.log("CONTEXTS: ",this.contexts);
+    console.log("\n\n\n\nCODE: ",actualCode);
+    console.log("STACK: ",this.stack);
+    console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
+    console.log("CONTEXTS: ",this.contexts);
 
     //console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {

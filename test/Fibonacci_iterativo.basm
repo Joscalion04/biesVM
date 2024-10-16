@@ -1,7 +1,4 @@
 $FUN $1 args:0 parent:$0
-
-    ; Inicializamos las variables para el cálculo
-
     LDV 0
     BLD 0 0         ; Cargamos n
     LTE             ; n <= 0
@@ -11,6 +8,8 @@ $FUN $1 args:0 parent:$0
     BLD 0 0         ; Cargamos n
     EQ             ; n == 1
     BT 28
+
+    ; Inicializamos las variables para el cálculo
 
     LDV 0          ; a = 0
     BST 0 1        ; Guardar a en el binding 0, posición 1
@@ -57,7 +56,6 @@ $FUN $1 args:0 parent:$0
     BR 2
     LDV 1           ; Si n == 1, retornamos 1
     RET             ; Retornar b
-
 $END
 
 $FUN $0 args:0 parent:$0
