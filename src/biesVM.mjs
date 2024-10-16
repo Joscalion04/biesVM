@@ -81,14 +81,10 @@ class BiesVM {
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
 
-
-
-    //console.log("STACK: ",this.stack);
-    //console.log("\n\n\n\nCODE: ",actualCode);
-    //console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
-    //console.log("CONTEXTS: ",this.contexts);
-
-
+    // console.log("STACK: ",this.stack);
+    // console.log("\n\n\n\nCODE: ",actualCode);
+    // console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
+    // console.log("CONTEXTS: ",this.contexts);
 
     //console.log("PC: ",this.getActualContext() ? this.getActualContext().PC : '');
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
@@ -425,6 +421,11 @@ class BiesVM {
         const contextToActivate = previousContext.context.code.length === 0 ? parentContext : previousContext;// Si la función anterior no tiene código, activamos la función padre
         
         contextToActivate.ACTUAL = true;
+
+        const bindingIndex = this.bindings.findIndex(binding => binding.fun === contextToActivate.FUN);
+        const binding = this.bindings.splice(bindingIndex, 1)[0];
+        this.bindings.unshift(binding);
+
         this.code = contextToActivate.context.code;
       } break;      
 
