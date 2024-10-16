@@ -1,15 +1,10 @@
 $FUN $0 args:0 parent:$0
-    
-    
     ; Cargamos la hilera original en la pila
     LDV "miCadena"  ; Cargar la hilera original en la pila
     BST 0 0         ; Guardamos la hilera en el binding 0, posición 1
-
     ; Llamamos a la función de conteo
     LDF $1          ; Cargamos la función de conteo en la pila
     APP 100          ; Ejecutamos la función sin argumentos
-
-   
     PRN
     ; Fin del programa
     HLT             ; Detenemos la ejecución
@@ -19,9 +14,6 @@ $END
 
 ; Función para invertir la hilera utilizando el contador
 $FUN $1 args:0 parent:$0
-   
-    
-
     ; Cargar la hilera original desde el binding 0
     BLD 1 0         ; Cargar la hilera original
     SNT              ; Verificar si la hilera está vacía (caso base)
