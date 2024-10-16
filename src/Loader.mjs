@@ -61,8 +61,7 @@ class Loader extends biesGrammarVisitor {
             const instruction = await this.VM.executeInstruction();
             if (instruction != null) {// Significa que viene algo
                 if (instruction === 'FIN') {
-                    continuar = false;
-                    break;
+                    return;
                 } else {
                     this.executeFunctionById(this.firstNode, instruction);
                     break;
