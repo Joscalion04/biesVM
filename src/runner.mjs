@@ -3,7 +3,7 @@ import antlr4 from 'antlr4';
 import Loader from "./Loader.mjs";
 import biesGrammarLexer from '../parser/biesLexer.js';
 import biesGrammarParser from '../parser/biesParser.js';
-let default_input_file = './test/Factorial_recursivo.basm'
+let default_input_file = './test/subhilera_hilera_iterativo.basm'
 
 /**
 * Función para probar el parser utilizando un archivo de entrada opcional.
