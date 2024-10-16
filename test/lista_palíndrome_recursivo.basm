@@ -5,7 +5,7 @@ $FUN $0 args:0 parent:$0
     BST 0 0         ; Guardamos la hilera en el binding 0, posición 0
     ; Llamamos a la función recursiva para invertir la hilera
     LDF $1          ; Cargar la función recursiva de inversión
-    APP 100         ; Ejecutar la función con la hilera original
+    APP 1         ; Ejecutar la función con la hilera original
     LDV ["r","e","c","o","n","o","c","e","r"]  ; Cargar la hilera original en la pila
     TOS
     EQ
@@ -41,7 +41,7 @@ $FUN $1 args:0 parent:$0
     BST 1 0         ; Se guarda la hilera sin el primer caracter
     CAT             ; Concatenar el carácter al final de la hilera invertida
     LDF $1          ; Cargar la función recursiva de inversión
-    APP 100           ; Llamar recursivamente
+    APP 1           ; Llamar recursivamente
     
     ; Concatenar el carácter extraído al final de la hilera invertida
     RET              ; Retornar la hilera invertida

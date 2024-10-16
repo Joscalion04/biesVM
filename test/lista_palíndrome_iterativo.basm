@@ -5,7 +5,7 @@ $FUN $0 args:0 parent:$0
     BST 0 0         ; Guardamos la hilera en el binding 0, posición 1
     ; Llamamos a la función de conteo
     LDF $1          ; Cargamos la función de conteo en la pila
-    APP 100          ; Ejecutamos la función sin argumentos
+    APP 1          ; Ejecutamos la función sin argumentos
     LDV ["H","o","l","a"]  ; Cargar la hilera original en la pila
     TOS
     EQ

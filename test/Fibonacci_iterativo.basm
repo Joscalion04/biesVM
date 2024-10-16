@@ -1,8 +1,16 @@
 $FUN $1 args:0 parent:$0
 
     ; Inicializamos las variables para el cálculo
-    LDV 8          ; Cargar 6 en la pila (n)
-    BST 0 0        ; Guardar n en el binding 0, posición 0
+
+    LDV 0
+    BLD 0 0         ; Cargamos n
+    LTE             ; n <= 0
+    BT 30
+
+    LDV 1
+    BLD 0 0         ; Cargamos n
+    EQ             ; n == 1
+    BT 28
 
     LDV 0          ; a = 0
     BST 0 1        ; Guardar a en el binding 0, posición 1
@@ -10,15 +18,20 @@ $FUN $1 args:0 parent:$0
     LDV 1          ; b = 1
     BST 0 2        ; Guardar b en el binding 0, posición 2
 
+    ; Aqui se inicializa el for
+
     LDV 2          ; Inicializar el contador en 2
     BST 0 3        ; Guardar el contador en el binding 0, posición 3
+
+    ; Condiciones del for
 
     BLD 0 3        ; Cargar el contador
     BLD 0 0        ; Cargar n
     LT             ; Comparar contador con n
     BT 14          ; Si contador > n, saltar a fin del bucle
 
-    ; Cuerpo del bucle
+    ; updates del for
+
     BLD 0 1        ; Cargar a
     BLD 0 2        ; Cargar b
     ADD            ; Calcular a + b
@@ -39,14 +52,18 @@ $FUN $1 args:0 parent:$0
 
     ; Retornar el valor de b
     BLD 0 2        ; Cargar el valor de b
+    BR 4
+    LDV 0           ; Si n <= 0, retornamos 0
+    BR 2
+    LDV 1           ; Si n == 1, retornamos 1
     RET             ; Retornar b
 
 $END
 
 $FUN $0 args:0 parent:$0
-    LDV 6          ; Cargar el valor de 'n' (6)
+    LDV 10          ; Cargar el valor de 'n'
     LDF $1         ; Cargar la función 'fibonacci'
-    APP 100          ; Llamar a la función 'fibonacci' con 1 argumento
+    APP 1          ; Llamar a la función 'fibonacci' con 1 argumento
     PRN            ; Imprimir el valor retornado
     HLT            ; Detener la ejecución
 $END

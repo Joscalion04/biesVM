@@ -110,7 +110,7 @@ $FUN $0 args:0 parent:$0
     ; Calcular la primera raíz (-b + sqrt(discriminante)) / 2a
     BLD 0 3             ; Traemos el discriminante
     LDF $1
-    APP 100             ; Calculamos la raiz cuadrada del discriminante
+    APP 1             ; Calculamos la raiz cuadrada del discriminante
     BLD 0 1             ; Cargar b
     NEG                 ; Se hace -b
     ADD                 ; Calculamos (-b + sqrt(discriminante))
@@ -124,7 +124,7 @@ $FUN $0 args:0 parent:$0
     ; Calcular la segunda raíz (-b - sqrt(discriminante)) / 2a
     BLD 0 3             ; Traemos el discriminante
     LDF $1
-    APP 100             ; Calculamos la raiz cuadrada del discriminante
+    APP 1             ; Calculamos la raiz cuadrada del discriminante
     BLD 0 1             ; Cargar b
     NEG                 ; Se hace -b
     SUB                 ; Calculamos (-b - sqrt(discriminante))

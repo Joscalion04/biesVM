@@ -19,7 +19,7 @@ $FUN $1 args:0 parent:$0
     BST 0 1         ; Guardar n-1 en el binding 0, posición 1
     LDF $1          ; Cargar la función Fibonacci
     BLD 0 1         ; Cargar n-1
-    APP 100         ; Llamada recursiva Fibonacci(n-1)
+    APP 1         ; Llamada recursiva Fibonacci(n-1)
     BST 0 2         ; Guardar Fibonacci(n-1) en el binding 0, posición 2
 
     BLD 0 0         ; Cargar n
@@ -28,7 +28,7 @@ $FUN $1 args:0 parent:$0
     BST 0 3         ; Guardar n-2 en el binding 0, posición 3
     LDF $1          ; Cargar la función Fibonacci
     BLD 0 3         ; Cargar n-2
-    APP 100         ; Llamada recursiva Fibonacci(n-2)
+    APP 1         ; Llamada recursiva Fibonacci(n-2)
     BST 0 4         ; Guardar Fibonacci(n-2) en el binding 0, posición 4
 
     BLD 0 2         ; Cargar Fibonacci(n-1)
@@ -45,7 +45,7 @@ $END
 $FUN $0 args:0 parent:$0
     LDV 6           ; Cargar el valor de 'n' (6)
     LDF $1          ; Cargar la función 'fibonacci'
-    APP 100         ; Llamar a la función 'fibonacci' con 1 argumento
+    APP 1         ; Llamar a la función 'fibonacci' con 1 argumento
     PRN             ; Imprimir el valor retornado
     HLT             ; Detener la ejecución
 $END
