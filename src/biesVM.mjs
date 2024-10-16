@@ -61,7 +61,6 @@ class BiesVM {
     this.contexts.push({context: {code: []}, PC: 0, ACTUAL: actual, FUN: arg, previousFUN: null, K: K, parent: this.getActualContext() ? this.getActualContext().FUN : arg});
   }
 
-<<<<<<< HEAD
   /** 
   * Este método elimina y retorna el último elemento de la pila si se cumplen las condiciones 
   * relacionadas con el valor de `K` en el contexto actual.
@@ -82,21 +81,6 @@ class BiesVM {
       throw new Error('No se puede hacer POP con K = 0');
     }
   }
-=======
-  // pop() {
-  //   if (this.getActualContext().K === null || this.getActualContext().K >= 0) {
-     
-  //     const V = this.stack.pop();
-      
-  //     if (this.getActualContext().K !== null) {
-  //       this.getActualContext().K--;
-  //     }
-  //     return V;
-  //   } else {
-  //     throw new Error('No se puede hacer POP con K = 0');
-  //   }
-  // }
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1
 
   /** 
   * Este método solicita una entrada del usuario a través de la consola y 
