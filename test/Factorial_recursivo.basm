@@ -1,14 +1,40 @@
-$FUN $0 args:1 parent:$0
-LDV 1            ; Factorial de 0 es 1
-EQ               ; Comparar si n == 0
-BT $1          ; Si es 0, regresar
-LDF $0           ; Cargar la función recursiva
-SWP
-LDV -1           ; Decrementar n
-ADD
-APP 0            ; Aplicar factorial_rec(n - 1)
-MUL              ; Multiplicar por n
-$1
-PRN
-HLT
+$FUN $1 args:0 parent:$0   ; Función factorial, recibe un argumento n
+    BLD 0 0        ; Cargar el valor de 'n'
+    LDV 0          ; Cargar el valor 1 para la comparación
+    EQ           ; Verificar si n = 0
+    BT 17  
+     
+
+    BLD 0 0        ; Cargar el valor de 'n'
+    LDV 1          ; Cargar el valor 1 para la comparación
+    LT             ; Verificar si n < 1
+    BF 11           
+    LDV 1          ; Cargar el valor 1
+    BLD 0 0        ; Cargar el valor de 'n'  
+    SUB            ; Calcular n - 1
+    BST 0 0       
+    BLD 0 0        ; Cargar el valor de 'n'
+    BLD 0 1  ; Cargar el valor retornado (factorial de n - 1)
+    MUL            ; Multiplicar n * factorial(n - 1)
+    BLD 0 0        ; Cargar el valor retornado (factorial de n - 1)
+   
+    LDF $1
+    APP 2
+    BLD 0 1
+    BR 2
+    LDV 1
+    RET            ; Retornar el resultado
 $END
+
+; Main
+$FUN $0 args:0 parent:$0
+    LDV 5          ; Cargar el valor inicial para el factorial (5 en este caso)
+    LDV 5
+    LDF $1  ; Llamar a la función factorial con n = 5
+    APP 2
+    PRN            ; Imprimir el resultado
+    HLT            ; Detener la ejecución
+   
+$END
+
+INI $0
