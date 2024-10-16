@@ -1,15 +1,93 @@
+$FUN $1 args: parent:$0     ;squareRoot(a, max=20, epsilon=1e-15)
+LDV 20              ; Cargamos max=20
+BST 0 1             ; Guardamos max en bindings
+LDV 1e-15
+BST 0 2             ; Guardamos epsilon
+BLD 0 0             ; Cargamos a
+LDV 0
+EQ                  ; a == 0
+BT n                ; Se va a return
+POP                 ; Sacamos el 0 de la pila
+LDV 1
+EQ                  ; a == 1
+BT n                ; Se va a return
+POP                 ; Sacamos a 1 de la pila, 
+LDV 2
+SWP                 ; intercambiamos para tener a arriba
+DIV                 ; a / 2
+BST 0 3             ; guardamos root = a / 2
+
+; Aqui se inicializa el for
+
+LDV 0
+BST 0 4             ; Guardamos i
+BLD 0 3             ; Traemos root = a / 2
+BST 0 5             ; Copiamos el valor de root en un nuevo binding para inicializar x = a / 2
+
+; Condiciones del for
+
+BLD 0 1             ; Traemos max
+BLD 0 4             ; Traemos i
+LT                  ; i < max
+
+BLD 0 5             ; Traemos x
+BLD 0 5             ; Traemos x
+MUL                 ; x * x
+BLD 0 0             ; Traemos a
+SWP                 ; Ponemos x * x arriba
+SUB                 ; x * x - a
+SGN
+BT 2                ; Si es positivo, continue
+NEG                 ; Si es negativo, conviertalo a positivo
+BLD 0 2             ; Traemos epsilon
+SWP                 ; Ponemos abs(x * x - a) arriba
+GTE                 ; abs(x * x - a) >= epsilon
+
+SWP
+POP                 ; Sacamos abs(x * x - a) de la pila
+SWP
+POP                 ; Sacamos epsilon de la pila
+EQ                  ; i < max == abs(x * x - a) >= epsilon  Pregunta si se cumplen ambas condiciones
+
+SWP
+POP                 ; Sacamos n = abs(x * x - a) >= epsilon
+SWP
+POP                 ; Sacamos n = i < max
+SWP
+POP                 ; Sacamos max
+SWP
+POP                 ; Sacamos i
+
+BF n                ; Si no se cumplen ambas condiciones, salga del for
+
+; updates del for
+
+BLD 0 5             ; Traemos x
+BLD 0 0             ; Traemos a
+
+
+
+$END 
+
+
 $FUN $0 args:0 parent:$0
 
 ; Cargar los coeficientes a, b, y c (valores de la ecuación cuadrática ax^2 + bx + c = 0)
+LDV 1             ; Cargar a = 1
+BST 0 0           ; Guardar a
 LDV -3            ; Cargar b = -3
+BST 0 1           ; Guardar b
+LDV 2             ; Cargar c = 2
+BST 0 2           ; Guardar c
 
 ; Resolver el discriminante: b^2 - 4ac
+BLD 0 1           ; Cargar b
 LDV -3            ; Cargar de nuevo b = -3
 MUL               ; Calcular b^2, el resultado es 9
-LDV 1             ; Cargar a = 1
 LDV 4             ; Cargar el número 4 (para multiplicar por 4ac)
+BLD 0 0           ; Cargar a
 MUL               ; Multiplicar 4 * a, el resultado es 4
-LDV 2             ; Cargar c = 2
+BLD 0 2           ; Cargar c
 MUL               ; Multiplicar 4a * c, el resultado es 8
 SWP 
 SUB               ; Restar b^2 - 4ac, el resultado es 9 - 8 = 1
@@ -19,9 +97,16 @@ SGN              ; Determinar el signo del discriminante
 BF 20            ; Si el discriminante es negativo (0), salta al final (no hay soluciones reales)
 
 ; Calcular la primera raíz (-b + sqrt(discriminante)) / 2a
-PRN               ; Imprimir el discriminante por verificación
-SWP               ; Intercambiar para obtener b
-NEG               ; Cambiar el signo de b (de -3 a 3)
+
+
+
+
+
+
+
+
+BLD 0 1           ; Cargar b
+NEG               ; Se hace b negativo
 ADD               ; Sumar -b + sqrt(discriminante), el resultado es 3 + 1 = 4
 LDV 2             ; Cargar el número 2
 LDV 1             ; Cargar el coeficiente a = 1

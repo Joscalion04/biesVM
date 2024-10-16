@@ -2,7 +2,7 @@ grammar bies;
 
 // LEXER
 INT : '-'? [0-9]+ ; // Números enteros
-FLOAT : '-'? [0-9]+ ('.' [0-9]+)? ; // Números decimales
+FLOAT : '-'? [0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)? ; // Números decimales y en notación científica
 STR : '\'' ( ~['\\] | '\\' . )* '\'' | '"' ( ~["\\] | '\\' . )* '"' ; // Cadenas
 FUNCTION : '$' [0-9]+ ; // Identificadores de funciones como $0, $1, etc.
 FUN : '$FUN' ; // Inicio de una función
