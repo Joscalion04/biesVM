@@ -318,8 +318,8 @@ class BiesVM {
 
       // Insertar al inicio de la lista
       case 'LIN': {
-        const V = this.pop()
-        const L = this.pop()
+        const V = this.pop(); console.log(V);
+        const L = this.pop(); console.log(L)
         L.unshift(V);
         this.stack.push(L);
       } break;

@@ -1,42 +1,86 @@
 $FUN $0 args:0 parent:$0
     ; Cargamos la hilera original en la pila
-    LDV ["m","i","C","a","d","e","n","a"]  ; Cargar la hilera original en la pila
-    BST 0 0         ; Guardamos la hilera en el binding 0, posición 1
+    LDV ["r","a","d","a","r"]  ; Cargar la hilera original en la pila
+    BST 0 0                    ; Guardamos la hilera en el binding 0, posición 0
 
-    ; Llamamos a la función de conteo
-    LDF $1          ; Cargamos la función de conteo en la pila
-    APP 100          ; Ejecutamos la función sin argumentos
-   
-    PRN
-    ; Fin del programa
-    HLT             ; Detenemos la ejecución
+    ; Llamamos a la función de invertir
+    LDF $1                     ; Cargamos la función de invertir en la pila
+    APP 100                    ; Ejecutamos la función sin argumentos
+    
+    ; La hilera invertida ahora está en la pila
+    BST 0 1                    ; Guardamos la hilera invertida en el binding 0, posición 1
+
+    ; Llamamos a la función de comparación
+    LDF $2                     ; Cargamos la función de comparación en la pila
+    APP 100                    ; Ejecutamos la función sin argumentos
+    
+    PRN                        ; Imprimir el resultado de la comparación
+    HLT                        ; Detenemos la ejecución
 $END
 
-; Función para invertir la hilera utilizando el contador
+; Función para invertir la hilera utilizando recursión
 $FUN $1 args:0 parent:$0
-
-    LDV []
-    BST 0 1
-    PRN
     ; Cargar la hilera original desde el binding 0
-    BLD 1 0         ; Cargar la hilera original
-    LNT              ; Verificar si la hilera está vacía (caso base)
-    BT 10            ; Si es nula (fin de la cadena), retornar la hilera vacía
-    
-    ; Extraer el último carácter de la hilera
-    BLD 1 0         ; Cargar la hilera original
-    LDV 0
-    LTK             ; Tomar el caracter en la posicion 0
-    BLD 
-    LIN
+    BLD 0 0                    ; Cargar la hilera original
+    SNT                         ; Verificar si la hilera está vacía (caso base)
+    BT 10                       ; Si es nula (fin de la cadena), retornar la hilera vacía
+
+    ; Extraer el primer carácter de la hilera
+    BLD 0 0                    ; Cargar la hilera original
+    STK                        ; Tomar el carácter en la posición 0
+
     ; Llamada recursiva para invertir el resto de la hilera
-    BLD 1 0         ; Cargar nuevamente la hilera original
-    LDV 1
-    LRK             ; Se toma la hilera sin el primer caracter
-    BST 1 0         ; Se guarda la hilera sin el primer caracter
-    CAT             ; Concatenar el carácter al final de la hilera invertida
-    BR -11
+    BLD 0 0                    ; Cargar nuevamente la hilera original
+    LDV 1                       ; Cargar longitud de la hilera
+    SRK                        ; Se toma la hilera sin el primer carácter
+    BST 0 0                    ; Se guarda la hilera sin el primer carácter
     
+    ; Llamada recursiva
+    LDF $1                     ; Llamar a la función recursiva
+    APP 100                    ; Ejecutar la función
+
     ; Concatenar el carácter extraído al final de la hilera invertida
-    RET              ; Retornar la hilera invertida
+    BLD 0 0                    ; Cargar el carácter
+    BLD 0 1                    ; Cargar la hilera invertida
+    PUSH                        ; Apilar la hilera invertida
+    PUSH                        ; Apilar el carácter
+    LDF $3                     ; Cargar función de concatenar (o similar)
+    APP 200                    ; Ejecutar la función para concatenar
+    BST 0 1                    ; Guardar la hilera invertida actualizada
+    RET                        ; Retornar la hilera invertida
+$END
+
+; Función para comparar la hilera original y la hilera invertida
+$FUN $2 args:0 parent:$0
+    ; Cargar la hilera original
+    BLD 0 0                    ; Cargar la hilera original
+    BST 0 0                    ; Guardamos en la posición 0
+
+    ; Cargar la hilera invertida
+    BLD 0 1                    ; Cargar la hilera invertida
+    BST 0 1                    ; Guardamos en la posición 1
+
+    ; Comparar ambas hileras
+    BLD 0 0                    ; Cargar la hilera original
+    BLD 0 1                    ; Cargar la hilera invertida
+    EQL                        ; Comprobar si son iguales
+    BT 20                      ; Si son iguales, significa que es un palíndromo
+    LDV 0                      ; Si no, cargar 0 (no es un palíndromo)
+    RET
+
+    ; Si son iguales
+    LDV 1                      ; Si son iguales, cargar 1 (es un palíndromo)
+    RET
+$END
+
+; Función para concatenar un carácter al final de una cadena (implementación de ejemplo)
+$FUN $3 args:2 parent:$0
+    ; Supongamos que la función toma el carácter y la hilera, y concatena al final
+    ; Aquí debes implementar la lógica adecuada para concatenar
+    ; BLD 0 1 para cargar la hilera
+    ; y el carácter que fue pasado como argumento en la pila.
+    
+    ; ... lógica de concatenación aquí ...
+    
+    RET
 $END
