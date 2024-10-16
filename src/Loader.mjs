@@ -45,7 +45,6 @@ class Loader extends biesGrammarVisitor {
     visitInst(ctx) {
         const mnemonic = ctx.mnemonic().getText(); // Obtiene la instrucción
         const args = ctx.arg().map(arg => this.visit(arg)).filter(arg => arg !== null); // Obtener los argumentos y filtrar los nulos
-        
         // Almacenar la instrucción en el array `code` de la VM
         this.VM.code.push({ mnemonic, args });
         
@@ -79,16 +78,43 @@ class Loader extends biesGrammarVisitor {
      * @return El valor del argumento como string o null si no aplica.
      */
     visitArg(ctx) {
+        // Si es un entero
         if (ctx.INT()) {
-            return ctx.INT().getText();
-        } else if (ctx.STR()) {
-            return ctx.STR().getText();
-        } else if (ctx.getText().startsWith('$')) { // Maneja argumentos como $1
-            return ctx.getText();
+            return parseInt(ctx.INT().getText(), 10);
         }
-        return null;
+        // Si es una cadena
+        else if (ctx.STR()) {
+            return ctx.STR().getText().slice(1, -1); // Remover las comillas alrededor
+        }
+        // Si es una lista
+        else if (ctx.list()) {
+            const listCtx = ctx.list();
+            // Mapeo de los elementos de la lista
+            const elements = listCtx.element().map(elementCtx => {
+                // Proceso manual para asegurarse de que se manejan correctamente enteros y cadenas
+                if (elementCtx.INT()) {
+                    return parseInt(elementCtx.INT().getText(), 10);
+                } else if (elementCtx.STR()) {
+                    return elementCtx.STR().getText().slice(1, -1);
+                } else {
+                    console.error("Elemento no reconocido:", elementCtx.getText());
+                    return undefined;
+                }
+            });
+            return elements;
+        }
+        // Si es una función
+        else if (ctx.FUNCTION()) {
+            return ctx.FUNCTION().getText();
+        }
+        // Si es un identificador
+        else if (ctx.ID()) {
+            return ctx.ID().getText();
+        }
+        return undefined; // Si no es ninguno de los anteriores, retornar undefined
     }
-
+    
+    
     /**
      * Busca un nodo de función por su `functionId` en el árbol sintáctico.
      * 

@@ -1,49 +1,53 @@
+$FUN $1 args:0 parent:$0
+    LDV 8           ; Cargar n en la pila
+    BST 0 0         ; Guardar n en el binding 0 (posición 0)
+
+    ; Caso base: si n == 0 o n == 1, retornar n
+    BLD 0 0         ; Cargar n
+    LDV 0           ; Cargar 0
+    EQ              ; Comparar n con 0
+    BT 12           ; Si n == 0, saltar al final y retornar n
+    BLD 0 0         ; Cargar n
+    LDV 1           ; Cargar 1
+    EQ              ; Comparar n con 1
+    BT 12           ; Si n == 1, saltar al final y retornar n
+
+    ; Caso recursivo: calcular Fibonacci(n-1) + Fibonacci(n-2)
+    BLD 0 0         ; Cargar n
+    LDV 1           ; Cargar 1
+    SUB             ; Calcular n-1
+    BST 0 1         ; Guardar n-1 en el binding 0, posición 1
+    LDF $1          ; Cargar la función Fibonacci
+    BLD 0 1         ; Cargar n-1
+    APP 100         ; Llamada recursiva Fibonacci(n-1)
+    BST 0 2         ; Guardar Fibonacci(n-1) en el binding 0, posición 2
+
+    BLD 0 0         ; Cargar n
+    LDV 2           ; Cargar 2
+    SUB             ; Calcular n-2
+    BST 0 3         ; Guardar n-2 en el binding 0, posición 3
+    LDF $1          ; Cargar la función Fibonacci
+    BLD 0 3         ; Cargar n-2
+    APP 100         ; Llamada recursiva Fibonacci(n-2)
+    BST 0 4         ; Guardar Fibonacci(n-2) en el binding 0, posición 4
+
+    BLD 0 2         ; Cargar Fibonacci(n-1)
+    BLD 0 4         ; Cargar Fibonacci(n-2)
+    ADD             ; Calcular Fibonacci(n-1) + Fibonacci(n-2)
+    RET             ; Retornar el resultado
+
+    ; Retornar n si es 0 o 1
+    BLD 0 0         ; Cargar n
+    RET             ; Retornar n
+
+$END
+
 $FUN $0 args:0 parent:$0
-    ; Inicializamos las variables de Fibonacci
-    LDV 0          ; Cargar 0 (Fibonacci(0))
-    BST 0 0        ; Guardar en el binding 0, posición 0 (F(0))
-    LDV 1          ; Cargar 1 (Fibonacci(1))
-    BST 0 1        ; Guardar en el binding 0, posición 1 (F(1))
-
-    ; Establecer el contador para calcular Fibonacci(6)
-    LDV 6          ; Cargar 6 (número de Fibonacci que queremos)
-    BST 2 0        ; Guardar en el binding 2, posición 0 (contador)
-
-    ; Comenzamos el cálculo de Fibonacci
-    LDF $1         ; Cargar la función de cálculo de Fibonacci
-    APP 100        ; Ejecutar la función
-
-    ; Imprimir el resultado (el último número calculado)
-    BLD 0 1        ; Cargar el resultado (Fibonacci(6))
-    PRN             ; Imprimir el número de Fibonacci
+    LDV 6           ; Cargar el valor de 'n' (6)
+    LDF $1          ; Cargar la función 'fibonacci'
+    APP 100         ; Llamar a la función 'fibonacci' con 1 argumento
+    PRN             ; Imprimir el valor retornado
     HLT             ; Detener la ejecución
 $END
 
-; Función para calcular Fibonacci de forma iterativa
-$FUN $1 args:0 parent:$0
-    ; Cargar el contador
-    BLD 2 0        ; Cargar el contador
-    SNT             ; Verificar si el contador es 0
-    BT 10           ; Si es 0, terminar la función
-
-    ; Calcular el siguiente número de Fibonacci
-    BLD 0 0        ; Cargar F(n-2)
-    BLD 0 1        ; Cargar F(n-1)
-    CAT             ; Sumar F(n-2) + F(n-1)
-    BST 0 1        ; Guardar el nuevo valor en F(n-1)
-
-    ; Actualizar F(n-2) para el siguiente ciclo
-    BLD 0 1        ; Cargar el antiguo F(n-1)
-    BST 0 0        ; Guardar el antiguo F(n-1) como F(n-2)
-
-    ; Decrementar el contador
-    BLD 2 0        ; Cargar el contador
-    LDV 1          ; Cargar 1
-    SUB             ; Decrementar el contador
-    BST 2 0        ; Guardar el nuevo contador
-
-    ; Volver a llamar a la función para continuar el cálculo
-    LDF $1         ; Cargar la función de cálculo de Fibonacci
-    APP 100        ; Ejecutar la función
-    RET             ; Retornar el resultado
-$END
+INI $0             ; Iniciar el programa desde main

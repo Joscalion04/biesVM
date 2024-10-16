@@ -83,8 +83,8 @@ class BiesVM {
 
 
 
-    //console.log("STACK: ",this.stack);
-    //console.log("\n\n\n\nCODE: ",actualCode);
+    console.log("STACK: ",this.stack);
+    console.log("\n\n\n\nCODE: ",actualCode);
     //console.log("BINDINGS: ", this.bindings.map(binding => binding.binding.map(b => b)));
     //console.log("CONTEXTS: ",this.contexts);
 
