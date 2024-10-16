@@ -3,7 +3,7 @@ import BiesVM from './src/biesVM.mjs';
 //(1) instalacion: npm install commander
 //(2) ejecucion de la primer prueba: npm run simulate -- simulate
 //(3) ejecucion de la segunda prueba: npm run simulate -- function
-//(4) ejecucion de la tercera prueba: npm run simulate -- fibonacci
+//(4) ejecucion de la tercera prueba: npm run simulate -- maximo
 
 const program = new Command();
 
@@ -51,42 +51,18 @@ program
           'RET',
           '$END'
         ],
-        'fibonacci': [
-          'INI 0',           
-          'LDV 5',            
-          'LDF $1',           
-          'APP 1',            
-          'HLT',              
-
-          '$FUN $1 args:1 parent:$1',
-          'LDV 0',
-          'EQ',               
-          'BT $1_1',
-          'LDV 1',
-          'EQ',              
-          'BT $1_2',
-          'LDF $1',           
-          'SWP',
-          'LDV -1',           
-          'ADD',
-          'APP 1',         
-          'SWP',
-          'LDV -2',          
-          'ADD',
-          'APP 1',           
-          'ADD',              
-          'BR $1_3',
-
-          '$1_1',
-          'LDV 0',            
-          'BR $1_3',
-
-          '$1_2',
-          'LDV 1',            
-
-          '$1_3',
-          'PRN',              
-          'RET',              
+        'maximo': [
+          '$FUN $0 args:0 parent:$0',
+          'LDV 15',
+          'LDV 10',
+          'GT',
+          'BF 3',
+          'LDV 15',
+          'PRN',
+          'BR 4',
+          'LDV 10',
+          'PRN',
+          'HLT',
           '$END'
         ],
       };
