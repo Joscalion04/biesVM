@@ -26,9 +26,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import biesGrammarVisitor from '../parser/grammar/biesVisitor.js';
+            <pre class="prettyprint source linenums"><code>import biesGrammarVisitor from '../parser/biesVisitor.js';
 import BiesVM from "./biesVM.mjs";
-
 
 /**
 * Visitor personalizado que extiende el `biesGrammarVisitor` para recorrer 
@@ -39,14 +38,13 @@ import BiesVM from "./biesVM.mjs";
 * @author Josué Vindas Pérez
 * @author Joseph León Cabezas
 */
-
 class Loader extends biesGrammarVisitor {
     VM = new BiesVM(); // Máquina virtual
     iniArgs = null;
     firstNode = null;
 
     /**
-    * Este método se encarga de iniciar la ejecución de funciones en el contexto del AST.
+    Este método se encarga de iniciar la ejecución de funciones en el contexto del AST.
     * Busca los argumentos de inicialización (`INI`) y ejecuta la función correspondiente.
     * 
     * @method visitStart
@@ -75,6 +73,7 @@ class Loader extends biesGrammarVisitor {
     }
 
     /**
+    * 
     * Este método procesa una instrucción del contexto y la almacena en el código de la máquina virtual.
     * Extrae el mnemonico y los argumentos, y ejecuta la instrucción si es un comando de retorno o 
     * detención.
@@ -87,7 +86,6 @@ class Loader extends biesGrammarVisitor {
     visitInst(ctx) {
         const mnemonic = ctx.mnemonic().getText(); // Obtiene la instrucción
         const args = ctx.arg().map(arg => this.visit(arg)).filter(arg => arg !== null); // Obtener los argumentos y filtrar los nulos
-        
         // Almacenar la instrucción en el array `code` de la VM
         this.VM.code.push({ mnemonic, args });
         
@@ -113,8 +111,7 @@ class Loader extends biesGrammarVisitor {
             const instruction = await this.VM.executeInstruction();
             if (instruction != null) {// Significa que viene algo
                 if (instruction === 'FIN') {
-                    continuar = false;
-                    break;
+                    return;
                 } else {
                     this.executeFunctionById(this.firstNode, instruction);
                     break;
@@ -133,16 +130,43 @@ class Loader extends biesGrammarVisitor {
     * @returns {string|null} La representación del argumento como texto o `null` si no se reconoce.
     */
     visitArg(ctx) {
+        // Si es un entero
         if (ctx.INT()) {
-            return ctx.INT().getText();
-        } else if (ctx.STR()) {
-            return ctx.STR().getText();
-        } else if (ctx.getText().startsWith('$')) { // Maneja argumentos como $1
-            return ctx.getText();
+            return parseInt(ctx.INT().getText(), 10);
         }
-        return null;
+        // Si es una cadena
+        else if (ctx.STR()) {
+            return ctx.STR().getText().slice(1, -1); // Remover las comillas alrededor
+        }
+        // Si es una lista
+        else if (ctx.list()) {
+            const listCtx = ctx.list();
+            // Mapeo de los elementos de la lista
+            const elements = listCtx.element().map(elementCtx => {
+                // Proceso manual para asegurarse de que se manejan correctamente enteros y cadenas
+                if (elementCtx.INT()) {
+                    return parseInt(elementCtx.INT().getText(), 10);
+                } else if (elementCtx.STR()) {
+                    return elementCtx.STR().getText().slice(1, -1);
+                } else {
+                    console.error("Elemento no reconocido:", elementCtx.getText());
+                    return undefined;
+                }
+            });
+            return elements;
+        }
+        // Si es una función
+        else if (ctx.FUNCTION()) {
+            return ctx.FUNCTION().getText();
+        }
+        // Si es un identificador
+        else if (ctx.ID()) {
+            return ctx.ID().getText();
+        }
+        return undefined; // Si no es ninguno de los anteriores, retornar undefined
     }
-
+    
+    
     /**
     * Busca un nodo de definición de función en el árbol de sintaxis abstracta (AST) 
     * basado en el identificador de la función proporcionado.
@@ -188,13 +212,13 @@ class Loader extends biesGrammarVisitor {
     executeFunctionById(tree, functionId) {
         const functionNode = this.findFunctionById(tree, functionId);
         if (functionNode) {
-            console.log(`Cargando función con ID: ${functionId}\n`);
-            this.visit(functionNode); // Ejecutar el visitor sobre el nodo de la función
+            //console.log(`Cargando función con ID: ${functionId}\n`);
+            this.visit(functionNode);  // Ejecutar el visitor sobre el nodo de la función
         } else {
             console.log(`Función con ID ${functionId} no encontrada.\n`);
         }
     }
-
+    
     /**
     * Busca la instrucción `INI` en el árbol de sintaxis abstracta (AST) 
     * y devuelve el primer argumento asociado a ella.
@@ -241,13 +265,13 @@ export default Loader;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#END">END</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="ElementContext.html">ElementContext</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="ListContext.html">ListContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ARGS">ARGS</a></li><li><a href="global.html#COMMA">COMMA</a></li><li><a href="global.html#END">END</a></li><li><a href="global.html#FLOAT">FLOAT</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#ID">ID</a></li><li><a href="global.html#INT">INT</a></li><li><a href="global.html#PARENT">PARENT</a></li><li><a href="global.html#STR">STR</a></li><li><a href="global.html#WS">WS</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#element">element</a></li><li><a href="global.html#executeArithmetic">executeArithmetic</a></li><li><a href="global.html#executeCasting">executeCasting</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#executeLogical">executeLogical</a></li><li><a href="global.html#executeStack">executeStack</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitElement">visitElement</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitList">visitList</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 12:05:24 GMT-0600 (hora estándar central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 15:54:23 GMT-0600 (hora estándar central)
 </footer>
 
 <script> prettyPrint(); </script>

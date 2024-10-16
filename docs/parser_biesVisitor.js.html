@@ -31,34 +31,47 @@
 import antlr4 from 'antlr4';
 
 /**
-* Esta clase define un visitante genérico completo para un árbol de análisis producido por biesParser.
-* @author Manuel Mora Sandi 
+* Clase que implementa un visitante para la gramática de BIES.
+* Esta clase extiende de `antlr4.tree.ParseTreeVisitor` y se encarga de 
+* recorrer el árbol de análisis sintáctico generado por el parser de BIES.
+* 
+* Los métodos de esta clase permiten realizar operaciones específicas en 
+* los nodos del árbol, facilitando así la manipulación y extracción de 
+* información de la estructura sintáctica.
+* 
+* @class biesVisitor 
+* @extends {antlr4.tree.ParseTreeVisitor}
+* 
+* @author Manuel Mora Sandi
 * @author Derek Rojas Mendoza
 * @author Josué Vindas Pérez
-* @author Joseph León Cabezas
+* @author Joseph León Cabezas 
 */
-
 export default class biesVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	/**
-    * Visita un árbol de análisis producido por biesParser#start.
-    * 
-    * @param {StartContext} ctx - El contexto de la regla 'start'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
+	* Método que visita el contexto de inicio del árbol de análisis sintáctico de BIES.
+	* Este método es responsable de procesar el nodo del contexto inicial y sus hijos 
+	* en el árbol. Utiliza el método `visitChildren` para recorrer todos los nodos hijos 
+	* y aplicar el visitante correspondiente a cada uno.
+	* 
+	* @method visitStart
+	* @param {StartContext} ctx - El contexto de inicio que se está visitando.
+	* @returns {*} El resultado de la visita a los nodos hijos del contexto.
+	*/
 	visitStart(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
 	/**
-	* Visita la definición de una función en el contexto proporcionado.
-	*
-	* Esta función llama a `visitChildren` para recorrer todos los nodos hijos
-	* del contexto `ctx` dado.
-	*
-	* @param {Object} ctx - El contexto que representa la definición de la función.
-	* @returns {any} El resultado de visitar los nodos hijos del contexto.
+	* Método que visita el contexto de definición de funciones en el árbol de análisis sintáctico de BIES.
+	* Este método es responsable de procesar el nodo del contexto de la función y sus hijos en el árbol.
+	* Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+	* 
+	* @method visitFunDef
+	* @param {FunDefContext} ctx - El contexto de definición de función que se está visitando.
+	* @returns {*} El resultado de la visita a los nodos hijos del contexto de la función.
 	*/
 	visitFunDef(ctx) {
 	  return this.visitChildren(ctx);
@@ -66,52 +79,73 @@ export default class biesVisitor extends antlr4.tree.ParseTreeVisitor {
 
 
 	/**
-	* Visita la declaración de argumentos en el contexto proporcionado.
-	*
-	* Esta función llama a `visitChildren` para recorrer todos los nodos hijos
-	* del contexto `ctx` dado.
-	*
-	* @param {Object} ctx - El contexto que representa la declaración de argumentos.
-	* @returns {any} El resultado de visitar los nodos hijos del contexto.
+	* Método que visita el contexto de instrucciones en el árbol de análisis sintáctico de BIES.
+	* Este método se encarga de procesar el nodo del contexto de instrucciones y sus hijos en el árbol.
+	* Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+	* 
+	* @method visitInst
+	* @param {InstContext} ctx - El contexto de instrucciones que se está visitando.
+	* @returns {*} El resultado de la visita a los nodos hijos del contexto de instrucciones.
 	*/
-	visitArgsDecl(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-	/**
-    * Visita un árbol de análisis producido por biesParser#inst.
-    * 
-    * @param {InstContext} ctx - El contexto de la regla 'inst'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
 	visitInst(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
 	/**
-    * Visita un árbol de análisis producido por biesParser#mnemonic.
-    * 
-    * @param {MnemonicContext} ctx - El contexto de la regla 'mnemonic'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
+	* Método que visita el contexto de mnemónicos en el árbol de análisis sintáctico de BIES.
+	* Este método se encarga de procesar el nodo del contexto de mnemónicos y sus hijos en el árbol.
+	* Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+	* 
+	* @method visitMnemonic
+	* @param {MnemonicContext} ctx - El contexto de mnemónico que se está visitando.
+	* @returns {*} El resultado de la visita a los nodos hijos del contexto de mnemónico.
+ 	*/
 	visitMnemonic(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
 	/**
-    * Visita un árbol de análisis producido por biesParser#arg.
-    * 
-    * @param {ArgContext} ctx - El contexto de la regla 'arg'.
-    * @returns {*} - El resultado de visitar los hijos del contexto.
-    */
+	* Método que visita el contexto de argumentos en el árbol de análisis sintáctico de BIES.
+	* Este método se encarga de procesar el nodo del contexto de argumentos y sus hijos en el árbol.
+	* Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+	* 
+	* @method visitArg
+	* @param {ArgContext} ctx - El contexto de argumento que se está visitando.
+	* @returns {*} El resultado de la visita a los nodos hijos del contexto de argumento.
+	*/
 	visitArg(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
+	/**
+	* Método que visita el contexto de una lista en el árbol de análisis sintáctico de BIES.
+	* Este método se encarga de procesar el nodo del contexto de la lista y sus hijos en el árbol.
+	* Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+	* 
+	* @method visitList
+	* @param {ListContext} ctx - El contexto de lista que se está visitando.
+	* @returns {*} El resultado de la visita a los nodos hijos del contexto de la lista.
+	*/
+	visitList(ctx) {
+	  return this.visitChildren(ctx);
+	}
 
+
+	/**
+	* Método que visita el contexto de un elemento en el árbol de análisis sintáctico de BIES.
+	* Este método se encarga de procesar el nodo del contexto de un elemento y sus hijos en el árbol.
+	* Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+	* 
+	* @method visitElement
+	* @param {ElementContext} ctx - El contexto del elemento que se está visitando.
+	* @returns {*} El resultado de la visita a los nodos hijos del contexto del elemento.
+	*/
+	visitElement(ctx) {
+	  return this.visitChildren(ctx);
+	}
 }</code></pre>
         </article>
     </section>
@@ -122,13 +156,13 @@ export default class biesVisitor extends antlr4.tree.ParseTreeVisitor {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="FunctionFinder.html">FunctionFinder</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="PrintVisitor.html">PrintVisitor</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#atn">atn</a></li><li><a href="global.html#decisionsToDFA">decisionsToDFA</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#serializedATN">serializedATN</a></li><li><a href="global.html#sharedContextCache">sharedContextCache</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="ElementContext.html">ElementContext</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="ListContext.html">ListContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ARGS">ARGS</a></li><li><a href="global.html#COMMA">COMMA</a></li><li><a href="global.html#END">END</a></li><li><a href="global.html#FLOAT">FLOAT</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#ID">ID</a></li><li><a href="global.html#INT">INT</a></li><li><a href="global.html#PARENT">PARENT</a></li><li><a href="global.html#STR">STR</a></li><li><a href="global.html#WS">WS</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#element">element</a></li><li><a href="global.html#executeArithmetic">executeArithmetic</a></li><li><a href="global.html#executeCasting">executeCasting</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#executeLogical">executeLogical</a></li><li><a href="global.html#executeStack">executeStack</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitElement">visitElement</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitList">visitList</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Oct 08 2024 21:50:30 GMT-0600 (hora estándar central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 15:54:23 GMT-0600 (hora estándar central)
 </footer>
 
 <script> prettyPrint(); </script>

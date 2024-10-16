@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ArgContext</title>
+    <title>JSDoc: Class: ListContext</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ArgContext</h1>
+    <h1 class="page-title">Class: ListContext</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ArgContext<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ListContext<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="ArgContext"><span class="type-signature"></span>new ArgContext<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ListContext"><span class="type-signature"></span>new ListContext<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Clase que extiende `antlr4.ParserRuleContext` y define el contexto para los argumentos en el lenguaje BIES.Esta clase representa una serie de parámetros que se pueden pasar a una función o instrucción,incluyendo los tipos y valores de dichos argumentos.
+    Clase que extiende `antlr4.ParserRuleContext` y define el contexto para listas en el lenguaje BIES.Esta clase representa un conjunto de elementos que se pueden utilizar en varias construcciones dentro del lenguaje, como argumentos de funciones o colecciones de instrucciones.
 </div>
 
 
@@ -106,7 +106,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line978">line 978</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1115">line 1115</a>
     </li></ul></dd>
     
 
@@ -183,7 +183,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ArgContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ListContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -196,7 +196,7 @@
     
 
     
-    <h4 class="name" id="ArgContext"><span class="type-signature"></span>new ArgContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ListContext"><span class="type-signature"></span>new ListContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h4>
     
 
     
@@ -204,7 +204,7 @@
 
 
 <div class="description">
-    Constructor de la clase `ArgContext`.Este constructor inicializa el contexto de los argumentos en el analizador sintáctico. Asigna el analizador correspondiente, el contexto padre y el estado de invocación.
+    Constructor de la clase `ListContext`.Este constructor inicializa una instancia del contexto de lista para el analizador sintáctico (parser).
 </div>
 
 
@@ -256,7 +256,7 @@
 
             
 
-            <td class="description last">El analizador sintáctico asociado a este contexto.</td>
+            <td class="description last">El parser asociado a este contexto.</td>
         </tr>
 
     
@@ -279,7 +279,7 @@
 
             
 
-            <td class="description last">El contexto padre de este contexto, o `null` si no hay.</td>
+            <td class="description last">El contexto padre de este contexto. Si no se proporciona, se establece como `null`.</td>
         </tr>
 
     
@@ -302,7 +302,7 @@
 
             
 
-            <td class="description last">El estado de invocación para este contexto.                                 Se establece en `-1` si no se proporciona un valor válido.</td>
+            <td class="description last">El estado de invocación de este contexto. Si no se proporciona o es `null`, se establece como -1.</td>
         </tr>
 
     
@@ -343,7 +343,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1004">line 1004</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1141">line 1141</a>
     </li></ul></dd>
     
 

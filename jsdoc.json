@@ -1,6 +1,6 @@
 {
     "source": {
-        "include": ["./src", "./parser/grammar","./parser"],
+        "include": ["./src","./parser"],
         "includePattern": ".+\\.(js|mjs)(doc|x)?$",
         "excludePattern": "node_modules/|docs"
     },

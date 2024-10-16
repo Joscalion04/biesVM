@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Clase que representa el contexto de un mnemotécnico en el análisis sintáctico de la gramática de BIES.Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información relevante durante la ejecución de la regla que define un mnemotécnico en el parser.El contexto de un mnemotécnico puede incluir detalles sobre la instrucción que se está definiendo,proporcionando métodos para acceder a esta información y a los argumentos asociados.
+    Clase que extiende `antlr4.ParserRuleContext` y define el contexto para los mnemónicos en el lenguaje BIES.Esta clase representa un elemento que puede ser un mnemónico, utilizado para identificar instrucciones o operaciones en el código del lenguaje.
 </div>
 
 
@@ -106,7 +106,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line889">line 889</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line912">line 912</a>
     </li></ul></dd>
     
 
@@ -165,169 +165,6 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {any}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Permite que un visitante procese este contexto de mnemotécnico.Si el visitante es una instancia de `biesVisitor`, se invoca el método `visitMnemonic` pasándole este contexto. De lo contrario, se llama al método `visitChildren` para procesar los nodos hijos de este contexto.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>visitor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="biesVisitor.html">biesVisitor</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">El visitante que procesa este contexto.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line937">line 937</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    El resultado del procesamiento del visitante.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">any</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-    
 
     
 
@@ -346,7 +183,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>MnemonicContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>MnemonicContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -359,7 +196,7 @@
     
 
     
-    <h4 class="name" id="MnemonicContext"><span class="type-signature"></span>new MnemonicContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="MnemonicContext"><span class="type-signature"></span>new MnemonicContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -367,7 +204,7 @@
 
 
 <div class="description">
-    Crea una instancia de `MnemonicContext`.Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información relevante durante la ejecución de la regla que define un mnemotécnico en el parser.
+    Constructor de la clase `MnemonicContext`.Este constructor inicializa una nueva instancia de `MnemonicContext`, configurando el analizador, el contexto padre y el estado de invocación. Si el contexto padre o el estado de invocación no se proporcionan, se establecen en valores predeterminados. Además, se asigna el índice de regla correspondiente para la regla de mnemónico en el analizador.
 </div>
 
 
@@ -391,7 +228,11 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -416,10 +257,22 @@
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">El parser asociado a este contexto.</td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">El analizador asociado a este contexto.</td>
         </tr>
 
     
@@ -439,10 +292,26 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">El contexto padre, si existe.</td>
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last">El contexto padre de este contexto, si existe.</td>
         </tr>
 
     
@@ -462,10 +331,26 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">El estado de invocación del contexto.</td>
+            
+                <td class="default">
+                
+                    -1
+                
+                </td>
+            
+
+            <td class="description last">El estado de invocación, que indica en qué punto de la gramática se ha llamado a este contexto.</td>
         </tr>
 
     
@@ -506,7 +391,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line916">line 916</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line940">line 940</a>
     </li></ul></dd>
     
 
@@ -554,169 +439,6 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {any}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Permite que un visitante procese este contexto de mnemotécnico.Si el visitante es una instancia de `biesVisitor`, se invoca el método `visitMnemonic` pasándole este contexto. De lo contrario, se llama al método `visitChildren` para procesar los nodos hijos de este contexto.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>visitor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="biesVisitor.html">biesVisitor</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">El visitante que procesa este contexto.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line937">line 937</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    El resultado del procesamiento del visitante.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">any</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-    
 
     
 
@@ -731,13 +453,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#END">END</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="ElementContext.html">ElementContext</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="ListContext.html">ListContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ARGS">ARGS</a></li><li><a href="global.html#COMMA">COMMA</a></li><li><a href="global.html#END">END</a></li><li><a href="global.html#FLOAT">FLOAT</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#ID">ID</a></li><li><a href="global.html#INT">INT</a></li><li><a href="global.html#PARENT">PARENT</a></li><li><a href="global.html#STR">STR</a></li><li><a href="global.html#WS">WS</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#element">element</a></li><li><a href="global.html#executeArithmetic">executeArithmetic</a></li><li><a href="global.html#executeCasting">executeCasting</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#executeLogical">executeLogical</a></li><li><a href="global.html#executeStack">executeStack</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitElement">visitElement</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitList">visitList</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 12:05:24 GMT-0600 (hora estándar central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 15:54:23 GMT-0600 (hora estándar central)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,7 +1,21 @@
 // Generated from grammar/bies.g4 by ANTLR 4.13.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
-
+/**
+* Clase que representa el lexer de BIES, generado a partir de la gramática 
+* de BIES utilizando ANTLR4.
+* 
+* Esta clase se encarga de analizar el texto de entrada y dividirlo en 
+* tokens que serán utilizados por el parser de BIES.
+* 
+* @class biesLexer
+* @extends antlr4.Lexer
+* 
+* @author Manuel Mora Sandi
+* @author Derek Rojas Mendoza
+* @author Josué Vindas Pérez
+* @author Joseph León Cabezas
+*/
 
 const serializedATN = [4,0,57,396,6,-1,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,
 4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,
@@ -135,6 +149,20 @@ const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
 const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
 
+/**
+ * Clase que extiende `antlr4.Lexer` y define el analizador léxico (lexer) para el lenguaje BIES.
+ * Esta clase es responsable de dividir la entrada de texto en tokens, que son las unidades léxicas 
+ * básicas del lenguaje. Los tokens son utilizados por el analizador sintáctico para construir 
+ * el árbol de análisis sintáctico (AST).
+ * 
+ * @class biesLexer
+ * @extends antlr4.Lexer
+ * 
+ * @author Manuel Mora Sandi 
+ * @author Derek Rojas Mendoza
+ * @author Josué Vindas Pérez
+ * @author Joseph León Cabezas
+ */
 export default class biesLexer extends antlr4.Lexer {
 
     static grammarFileName = "bies.g4";

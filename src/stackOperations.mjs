@@ -1,4 +1,26 @@
 // stackOperations.mjs
+/**
+ * Ejecuta una operación sobre el stack de la máquina virtual
+ * según el mnemonico proporcionado.
+ * 
+ * Esta función permite manipular el stack a través de operaciones
+ * como eliminar el elemento superior, intercambiar los dos elementos
+ * superiores, y gestionar la vinculación de variables en el contexto 
+ * actual. Las operaciones modifican el stack directamente.
+ * 
+ * @function executeStack
+ * @param {string} mnemonic - El mnemonico que determina la operación de stack a realizar. 
+ * Puede ser uno de los siguientes: 'POP', 'SWP', 'BLD', 'BST'.
+ * @param {Object} vm - La máquina virtual que contiene el stack y el estado actual.
+ * 
+ * @throws {Error} Lanza un error si el mnemonico no es reconocido.
+ * 
+ * @author Manuel Mora Sandi 
+ * @author Derek Rojas Mendoza
+ * @author Josué Vindas Pérez
+ * @author Joseph León Cabezas
+ */
+
 export function executeStack(mnemonic, vm) {
     switch (mnemonic) {
         case 'POP':

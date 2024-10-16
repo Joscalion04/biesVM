@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Clase que representa el contexto inicial en el análisis sintáctico de la gramática de BIES.Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información relevante durante la ejecución de la regla de inicio en el parser.El contexto de inicio puede incluir detalles sobre las instrucciones y elementos que componen la estructura principal del programa BIES, así como métodos para acceder a estos elementos.
+    Clase que extiende `antlr4.ParserRuleContext` y representa el contexto de inicio para el lenguaje BIES.Esta clase es responsable de encapsular la información del contexto de análisis sintácticoen la raíz del árbol de análisis, facilitando el acceso a las reglas y nodos hijosde la gramática durante el proceso de análisis.
 </div>
 
 
@@ -106,7 +106,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line467">line 467</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line581">line 581</a>
     </li></ul></dd>
     
 
@@ -183,7 +183,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>StartContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>StartContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -196,7 +196,7 @@
     
 
     
-    <h4 class="name" id="StartContext"><span class="type-signature"></span>new StartContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="StartContext"><span class="type-signature"></span>new StartContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h4>
     
 
     
@@ -204,7 +204,7 @@
 
 
 <div class="description">
-    Crea una instancia del contexto de inicio para el análisis sintáctico en la gramática de BIES.Este constructor inicializa el contexto, estableciendo el parser, el contexto padre y el estado de invocación. Se utiliza en la regla de inicio del parser para almacenar información relevante sobre el análisis sintáctico en esta etapa.
+    Crea una instancia de `StartContext`.
 </div>
 
 
@@ -228,11 +228,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -250,29 +246,17 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">antlr4.Parser</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last">El parser asociado con este contexto, responsable del análisis sintáctico.</td>
+            <td class="description last">El analizador sintáctico asociado.</td>
         </tr>
 
     
@@ -285,36 +269,17 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="StartContext.html">StartContext</a></span>
-|
-
-<span class="param-type">null</span>
+<span class="param-type">antlr4.ParserRuleContext</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
 
-            <td class="description last">El contexto padre, o null si no hay un contexto padre.</td>
+            <td class="description last">El contexto padre.</td>
         </tr>
 
     
@@ -334,26 +299,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    -1
-                
-                </td>
-            
 
-            <td class="description last">El estado de invocación, que indica el estado actual del parser.</td>
+            <td class="description last">El estado de invocación del analizador.</td>
         </tr>
 
     
@@ -394,7 +343,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line499">line 499</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line604">line 604</a>
     </li></ul></dd>
     
 
@@ -417,35 +366,6 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Lanza un error si el tipo de `parser` no es válido.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TypeError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 
@@ -485,13 +405,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#END">END</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="ElementContext.html">ElementContext</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="ListContext.html">ListContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ARGS">ARGS</a></li><li><a href="global.html#COMMA">COMMA</a></li><li><a href="global.html#END">END</a></li><li><a href="global.html#FLOAT">FLOAT</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#ID">ID</a></li><li><a href="global.html#INT">INT</a></li><li><a href="global.html#PARENT">PARENT</a></li><li><a href="global.html#STR">STR</a></li><li><a href="global.html#WS">WS</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#element">element</a></li><li><a href="global.html#executeArithmetic">executeArithmetic</a></li><li><a href="global.html#executeCasting">executeCasting</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#executeLogical">executeLogical</a></li><li><a href="global.html#executeStack">executeStack</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitElement">visitElement</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitList">visitList</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 12:05:24 GMT-0600 (hora estándar central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 15:54:23 GMT-0600 (hora estándar central)
 </footer>
 
 <script> prettyPrint(); </script>

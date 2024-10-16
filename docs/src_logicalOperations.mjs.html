@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: src/runner.mjs</title>
+    <title>JSDoc: Source: src/logicalOperations.mjs</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: src/runner.mjs</h1>
+    <h1 class="page-title">Source: src/logicalOperations.mjs</h1>
 
     
 
@@ -26,70 +26,86 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import fs from 'fs';
-import antlr4 from 'antlr4';
-import Loader from "./Loader.mjs";
-import biesGrammarLexer from '../parser/biesLexer.js';
-import biesGrammarParser from '../parser/biesParser.js';
-let default_input_file = './test/reverse_hilera_iterativo.basm';
-
+            <pre class="prettyprint source linenums"><code>// logicalOperations.mjs
 /**
-* Función para probar el parser utilizando un archivo de entrada opcional.
-* Lee el archivo especificado, lo tokeniza, genera el árbol sintáctico (AST),
-* y finalmente utiliza un visitor para recorrer el AST.
-* 
-* @param {string} [input_file=default_input_file] - Ruta del archivo de entrada a procesar, por defecto usa './test/biesTest.txt'.
-* 
-* @author Manuel Mora Sandi 
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
-function test_parser(input_file=default_input_file){
-    console.log(`Leyendo el documento... ${input_file}`)
-    
-    /**
-    * Contenido del archivo leído como una cadena.
-    * @type {string}
-    */
-    const input = fs.readFileSync(input_file,'utf-8');
-
-    // De archivo a stream de caracteres.
-    const chars = new antlr4.InputStream(input);
-
-    /**
-    * Instancia del lexer para procesar los caracteres del archivo.
-    * @type {biesGrammarLexer}
-    */
-    const lexer = new biesGrammarLexer(chars);
-
-    // Tokeniza el flujo de caracteres.
-    const tokens = new antlr4.CommonTokenStream(lexer);
-
-    /**
-    * Instancia del parser que genera el árbol de sintaxis abstracta (AST).
-    * @type {biesGrammarParser}
-    */
-    const parser = new biesGrammarParser(tokens);
-
-    //Construye el AST.
-    parser.buildParseTrees = true;
-
-    /**
-    * El árbol sintáctico resultante después del análisis.
-    * @type {ParseTree}
-    */
-    const AST = parser.start();
-
-    // Se necesita un loader que pase del AST a la máquina virtual.
-
-    //Visita el AST.
-    const loader = new Loader();
-    loader.visit(AST);
-
-}
-
-export default test_parser</code></pre>
+ * Ejecuta una operación lógica basada en el mnemonico proporcionado 
+ * utilizando el stack del modelo de máquina virtual.
+ * 
+ * Esta función evalúa diferentes operaciones lógicas como comparación, 
+ * conjunción, disyunción y negación, y coloca el resultado en el 
+ * stack de la máquina virtual. Las operaciones devuelven 1 si el 
+ * resultado es verdadero y 0 si es falso.
+ * 
+ * @function executeLogical
+ * @param {string} mnemonic - El mnemonico que determina la operación lógica a realizar. 
+ * Puede ser uno de los siguientes: 'EQ', 'GT', 'GTE', 'LT', 'LTE', 'AND', 'OR', 'XOR', 'NOT'.
+ * @param {Object} vm - La máquina virtual que contiene el stack y el estado actual.
+ * 
+ * @throws {Error} Lanza un error si el mnemonico no es reconocido.
+ *  @author Manuel Mora Sandi 
+ * @author Derek Rojas Mendoza
+ * @author Josué Vindas Pérez 
+ * @author Joseph León Cabezas
+ */
+export function executeLogical(mnemonic, vm) {
+    switch (mnemonic) {
+        case 'EQ': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push(M === N ? 1 : 0);
+            break;
+        }
+        case 'GT': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push(M > N ? 1 : 0);
+            break;
+        }
+        case 'GTE': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push(M >= N ? 1 : 0);
+            break;
+        }
+        case 'LT': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push(M &lt; N ? 1 : 0);
+            break;
+        }
+        case 'LTE': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push(M &lt;= N ? 1 : 0);
+            break;
+        }
+        case 'AND': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push(M &amp;&amp; N ? 1 : 0);
+            break;
+        }
+        case 'OR': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push(M || N ? 1 : 0);
+            break;
+        }
+        case 'XOR': {
+            const N = vm.stack.pop();
+            const M = vm.stack.pop();
+            vm.stack.push((M ? 1 : 0) ^ (N ? 1 : 0));
+            break;
+        }
+        case 'NOT': {
+            const N = vm.stack.pop();
+            vm.stack.push(!N ? 1 : 0);
+            break;
+        }
+        default:
+            throw new Error(`Unknown logical operation: ${mnemonic}`);
+    }
+}</code></pre>
         </article>
     </section>
 

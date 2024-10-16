@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="END"><span class="type-signature"></span>END<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    <h4 class="name" id="ARGS"><span class="type-signature"></span>ARGS<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
     
 
     
@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    Obtiene el token correspondiente a la palabra clave 'END' en la gramática BIES.Este método permite acceder al token que indica el final de una estructura o bloque en el análisis sintáctico.
+    Método que obtiene el token correspondiente a la palabra clave `ARGS`.
 </div>
 
 
@@ -156,7 +156,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line659">line 659</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line739">line 739</a>
     </li></ul></dd>
     
 
@@ -185,7 +185,7 @@
 
         
 <div class="param-desc">
-    El token de 'END' correspondiente en la gramática BIES.
+    El token que representa la palabra clave `ARGS`.
 </div>
 
 
@@ -214,7 +214,7 @@
     
 
     
-    <h4 class="name" id="FUN"><span class="type-signature"></span>FUN<span class="signature">()</span><span class="type-signature"> &rarr; {Token|null}</span></h4>
+    <h4 class="name" id="COMMA"><span class="type-signature"></span>COMMA<span class="signature">(i)</span><span class="type-signature"> &rarr; {Token|Array.&lt;Token>}</span></h4>
     
 
     
@@ -222,120 +222,7 @@
 
 
 <div class="description">
-    Obtiene el token correspondiente a la palabra clave 'FUN' en la gramática BIES.Este método permite acceder al token de la función que se está definiendo,facilitando su uso en el análisis sintáctico.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line625">line 625</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    El token de la palabra clave 'FUN' si está presente; de lo contrario, null.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Token</span>
-|
-
-<span class="param-type">null</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="FUNCTION"><span class="type-signature"></span>FUNCTION<span class="signature">(i<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;Token>|Token|null}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Obtiene el token correspondiente a la palabra clave 'FUNCTION' en la gramática BIES.Este método permite acceder a todos los tokens de la función que se están definiendo,o a un token específico si se proporciona un índice.
+    Método para obtener tokens de coma (COMMA) en función de un índice.Este método permite recuperar uno o varios tokens de coma (COMMA) desde la entrada del parser. Es útil para analizar correctamente la sintaxis en el lenguaje BIES, especialmente en listas y argumentos donde las comas son utilizadas como separadores.
 </div>
 
 
@@ -359,11 +246,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -391,26 +274,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
 
-            <td class="description last">El índice del token 'FUNCTION' que se desea obtener. Si no se proporciona, se devolverán todos los tokens de 'FUNCTION'.</td>
+            <td class="description last">El índice del token COMMA que se desea recuperar.Si no se proporciona o es `null`, se devolverán todos los tokens COMMA encontrados en la entrada.</td>
         </tr>
 
     
@@ -451,7 +318,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line637">line 637</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1204">line 1204</a>
     </li></ul></dd>
     
 
@@ -480,7 +347,7 @@
 
         
 <div class="param-desc">
-    Un arreglo de tokens de 'FUNCTION' si no se proporciona un índice; un token específico si se indica un índice; o null si no hay tokens disponibles.
+    Un token específico de `COMMA` si se proporciona un índice, o una lista de todos los tokens `COMMA` si el índice es `null`.
 </div>
 
 
@@ -491,13 +358,10 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;Token></span>
-|
-
 <span class="param-type">Token</span>
 |
 
-<span class="param-type">null</span>
+<span class="param-type">Array.&lt;Token></span>
 
 
     </dd>
@@ -515,7 +379,7 @@
     
 
     
-    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {any}</span></h4>
+    <h4 class="name" id="END"><span class="type-signature"></span>END<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
     
 
     
@@ -523,7 +387,447 @@
 
 
 <div class="description">
-    Permite que un visitante procese el contexto de inicio en el árbol de análisis sintáctico.Este método acepta un objeto visitante y, si el visitante es una instancia de `biesVisitor`, invoca su método `visitStart` pasándole el contexto actual. Si no es un `biesVisitor`, llama al método `visitChildren` para procesar los hijos del contexto actual.
+    Método que obtiene el token correspondiente a la palabra clave `END`.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line757">line 757</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa la palabra clave `END`.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="FLOAT"><span class="type-signature"></span>FLOAT<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que devuelve el token de tipo `FLOAT` en el contexto actual.Este método utiliza el analizador para obtener el token que representaun número en punto flotante en la entrada del código BIES. Solo se devuelveel primer token `FLOAT` encontrado, si existe.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1029">line 1029</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa un número en punto flotante en el contexto actual.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="FLOAT"><span class="type-signature"></span>FLOAT<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que obtiene el token correspondiente a un número de punto flotante en la gramática BIES.Este método se utiliza para acceder al token que representa un valor de punto flotante. Retorna el primer token encontrado en la entrada que coincide con la regla de gramática para números de punto flotante (FLOAT).
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1309">line 1309</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa un valor de punto flotante.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="FUN"><span class="type-signature"></span>FUN<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que obtiene el token correspondiente a la palabra clave `FUN`.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line710">line 710</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa la palabra clave `FUN` en la entrada.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="FUNCTION"><span class="type-signature"></span>FUNCTION<span class="signature">(i)</span><span class="type-signature"> &rarr; {Token|Array.&lt;Token>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que obtiene uno o más tokens correspondientes a la palabra clave `FUNCTION`.
 </div>
 
 
@@ -559,13 +863,16 @@
 
         <tr>
             
-                <td class="name"><code>visitor</code></td>
+                <td class="name"><code>i</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
 
 
             
@@ -575,7 +882,7 @@
 
             
 
-            <td class="description last">El objeto visitante que realiza el procesamiento del                            árbol de análisis sintáctico.</td>
+            <td class="description last">El índice del token que se desea obtener.                          Si no se proporciona, se retornarán todos los tokens `FUNCTION`.</td>
         </tr>
 
     
@@ -616,7 +923,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line565">line 565</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line719">line 719</a>
     </li></ul></dd>
     
 
@@ -639,42 +946,13 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Lanza un error si el visitante no es un objeto válido.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TypeError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    El resultado del procesamiento por parte del visitante.
+    Un token que representa la palabra clave `FUNCTION` si se especifica un índice,                         o un arreglo de todos los tokens `FUNCTION` si no se especifica.
 </div>
 
 
@@ -685,7 +963,1055 @@
     </dt>
     <dd>
         
-<span class="param-type">any</span>
+<span class="param-type">Token</span>
+|
+
+<span class="param-type">Array.&lt;Token></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="FUNCTION"><span class="type-signature"></span>FUNCTION<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que devuelve el token de tipo `FUNCTION` en el contexto actual.Este método utiliza el analizador para obtener el token que representala palabra clave `FUNCTION` en la entrada del código BIES. Solo se devuelveel primer token `FUNCTION` encontrado, si existe.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1055">line 1055</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa la palabra clave `FUNCTION` en el contexto actual.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="ID"><span class="type-signature"></span>ID<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que devuelve el token que representa un identificador en el análisis sintáctico.Este método utiliza el analizador para obtener el token de tipo `ID` asociado al contexto actual. Se asume que hay un solo token de identificador presente en este nivel de análisis, por lo que se devuelve el primer token `ID` encontrado.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1082">line 1082</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa un identificador en el análisis sintáctico.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="INT"><span class="type-signature"></span>INT<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que obtiene el token correspondiente al tipo de dato `INT`.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line748">line 748</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa el tipo de dato `INT`.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="INT"><span class="type-signature"></span>INT<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que devuelve el token de tipo `INT` en el contexto actual.Este método utiliza el analizador para obtener el token que representaun entero en la entrada del código BIES. Solo se devuelve el primertoken `INT` encontrado, si existe.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1016">line 1016</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa un entero en el contexto actual.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="INT"><span class="type-signature"></span>INT<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que obtiene el token correspondiente a un entero en la gramática BIES.Este método se utiliza para acceder al token que representa un valor entero. Retorna el primer token encontrado en la entrada que coincide con la regla de gramática para enteros (INT).
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1295">line 1295</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa un valor entero.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="PARENT"><span class="type-signature"></span>PARENT<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que obtiene el token correspondiente a la palabra clave `PARENT`.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line766">line 766</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa la palabra clave `PARENT`.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="STR"><span class="type-signature"></span>STR<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que devuelve el token de tipo `STR` en el contexto actual.Este método utiliza el analizador para obtener el token que representauna cadena de caracteres en la entrada del código BIES. Solo se devuelveel primer token `STR` encontrado, si existe.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1042">line 1042</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa una cadena de caracteres en el contexto actual.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="STR"><span class="type-signature"></span>STR<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que obtiene el token correspondiente a una cadena de texto en la gramática BIES.Este método se utiliza para acceder al token que representa un valor de cadena. Retorna el primer token encontrado en la entrada que coincide con la regla de gramática para cadenas de texto (STR).
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1323">line 1323</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token que representa un valor de cadena de texto.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="WS"><span class="type-signature"></span>WS<span class="signature">(i)</span><span class="type-signature"> &rarr; {Token|Array.&lt;Token>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método para obtener tokens de espacios en blanco (WS) en función de un índice.Este método permite recuperar uno o varios tokens de espacios en blanco (WS) desde la entrada del parser. Es útil para manejar y analizar correctamente el formato del código en el lenguaje BIES.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El índice del token WS que se desea recuperar.Si no se proporciona o es `null`, se devolverán todos los tokens WS encontrados en la entrada.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1178">line 1178</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Un token específico de `WS` si se proporciona un índice, o una lista de todos los tokens `WS` si el índice es `null`.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Token</span>
+|
+
+<span class="param-type">Array.&lt;Token></span>
 
 
     </dd>
@@ -711,7 +2037,7 @@
 
 
 <div class="description">
-    Permite que un visitante visite el contexto de definición de función.Este método es parte del patrón Visitor, que facilita la operación sobre los nodos del árbol de análisis sintáctico. Si el visitante es una instanciade `biesVisitor`, se llama al método específico para manejar la definición de función; de lo contrario, se llama a `visitChildren` para visitar los nodos hijos.
+    Método que acepta un visitante en el contexto de análisis sintáctico.Este método permite que un objeto visitante (visitor) realice operacionessobre el contexto actual (`StartContext`). Si el visitante es una instancia de`biesVisitor`, se llama al método específico para manejar el contexto de inicio.De lo contrario, se llama al método `visitChildren` para procesar los nodos hijos.
 </div>
 
 
@@ -763,7 +2089,7 @@
 
             
 
-            <td class="description last">El visitante que realiza la operación sobre el contexto de definición de función.</td>
+            <td class="description last">El visitante que va a operar sobre este contexto.</td>
         </tr>
 
     
@@ -804,7 +2130,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line708">line 708</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line658">line 658</a>
     </li></ul></dd>
     
 
@@ -833,7 +2159,7 @@
 
         
 <div class="param-desc">
-    El resultado de la visita, que puede ser el resultado de `visitFunDef` o el resultado de `visitChildren`.
+    - El resultado de la operación del visitante sobre el contexto.
 </div>
 
 
@@ -862,6 +2188,960 @@
     
 
     
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que acepta un visitante para procesar el contexto de la definición de función.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>visitor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Visitor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El visitante que se encargará de procesar este contexto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line795">line 795</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado del procesamiento del visitante.Si el visitante es una instancia de `biesVisitor`, se llama a su método `visitFunDef` pasando este contexto. Si no, se llama a `visitChildren` para procesar todos los hijosdel contexto.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que acepta un visitante para procesar el contexto de una instrucción en el lenguaje BIES.Este método permite que un visitante personalizado maneje el contexto de la instrucciónactual, facilitando la implementación de patrones de diseño como el Visitor.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>visitor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Visitor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El visitante que se encargará de procesar este contexto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line888">line 888</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado del procesamiento del visitante.Si el visitante es una instancia de `biesVisitor`, se llama a su método `visitInst`pasando este contexto. Si no, se llama a `visitChildren` para procesar todos los hijosdel contexto.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que acepta un visitante para procesar el contexto del mnemónico.Este método permite que un visitante maneje la lógica de procesamiento específica para el contexto del mnemónico en la gramática BIES. Si el visitante es una instancia de `biesVisitor`, se invoca el método `visitMnemonic` pasando este contexto. En caso contrario, se llama al método `visitChildren` para procesar todos los hijos del contexto, permitiendo que el visitante maneje otros tipos de nodos en el árbol de análisis sintáctico.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>visitor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Visitor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El visitante que se encargará de procesar este contexto del mnemónico.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line952">line 952</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado del procesamiento del visitante.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que acepta un visitante para procesar el contexto de los argumentos.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>visitor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Visitor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El visitante que se encargará de procesar este contexto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1096">line 1096</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado del procesamiento del visitante.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que acepta un visitante para procesar el contexto de la lista.Este método permite que un visitante interactúe con el contexto de la lista en el árbol de análisis sintáctico. Si el visitante es una instancia de `biesVisitor`, se llama a su método `visitList` pasando este contexto. De lo contrario, se llama a `visitChildren` para procesar todos los hijos del contexto.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>visitor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Visitor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El visitante que se encargará de procesar este contexto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1231">line 1231</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado del procesamiento del visitante, que puede ser el resultado de `visitList` o el resultado de procesar los hijos del contexto.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que acepta un visitante para procesar el contexto de un elemento en la gramática BIES.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>visitor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Visitor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El visitante que se encargará de procesar este contexto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1337">line 1337</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado del procesamiento del visitante.Si el visitante es una instancia de `biesVisitor`, se llama a su método `visitElement` pasando este contexto. Si no, se llama a `visitChildren` para procesar todos los hijos del contexto.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="arg"><span class="type-signature"></span>arg<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ArgContext.html">ArgContext</a>}</span></h4>
     
 
@@ -870,7 +3150,7 @@
 
 
 <div class="description">
-    Analiza y recupera un argumento en el análisis sintáctico de BIES.Este método verifica si el siguiente token en la entrada coincide con uno de los argumentos permitidos según la gramática.Si el token coincide, se consume; de lo contrario, se gestiona el error de manera apropiada.
+    Método que define la regla para procesar un argumento en el lenguaje BIES.Este método verifica el tipo de argumento que se encuentra en la entrada,permitiendo argumentos de tipo entero, flotante, cadena, función, lista o identificador.Dependiendo del tipo de argumento reconocido, se consumirá el token correspondiente.
 </div>
 
 
@@ -914,7 +3194,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line363">line 363</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line327">line 327</a>
     </li></ul></dd>
     
 
@@ -944,7 +3224,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Lanza una excepción si se encuentra un error de reconocimiento durante el análisis sintáctico.
+        Si ocurre un error de reconocimiento durante el análisis.
         </div>
     </dt>
     <dd></dd>
@@ -972,7 +3252,7 @@
 
         
 <div class="param-desc">
-    El contexto del argumento reconocido.
+    El contexto del argumento que se está procesando.
 </div>
 
 
@@ -1001,7 +3281,7 @@
     
 
     
-    <h4 class="name" id="argsDecl"><span class="type-signature"></span>argsDecl<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ArgsDeclContext.html">ArgsDeclContext</a>}</span></h4>
+    <h4 class="name" id="arg"><span class="type-signature"></span>arg<span class="signature">(i)</span><span class="type-signature"> &rarr; {<a href="ArgContext.html">ArgContext</a>|Array.&lt;<a href="ArgContext.html">ArgContext</a>>}</span></h4>
     
 
     
@@ -1009,7 +3289,7 @@
 
 
 <div class="description">
-    Define el análisis de una declaración de argumentos en la gramática de BIES.Este método maneja el reconocimiento de una estructura que comienza conun símbolo específico seguido de un tipo de dato entero.Asegura que la sintaxis de la declaración de argumentos siga las reglas definidas en la gramática.
+    Método que devuelve el contexto de `ArgContext` asociado a los argumentos de la función o instrucción.Este método permite acceder a uno o más contextos de argumentos utilizados en ladeclaración actual. Si se llama sin parámetros, devuelve todos los contextos de argumentos,de lo contrario, devuelve el contexto de argumento en la posición especificada.
 </div>
 
 
@@ -1020,143 +3300,56 @@
 
 
 
-
-
-
-
-<dl class="details">
-
+    <h5>Parameters:</h5>
     
 
-    
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line234">line 234</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
+        <th>Type</th>
 
         
 
-<dl>
-    <dt>
-        <div class="param-desc">
-        Lanza una excepción si se encuentra un error de reconocimiento durante el análisis sintáctico.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">antlr4.error.RecognitionException</span>
+        
 
+        <th class="last">Description</th>
+    </tr>
+    </thead>
 
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
+    <tbody>
     
 
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    El contexto de la declaración de argumentos analizada.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="ArgsDeclContext.html">ArgsDeclContext</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
+        <tr>
+            
+                <td class="name"><code>i</code></td>
             
 
-    
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El índice del argumento que se desea recuperar. Si se proporciona                          un valor nulo, se devuelven todos los contextos de argumentos.</td>
+        </tr>
 
     
-    <h4 class="name" id="argsDecl"><span class="type-signature"></span>argsDecl<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ArgsDeclContext.html">ArgsDeclContext</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Obtiene el contexto de declaración de argumentos en la gramática BIES.Este método permite acceder a la parte del árbol de análisis sintáctico que corresponde a la declaración de argumentos de una función, asegurando que se sigan las reglas de la gramática.
-</div>
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -1192,7 +3385,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line671">line 671</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line864">line 864</a>
     </li></ul></dd>
     
 
@@ -1221,7 +3414,7 @@
 
         
 <div class="param-desc">
-    El contexto de declaración de argumentos.
+    El contexto de argumento específico o un arreglo                                         de contextos de argumento si no se especifica el índice.
 </div>
 
 
@@ -1232,7 +3425,10 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="ArgsDeclContext.html">ArgsDeclContext</a></span>
+<span class="param-type"><a href="ArgContext.html">ArgContext</a></span>
+|
+
+<span class="param-type">Array.&lt;<a href="ArgContext.html">ArgContext</a>></span>
 
 
     </dd>
@@ -1477,6 +3673,741 @@
     
 
     
+    <h4 class="name" id="element"><span class="type-signature"></span>element<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ElementContext.html">ElementContext</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que define la regla para procesar un elemento dentro de una listaen el lenguaje BIES. Este método verifica si el elemento es uno de lostipos válidos (INT, FLOAT, STR, FUNCTION) y lo consume si es válido.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line475">line 475</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Si ocurre un error de reconocimiento durante el análisis.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">antlr4.error.RecognitionException</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El contexto del elemento que se está procesando.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="ElementContext.html">ElementContext</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="element"><span class="type-signature"></span>element<span class="signature">(i)</span><span class="type-signature"> &rarr; {<a href="ElementContext.html">ElementContext</a>|Array.&lt;<a href="ElementContext.html">ElementContext</a>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método para obtener un contexto de elemento en función de un índice.Este método permite recuperar uno o varios contextos de elementosdesde la lista de contextos de `ElementContext` en el parser.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El índice del contexto de elemento que se desea recuperar.Si no se proporciona o es `null`, se devolverán todos los contextos de elementos.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1153">line 1153</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Un contexto específico de `ElementContext`si se proporciona un índice, o una lista de todos los contextos de `ElementContext`si el índice es `null`.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="ElementContext.html">ElementContext</a></span>
+|
+
+<span class="param-type">Array.&lt;<a href="ElementContext.html">ElementContext</a>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="executeArithmetic"><span class="type-signature"></span>executeArithmetic<span class="signature">(mnemonic, vm)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ejecuta una operación aritmética en la máquina virtual.Esta función toma un mnemonico de operación aritmética y dos operandos desde la pila de la máquina virtual (vm), realizando la operación correspondiente. Los resultados se almacenan de nuevo en la pila.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mnemonic</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El mnemonico de la operación aritmética a realizar. Puede ser 'ADD', 'SUB', 'MUL' o 'DIV'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La instancia de la máquina virtual que contiene la pila y el estado actual de la ejecución.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Manuel Mora Sandi</li>
+        
+            <li>Derek Rojas Mendoza</li>
+        
+            <li>Josué Vindas Pérez</li>
+        
+            <li>Joseph León Cabezas</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_arithmeticOperations.mjs.html">src/arithmeticOperations.mjs</a>, <a href="src_arithmeticOperations.mjs.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Si se intenta realizar una división por cero.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Si se proporciona un mnemonico de operación desconocido.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    </ul>
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="executeCasting"><span class="type-signature"></span>executeCasting<span class="signature">(mnemonic, vm)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ejecuta una operación de conversión de tipos en la máquina virtual.Esta función toma un mnemonico de operación de conversión y aplica la conversión correspondiente al valor en la parte superior de la pila de la máquina virtual (vm). Los resultados se almacenan de nuevo en la pila.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mnemonic</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El mnemonico de la operación de conversión a realizar. Puede ser 'TOS' para convertir a cadena o 'TOL' para convertir a lista.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La instancia de la máquina virtual que contiene la pila y el estado actual de la ejecución.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Manuel Mora Sandi</li>
+        
+            <li>Derek Rojas Mendoza</li>
+        
+            <li>Josué Vindas Pérez</li>
+        
+            <li>Joseph León Cabezas</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_castingOperations.mjs.html">src/castingOperations.mjs</a>, <a href="src_castingOperations.mjs.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Si se proporciona un mnemonico de operación desconocido.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="executeFunctionById"><span class="type-signature"></span>executeFunctionById<span class="signature">(tree, functionId)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
@@ -1601,7 +4532,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line149">line 149</a>
+        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line173">line 173</a>
     </li></ul></dd>
     
 
@@ -1772,7 +4703,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line106">line 106</a>
+        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -1848,6 +4779,410 @@
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="executeLogical"><span class="type-signature"></span>executeLogical<span class="signature">(mnemonic, vm)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ejecuta una operación lógica basada en el mnemonico proporcionado utilizando el stack del modelo de máquina virtual.Esta función evalúa diferentes operaciones lógicas como comparación, conjunción, disyunción y negación, y coloca el resultado en el stack de la máquina virtual. Las operaciones devuelven 1 si el resultado es verdadero y 0 si es falso.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mnemonic</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El mnemonico que determina la operación lógica a realizar. Puede ser uno de los siguientes: 'EQ', 'GT', 'GTE', 'LT', 'LTE', 'AND', 'OR', 'XOR', 'NOT'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La máquina virtual que contiene el stack y el estado actual.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Manuel Mora Sandi</li>
+        
+            <li>Derek Rojas Mendoza</li>
+        
+            <li>Josué Vindas Pérez</li>
+        
+            <li>Joseph León Cabezas</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_logicalOperations.mjs.html">src/logicalOperations.mjs</a>, <a href="src_logicalOperations.mjs.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Lanza un error si el mnemonico no es reconocido.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="executeStack"><span class="type-signature"></span>executeStack<span class="signature">(mnemonic, vm)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Ejecuta una operación sobre el stack de la máquina virtualsegún el mnemonico proporcionado.Esta función permite manipular el stack a través de operacionescomo eliminar el elemento superior, intercambiar los dos elementossuperiores, y gestionar la vinculación de variables en el contexto actual. Las operaciones modifican el stack directamente.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mnemonic</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El mnemonico que determina la operación de stack a realizar. Puede ser uno de los siguientes: 'POP', 'SWP', 'BLD', 'BST'.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vm</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La máquina virtual que contiene el stack y el estado actual.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Manuel Mora Sandi</li>
+        
+            <li>Derek Rojas Mendoza</li>
+        
+            <li>Josué Vindas Pérez</li>
+        
+            <li>Joseph León Cabezas</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_stackOperations.mjs.html">src/stackOperations.mjs</a>, <a href="src_stackOperations.mjs.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Lanza un error si el mnemonico no es reconocido.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
 
 
 
@@ -2145,7 +5480,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line118">line 118</a>
+        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line142">line 142</a>
     </li></ul></dd>
     
 
@@ -2307,7 +5642,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line170">line 170</a>
+        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line194">line 194</a>
     </li></ul></dd>
     
 
@@ -2376,7 +5711,7 @@
 
 
 <div class="description">
-    Define una función en el análisis sintáctico de BIES.Este método maneja la definición de una función, incluyendo su nombre, parámetros opcionales y las instrucciones que la componen. Además, asegura que la sintaxis de la función siga las reglas definidas en la gramática.
+    Método que define la regla para procesar una definición de función en el lenguaje BIES.Este método maneja el reconocimiento de palabras clave asociadas a la declaración de funciones,como `FUN`, `FUNCTION`, `ARGS` e `INT`, además de procesar las instrucciones dentro del cuerpo de la función.También maneja una posible declaración de función padre opcional, verificando la presencia de un `PARENT`.
 </div>
 
 
@@ -2420,7 +5755,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line168">line 168</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line179">line 179</a>
     </li></ul></dd>
     
 
@@ -2450,7 +5785,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Lanza una excepción si se encuentra un error de reconocimiento durante el análisis sintáctico.
+        Si ocurre un error de reconocimiento durante el análisis.
         </div>
     </dt>
     <dd></dd>
@@ -2478,7 +5813,7 @@
 
         
 <div class="param-desc">
-    El contexto de la definición de la función.
+    El contexto de la definición de función que se está procesando.
 </div>
 
 
@@ -2507,7 +5842,7 @@
     
 
     
-    <h4 class="name" id="funDef"><span class="type-signature"></span>funDef<span class="signature">(i<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="FunDefContext.html">FunDefContext</a>>|<a href="FunDefContext.html">FunDefContext</a>}</span></h4>
+    <h4 class="name" id="funDef"><span class="type-signature"></span>funDef<span class="signature">(i)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="FunDefContext.html">FunDefContext</a>>|<a href="FunDefContext.html">FunDefContext</a>}</span></h4>
     
 
     
@@ -2515,7 +5850,7 @@
 
 
 <div class="description">
-    Obtiene el contexto de definición de funciones desde el árbol de análisis sintáctico.Este método permite acceder a todos los contextos de definición de funciones presentes en la entrada analizada. Si se proporciona un índice, devuelve el contexto correspondiente a ese índice. Si no se proporciona un índice, se devuelven todos los contextos de definición de funciones.
+    Método que recupera definiciones de funciones en el contexto de análisis sintáctico.Permite obtener una o varias instancias de `FunDefContext`, que representan las definiciones de funciones en el árbol de análisis sintáctico para el lenguaje BIES.
 </div>
 
 
@@ -2539,11 +5874,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -2571,26 +5902,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
 
-            <td class="description last">El índice del contexto de definición de funciones a obtener,                                  o null para obtener todos los contextos.</td>
+            <td class="description last">El índice de la definición de función que se desea recuperar.                          Si se proporciona `null`, se retornarán todas las definiciones.</td>
         </tr>
 
     
@@ -2631,7 +5946,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line511">line 511</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line616">line 616</a>
     </li></ul></dd>
     
 
@@ -2654,42 +5969,13 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Lanza un error si el índice no es un número válido.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TypeError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    Un array de contextos de definición de funciones                                                si se proporciona `null`, o el contexto específico                                                si se proporciona un índice.
+    - Un array de `FunDefContext` si `i` es `null`,                                                 o una instancia de `FunDefContext` si `i` es un número.
 </div>
 
 
@@ -2842,7 +6128,7 @@
 
 
 <div class="description">
-    Este método solicita una entrada del usuario a través de la consola y retorna una promesa que se resuelve con el valor ingresado.
+    Obtiene la entrada del usuario desde la consola de manera asíncrona.Esta función crea una interfaz de lectura de línea para recibir una entrada del usuario. Utiliza una promesa para manejar la respuesta de manera asíncrona, permitiendo que el flujo de ejecución continúe sin bloquear el programa mientras espera la entrada.
 </div>
 
 
@@ -2876,6 +6162,19 @@
     
 
     
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Manuel Mora Sandi</li>
+        
+            <li>Derek Rojas Mendoza</li>
+        
+            <li>Josué Vindas Pérez</li>
+        
+            <li>Joseph León Cabezas</li>
+        </ul>
+    </dd>
+    
 
     
 
@@ -2886,7 +6185,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line85">line 85</a>
+        <a href="src_IO_Operator.mjs.html">src/IO_Operator.mjs</a>, <a href="src_IO_Operator.mjs.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -2915,7 +6214,7 @@
 
         
 <div class="param-desc">
-    Una promesa que se resuelve con la entrada del usuario.
+    Una promesa que se resuelve con la entrada del usuario como una cadena de texto.
 </div>
 
 
@@ -2952,7 +6251,7 @@
 
 
 <div class="description">
-    Define el análisis de una instrucción en la gramática de BIES.Este método maneja el reconocimiento de una instrucción, comenzando con un mnemotécnico seguido de uno o más argumentos opcionales. Asegura que la sintaxis de la instrucción siga las reglas definidas en la gramática.
+    Método que define la regla para procesar una instrucción en el lenguaje BIES.Este método maneja el reconocimiento de un mnemónico seguido de uno o más argumentos opcionales.Si la instrucción contiene argumentos, estos se procesan mediante la invocación repetida del método `arg()`.
 </div>
 
 
@@ -2996,7 +6295,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line269">line 269</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line239">line 239</a>
     </li></ul></dd>
     
 
@@ -3026,7 +6325,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Lanza una excepción si se encuentra un error de reconocimiento durante el análisis sintáctico.
+        Si ocurre un error de reconocimiento durante el análisis.
         </div>
     </dt>
     <dd></dd>
@@ -3054,7 +6353,7 @@
 
         
 <div class="param-desc">
-    El contexto de la instrucción analizada.
+    El contexto de la instrucción que se está procesando.
 </div>
 
 
@@ -3065,6 +6364,171 @@
     </dt>
     <dd>
         
+<span class="param-type"><a href="InstContext.html">InstContext</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="inst"><span class="type-signature"></span>inst<span class="signature">(i)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="InstContext.html">InstContext</a>>|<a href="InstContext.html">InstContext</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que recupera instrucciones en el contexto de análisis sintáctico.Permite obtener una o varias instancias de `InstContext`, que representan lasinstrucciones en el árbol de análisis sintáctico para el lenguaje BIES.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>i</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El índice de la instrucción que se desea recuperar.                         Si se proporciona `null`, se retornarán todas las instrucciones.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line637">line 637</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Un array de `InstContext` si `i` es `null`,                                              o una instancia de `InstContext` si `i` es un número.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="InstContext.html">InstContext</a>></span>
+|
+
 <span class="param-type"><a href="InstContext.html">InstContext</a></span>
 
 
@@ -3091,7 +6555,7 @@
 
 
 <div class="description">
-    Obtiene el contexto de las instrucciones desde el árbol de análisis sintáctico.Este método permite acceder a todos los contextos de instrucciones presentes en la entrada analizada. Si se proporciona un índice, devuelve el contexto correspondiente a ese índice. Si no se proporciona un índice, se devuelven todos los contextos de instrucciones.
+    Método que obtiene una o varias instancias del contexto de la regla `Inst`.
 </div>
 
 
@@ -3166,7 +6630,7 @@
                 </td>
             
 
-            <td class="description last">El índice del contexto de instrucción a obtener,                                  o null para obtener todos los contextos.</td>
+            <td class="description last">Índice de la instancia del contexto a obtener.                                 Si es `null`, se retornan todas las instancias de `InstContext`.</td>
         </tr>
 
     
@@ -3207,7 +6671,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line538">line 538</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line775">line 775</a>
     </li></ul></dd>
     
 
@@ -3230,42 +6694,13 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Lanza un error si el índice no es un número válido.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TypeError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    Un array de contextos de instrucciones                                            si se proporciona `null`, o el contexto específico                                            si se proporciona un índice.
+    Un array de instancias de `InstContext`                                            si `i` es `null`, o una única instancia si `i` tiene un valor.
 </div>
 
 
@@ -3297,7 +6732,7 @@
     
 
     
-    <h4 class="name" id="inst"><span class="type-signature"></span>inst<span class="signature">(i<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="InstContext.html">InstContext</a>|Array.&lt;<a href="InstContext.html">InstContext</a>>}</span></h4>
+    <h4 class="name" id="list"><span class="type-signature"></span>list<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ListContext.html">ListContext</a>}</span></h4>
     
 
     
@@ -3305,192 +6740,7 @@
 
 
 <div class="description">
-    Obtiene el contexto de instrucciones en la gramática BIES.Este método permite acceder a la parte del árbol de análisis sintáctico que corresponde a las instrucciones dentro de una función o bloque de código.Puede devolver una lista de contextos de instrucción o un contexto específico según el índice proporcionado.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>i</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last">El índice de la instrucción a obtener. Si no se proporciona, se devolverán todas las instancias de `InstContext`.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line684">line 684</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    El contexto de la instrucción o una lista de contextos de instrucción si no se proporciona un índice.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="InstContext.html">InstContext</a></span>
-|
-
-<span class="param-type">Array.&lt;<a href="InstContext.html">InstContext</a>></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="mnemonic"><span class="type-signature"></span>mnemonic<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="MnemonicContext.html">MnemonicContext</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Analiza y recupera un mnemotécnico en el análisis sintáctico de BIES.Este método verifica si el siguiente token en la entrada coincide conuno de los mnemotécnicos permitidos según la gramática.Si el token coincide, se consume; de lo contrario, se gestiona el error de manera apropiada.
+    Método que define la regla para procesar una lista en el lenguaje BIES.Este método comienza y termina la lista, y permite la inclusión de múltipleselementos separados por comas. Se gestiona el espacio en blanco antes ydespués de las comas. Los elementos de la lista son procesados medianteel método `element()`.
 </div>
 
 
@@ -3534,7 +6784,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line321">line 321</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line391">line 391</a>
     </li></ul></dd>
     
 
@@ -3564,7 +6814,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Lanza una excepción si se encuentra un error de reconocimiento durante el análisis sintáctico.
+        Si ocurre un error de reconocimiento durante el análisis.
         </div>
     </dt>
     <dd></dd>
@@ -3592,7 +6842,256 @@
 
         
 <div class="param-desc">
-    El contexto del mnemotécnico reconocido.
+    El contexto de la lista que se está procesando.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="ListContext.html">ListContext</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="list"><span class="type-signature"></span>list<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ListContext.html">ListContext</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que devuelve el contexto de la lista en el análisis sintáctico.Este método utiliza el analizador para obtener el contexto de tipo `ListContext` asociado al contexto actual. Se asume que hay un solo contexto de lista presente en este nivel de análisis, por lo que se devuelve el primer contexto `ListContext` encontrado.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line1068">line 1068</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El contexto que representa la lista en el análisis sintáctico.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="ListContext.html">ListContext</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="mnemonic"><span class="type-signature"></span>mnemonic<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="MnemonicContext.html">MnemonicContext</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que define la regla para procesar un mnemónico en el lenguaje BIES.Este método se encarga de reconocer un mnemónico válido en la entrada,verificando que el símbolo actual corresponda a uno de los mnemónicos definidos.Si el mnemónico es válido, se registra el reconocimiento y se consume el token.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line288">line 288</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        Si ocurre un error de reconocimiento durante el análisis.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">antlr4.error.RecognitionException</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El contexto del mnemónico que se está procesando.
 </div>
 
 
@@ -3621,7 +7120,7 @@
     
 
     
-    <h4 class="name" id="pop"><span class="type-signature"></span>pop<span class="signature">()</span><span class="type-signature"> &rarr; {any}</span></h4>
+    <h4 class="name" id="mnemonic"><span class="type-signature"></span>mnemonic<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="MnemonicContext.html">MnemonicContext</a>}</span></h4>
     
 
     
@@ -3629,7 +7128,7 @@
 
 
 <div class="description">
-    Este método elimina y retorna el último elemento de la pila si se cumplen las condiciones relacionadas con el valor de `K` en el contexto actual.
+    Método que devuelve el contexto de `MnemonicContext` asociado a la instrucción.Este método permite acceder al contexto específico de la mnemotecnia utilizada en lainstrucción actual, lo que facilita la manipulación y análisis de la misma en el árbolde análisis sintáctico.
 </div>
 
 
@@ -3673,7 +7172,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line64">line 64</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line851">line 851</a>
     </li></ul></dd>
     
 
@@ -3696,42 +7195,13 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Lanza un error si `K` es igual a 0.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    El valor eliminado de la pila.
+    El contexto de la mnemotecnia correspondiente a la instrucción.
 </div>
 
 
@@ -3742,7 +7212,7 @@
     </dt>
     <dd>
         
-<span class="param-type">any</span>
+<span class="param-type"><a href="MnemonicContext.html">MnemonicContext</a></span>
 
 
     </dd>
@@ -3812,7 +7282,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line73">line 73</a>
+        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -3878,7 +7348,7 @@
 
 
 <div class="description">
-    Método que representa el inicio de la regla de análisis para el contexto `start`.Este método se encarga de procesar las definiciones de funciones y las instruccionesdentro del contexto del análisis sintáctico. Se basa en la gramática definida por ANTLR.
+    Método que representa la regla de inicio del parser para el lenguaje BIES.Este método se encarga de procesar las definiciones de funciones y las instrucciones,creando el contexto inicial de análisis sintáctico (AST). Utiliza un bucle para manejarmúltiples definiciones o instrucciones en la entrada según las reglas de la gramática.
 </div>
 
 
@@ -3922,7 +7392,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line73">line 73</a>
+        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -3952,7 +7422,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Lanza una excepción si no se encuentra                                           ninguna alternativa viable durante el análisis.
+        Si no se encuentra una alternativa válida en el análisis.
         </div>
     </dt>
     <dd></dd>
@@ -3980,7 +7450,7 @@
 
         
 <div class="param-desc">
-    El contexto `StartContext` que contiene la información sobre                        las funciones y las instrucciones procesadas.
+    El contexto del inicio que se está procesando.
 </div>
 
 
@@ -4280,7 +7750,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line98">line 98</a>
+        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line95">line 95</a>
     </li></ul></dd>
     
 
@@ -4442,7 +7912,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesVisitor.js.html">parser/grammar/biesVisitor.js</a>, <a href="parser_grammar_biesVisitor.js.html#line95">line 95</a>
+        <a href="parser_biesVisitor.js.html">parser/biesVisitor.js</a>, <a href="parser_biesVisitor.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -4500,7 +7970,7 @@
     
 
     
-    <h4 class="name" id="visitArgsDecl"><span class="type-signature"></span>visitArgsDecl<span class="signature">(ctx)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id="visitElement"><span class="type-signature"></span>visitElement<span class="signature">(ctx)</span><span class="type-signature"> &rarr; {*}</span></h4>
     
 
     
@@ -4508,7 +7978,7 @@
 
 
 <div class="description">
-    Método que visita el contexto de declaración de argumentos en el árbol de análisis sintáctico de BIES.Este método es responsable de procesar el nodo del contexto de declaración de argumentos y sus hijos en el árbol.Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+    Método que visita el contexto de un elemento en el árbol de análisis sintáctico de BIES.Este método se encarga de procesar el nodo del contexto de un elemento y sus hijos en el árbol.Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
 </div>
 
 
@@ -4550,7 +8020,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="ArgsDeclContext.html">ArgsDeclContext</a></span>
+<span class="param-type"><a href="ElementContext.html">ElementContext</a></span>
 
 
             
@@ -4560,7 +8030,7 @@
 
             
 
-            <td class="description last">El contexto de declaración de argumentos que se está visitando.</td>
+            <td class="description last">El contexto del elemento que se está visitando.</td>
         </tr>
 
     
@@ -4601,7 +8071,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesVisitor.js.html">parser/grammar/biesVisitor.js</a>, <a href="parser_grammar_biesVisitor.js.html#line53">line 53</a>
+        <a href="parser_biesVisitor.js.html">parser/biesVisitor.js</a>, <a href="parser_biesVisitor.js.html#line109">line 109</a>
     </li></ul></dd>
     
 
@@ -4630,7 +8100,7 @@
 
         
 <div class="param-desc">
-    El resultado de la visita a los nodos hijos del contexto de declaración de argumentos.
+    El resultado de la visita a los nodos hijos del contexto del elemento.
 </div>
 
 
@@ -4760,7 +8230,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesVisitor.js.html">parser/grammar/biesVisitor.js</a>, <a href="parser_grammar_biesVisitor.js.html#line39">line 39</a>
+        <a href="parser_biesVisitor.js.html">parser/biesVisitor.js</a>, <a href="parser_biesVisitor.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -4919,7 +8389,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line49">line 49</a>
+        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -5078,7 +8548,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesVisitor.js.html">parser/grammar/biesVisitor.js</a>, <a href="parser_grammar_biesVisitor.js.html#line67">line 67</a>
+        <a href="parser_biesVisitor.js.html">parser/biesVisitor.js</a>, <a href="parser_biesVisitor.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -5108,6 +8578,165 @@
         
 <div class="param-desc">
     El resultado de la visita a los nodos hijos del contexto de instrucciones.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="visitList"><span class="type-signature"></span>visitList<span class="signature">(ctx)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Método que visita el contexto de una lista en el árbol de análisis sintáctico de BIES.Este método se encarga de procesar el nodo del contexto de la lista y sus hijos en el árbol.Utiliza el método `visitChildren` para recorrer todos los nodos hijos y aplicar el visitante correspondiente a cada uno.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ctx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ListContext.html">ListContext</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El contexto de lista que se está visitando.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_biesVisitor.js.html">parser/biesVisitor.js</a>, <a href="parser_biesVisitor.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado de la visita a los nodos hijos del contexto de la lista.
 </div>
 
 
@@ -5237,7 +8866,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesVisitor.js.html">parser/grammar/biesVisitor.js</a>, <a href="parser_grammar_biesVisitor.js.html#line81">line 81</a>
+        <a href="parser_biesVisitor.js.html">parser/biesVisitor.js</a>, <a href="parser_biesVisitor.js.html#line67">line 67</a>
     </li></ul></dd>
     
 
@@ -5396,7 +9025,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line20">line 20</a>
+        <a href="src_Loader.mjs.html">src/Loader.mjs</a>, <a href="src_Loader.mjs.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -5555,7 +9184,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_grammar_biesVisitor.js.html">parser/grammar/biesVisitor.js</a>, <a href="parser_grammar_biesVisitor.js.html#line24">line 24</a>
+        <a href="parser_biesVisitor.js.html">parser/biesVisitor.js</a>, <a href="parser_biesVisitor.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -5623,13 +9252,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#END">END</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="ElementContext.html">ElementContext</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="ListContext.html">ListContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ARGS">ARGS</a></li><li><a href="global.html#COMMA">COMMA</a></li><li><a href="global.html#END">END</a></li><li><a href="global.html#FLOAT">FLOAT</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#ID">ID</a></li><li><a href="global.html#INT">INT</a></li><li><a href="global.html#PARENT">PARENT</a></li><li><a href="global.html#STR">STR</a></li><li><a href="global.html#WS">WS</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#element">element</a></li><li><a href="global.html#executeArithmetic">executeArithmetic</a></li><li><a href="global.html#executeCasting">executeCasting</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#executeLogical">executeLogical</a></li><li><a href="global.html#executeStack">executeStack</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitElement">visitElement</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitList">visitList</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 12:05:24 GMT-0600 (hora estándar central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 15:54:23 GMT-0600 (hora estándar central)
 </footer>
 
 <script> prettyPrint(); </script>

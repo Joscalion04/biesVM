@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: src/runner.mjs</title>
+    <title>JSDoc: Source: src/castingOperations.mjs</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: src/runner.mjs</h1>
+    <h1 class="page-title">Source: src/castingOperations.mjs</h1>
 
     
 
@@ -26,70 +26,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import fs from 'fs';
-import antlr4 from 'antlr4';
-import Loader from "./Loader.mjs";
-import biesGrammarLexer from '../parser/biesLexer.js';
-import biesGrammarParser from '../parser/biesParser.js';
-let default_input_file = './test/reverse_hilera_iterativo.basm';
-
+            <pre class="prettyprint source linenums"><code>// castingOperations.mjs
 /**
-* Función para probar el parser utilizando un archivo de entrada opcional.
-* Lee el archivo especificado, lo tokeniza, genera el árbol sintáctico (AST),
-* y finalmente utiliza un visitor para recorrer el AST.
-* 
-* @param {string} [input_file=default_input_file] - Ruta del archivo de entrada a procesar, por defecto usa './test/biesTest.txt'.
-* 
-* @author Manuel Mora Sandi 
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
-function test_parser(input_file=default_input_file){
-    console.log(`Leyendo el documento... ${input_file}`)
-    
-    /**
-    * Contenido del archivo leído como una cadena.
-    * @type {string}
-    */
-    const input = fs.readFileSync(input_file,'utf-8');
-
-    // De archivo a stream de caracteres.
-    const chars = new antlr4.InputStream(input);
-
-    /**
-    * Instancia del lexer para procesar los caracteres del archivo.
-    * @type {biesGrammarLexer}
-    */
-    const lexer = new biesGrammarLexer(chars);
-
-    // Tokeniza el flujo de caracteres.
-    const tokens = new antlr4.CommonTokenStream(lexer);
-
-    /**
-    * Instancia del parser que genera el árbol de sintaxis abstracta (AST).
-    * @type {biesGrammarParser}
-    */
-    const parser = new biesGrammarParser(tokens);
-
-    //Construye el AST.
-    parser.buildParseTrees = true;
-
-    /**
-    * El árbol sintáctico resultante después del análisis.
-    * @type {ParseTree}
-    */
-    const AST = parser.start();
-
-    // Se necesita un loader que pase del AST a la máquina virtual.
-
-    //Visita el AST.
-    const loader = new Loader();
-    loader.visit(AST);
-
-}
-
-export default test_parser</code></pre>
+ * Ejecuta una operación de conversión de tipos en la máquina virtual.
+ * 
+ * Esta función toma un mnemonico de operación de conversión y aplica la 
+ * conversión correspondiente al valor en la parte superior de la pila de 
+ * la máquina virtual (vm). Los resultados se almacenan de nuevo en la pila.
+ * 
+ * @function executeCasting
+ * @param {string} mnemonic - El mnemonico de la operación de conversión a realizar. 
+ * Puede ser 'TOS' para convertir a cadena o 'TOL' para convertir a lista.
+ * @param {Object} vm - La instancia de la máquina virtual que contiene la pila 
+ * y el estado actual de la ejecución.
+ * 
+ * @throws {Error} Si se proporciona un mnemonico de operación desconocido.
+ * @author Manuel Mora Sandi 
+ * @author Derek Rojas Mendoza
+ * @author Josué Vindas Pérez
+ * @author Joseph León Cabezas
+ */
+export function executeCasting(mnemonic, vm) {
+    switch (mnemonic) {
+        case 'TOS':
+            vm.stack.push(String(vm.stack.pop()));
+            break;
+        case 'TOL':
+            vm.stack.push([vm.stack.pop()]);
+            break;
+        default:
+            throw new Error(`Unknown casting operation: ${mnemonic}`);
+    }
+}</code></pre>
         </article>
     </section>
 
