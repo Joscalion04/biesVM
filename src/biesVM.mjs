@@ -10,12 +10,20 @@ import { getInput } from './IO_Operator.mjs'; // Asegúrate de usar la ruta corr
 */
 
 class BiesVM {
-    constructor() {
-        this.code = []; // C
-        this.stack = []; // S
-        this.bindings = [{fun: null, binding:[]}]; // B
-        this.contexts = []; // D
-    }
+  /**
+  * Constructor de la máquina virtual Bies con un conjunto de instrucciones y un entorno global
+  * @constructor
+  * @param {string} code - Código fuente a ejecutar
+  * @param {object} bindings - Entorno global
+  * @param {object} contexts - Contextos de ejecución
+  * @param {object} stack - Pila de ejecución
+  */
+  constructor() {
+    this.code = []; // C
+    this.stack = []; // S
+    this.bindings = [{fun: null, binding:[]}]; // B
+    this.contexts = []; // D
+  }
 
   getActualContext() {
     return this.contexts.find(context => context.ACTUAL);
@@ -49,7 +57,8 @@ class BiesVM {
           ) : null;
       } break;
 
-    halt() {
+      // Stop
+      case 'HLT': {
         this.code = [];
         this.stack = [];
         this.bindings = [{fun: null, binding:[]}];

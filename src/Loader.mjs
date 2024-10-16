@@ -1,31 +1,21 @@
 import biesGrammarVisitor from '../parser/biesVisitor.js';
 import BiesVM from "./biesVM.mjs";
 
-
 /**
-* Visitor personalizado que extiende el `biesGrammarVisitor` para recorrer 
-* el árbol sintáctico y guardar las instrucciones de las funciones en la máquina virtual asociada (BiesVM).
-* 
-* @author Manuel Mora Sandi 
-* @author Derek Rojas Mendoza
-* @author Josué Vindas Pérez
-* @author Joseph León Cabezas
-*/
-
+ * Visitor personalizado que extiende el `biesGrammarVisitor` para recorrer 
+ * el árbol sintáctico y guardar las instrucciones de las funciones en la máquina virtual asociada (BiesVM).
+ */
 class Loader extends biesGrammarVisitor {
     VM = new BiesVM(); // Máquina virtual
     iniArgs = null;
     firstNode = null;
 
     /**
-    * Este método se encarga de iniciar la ejecución de funciones en el contexto del AST.
-    * Busca los argumentos de inicialización (`INI`) y ejecuta la función correspondiente.
-    * 
-    * @method visitStart
-    * @param {Object} ctx - El contexto actual que representa un nodo en el AST.
-    * 
-    * @returns {null} Siempre retorna `null` para mantener la consistencia en el patrón de visitante.
-    */
+     * Inicia el recorrido del árbol, pero busca la instrucción `INI` antes de procesar todo.
+     * 
+     * @param {Object} ctx El contexto del nodo de inicio en el árbol sintáctico.
+     * @return El resultado de visitar el nodo de la función indicada en la isntrucción `INI` o procesar normalmente.
+     */
     visitStart(ctx) {
 
         if (!this.iniArgs) {
@@ -47,15 +37,11 @@ class Loader extends biesGrammarVisitor {
     }
 
     /**
-    * Este método procesa una instrucción del contexto y la almacena en el código de la máquina virtual.
-    * Extrae el mnemonico y los argumentos, y ejecuta la instrucción si es un comando de retorno o 
-    * detención.
-    * 
-    * @method visitInst
-    * @param {Object} ctx - El contexto que representa una instrucción en el AST.
-    * 
-    * @returns {null} Siempre retorna `null` para mantener la consistencia en el patrón de visitante.
-    */
+     * Visita una instrucción en el AST y procesa el mnemonico y los argumentos.
+     * 
+     * @param {Object} ctx - El contexto del nodo actual en el árbol de análisis sintáctico (AST).
+     * @returns {null} - No retorna ningún valor después de procesar la instrucción.
+     */
     visitInst(ctx) {
         const mnemonic = ctx.mnemonic().getText(); // Obtiene la instrucción
         const args = ctx.arg().map(arg => this.visit(arg)).filter(arg => arg !== null); // Obtener los argumentos y filtrar los nulos
@@ -69,15 +55,6 @@ class Loader extends biesGrammarVisitor {
         return null;
     }
 
-    /**
-    * Este método ejecuta instrucciones de la máquina virtual en un bucle hasta que se
-    * encuentra una instrucción de finalización. Si se recibe una instrucción válida, se
-    * ejecuta la función correspondiente.
-    * 
-    * @method run
-    * 
-    * @returns {Promise<void>} Una promesa que se resuelve cuando se completa la ejecución.
-    */
     async run() {
         let continuar = true;
         while (continuar) {
@@ -94,14 +71,11 @@ class Loader extends biesGrammarVisitor {
     }
 
     /**
-    * Este método evalúa un contexto de argumento y devuelve su representación como texto.
-    * Maneja enteros, cadenas y variables que comienzan con `$`. 
-    * 
-    * @method visitArg
-    * 
-    * @param {Object} ctx - El contexto del argumento a evaluar.
-    * @returns {string|null} La representación del argumento como texto o `null` si no se reconoce.
-    */
+     * Visita los argumentos de una instrucción.
+     * 
+     * @param {Object} ctx El contexto del nodo de la instrucción en el árbol sintáctico.
+     * @return El valor del argumento como string o null si no aplica.
+     */
     visitArg(ctx) {
         // Si es un entero
         if (ctx.INT()) {
@@ -141,15 +115,12 @@ class Loader extends biesGrammarVisitor {
     
     
     /**
-    * Busca un nodo de definición de función en el árbol de sintaxis abstracta (AST) 
-    * basado en el identificador de la función proporcionado.
-    * 
-    * @method findFunctionById
-    * 
-    * @param {Object} tree - El árbol de sintaxis abstracta en el que buscar la función.
-    * @param {string} functionId - El identificador de la función que se desea encontrar.
-    * @returns {Object|null} El nodo de la función encontrada o `null` si no se encuentra.
-    */
+     * Busca un nodo de función por su `functionId` en el árbol sintáctico.
+     * 
+     * @param {Object} tree - El árbol sintáctico completo.
+     * @param {string} functionId - El ID de la función que se desea buscar.
+     * @returns {Object | null} - Retorna el nodo de la función si se encuentra, o null.
+     */
     findFunctionById(tree, functionId) {
         let foundNode = null;
 
@@ -172,16 +143,12 @@ class Loader extends biesGrammarVisitor {
     }
 
     /**
-    * Ejecuta una función específica en el árbol de sintaxis abstracta (AST) 
-    * basado en el identificador de la función proporcionado.
-    * 
-    * @method executeFunctionById
-    * 
-    * @param {Object} tree - El árbol de sintaxis abstracta en el que se busca la función.
-    * @param {string} functionId - El identificador de la función que se desea ejecutar.
-    * 
-    * @returns {void} No retorna ningún valor.
-    */
+     * Ejecuta una función por su `functionId`, recorriendo las instrucciones de la misma.
+     * 
+     * @param {Object} tree - El árbol sintáctico completo.
+     * @param {string} functionId - El ID de la función a ejecutar.
+     * @returns {null}
+     */
     executeFunctionById(tree, functionId) {
         const functionNode = this.findFunctionById(tree, functionId);
         if (functionNode) {
@@ -193,16 +160,6 @@ class Loader extends biesGrammarVisitor {
     }
     
 
-    /**
-    * Busca la instrucción `INI` en el árbol de sintaxis abstracta (AST) 
-    * y devuelve el primer argumento asociado a ella.
-    * 
-    * @method findINI
-    * 
-    * @param {Object} tree - El árbol de sintaxis abstracta donde se busca la instrucción `INI`.
-    * 
-    * @returns {string|null} El primer argumento de la instrucción `INI` si se encuentra, o `null` si no existe.
-    */
     findINI(tree) {
         let foundNode = null;
 
