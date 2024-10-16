@@ -4,8 +4,6 @@ grammar bies;
 INT : '-'? [0-9]+ ; // Números enteros
 FLOAT : '-'? [0-9]+ ('.' [0-9]+)? ; // Números decimales
 STR : '\'' ( ~['\\] | '\\' . )* '\'' | '"' ( ~["\\] | '\\' . )* '"' ; // Cadenas
-LIST : '[' (ELEMENT (',' ELEMENT)*)? ']' ;
-ELEMENT : STR | INT | FLOAT;
 FUNCTION : '$' [0-9]+ ; // Identificadores de funciones como $0, $1, etc.
 FUN : '$FUN' ; // Inicio de una función
 END : '$END' ; // Fin de una función
@@ -14,6 +12,8 @@ COMMENT : ';' ~[\r\n]* -> skip ; // Comentarios ignorados
 PARENT : 'parent:'; // Literal para 'parent:'
 ARGS : 'args:'; // Literal para 'args:'
 ID : [a-zA-Z_][a-zA-Z_0-9]* ; // Identificadores como nombres de variables, etc.
+COMMA : ',' ; // Coma para separar elementos en listas
+
 // PARSER
 start : (funDef | inst)+ ; // Debe haber al menos una función o instrucción
 
@@ -26,5 +26,10 @@ mnemonic : 'INI' | 'HLT' | 'POP' | 'SWP' | 'LDV' | 'BLD' | 'BST' | 'ADD' | 'MUL'
          | 'SNT' | 'CAT' | 'TOS' | 'LNT' | 'LIN' | 'LTK' | 'LRK' | 'TOL' | 'NOP' | 'BR' | 'BT'
          | 'BF' | 'LDF' | 'APP' | 'RET' | 'CST' | 'INO' | 'PRN' | 'STK' | 'SRK' | 'INP';
 
-arg : INT | FLOAT | STR | FUNCTION | LIST | ID; // Argumentos posibles
+arg : INT | FLOAT | STR | FUNCTION | list | ID ; // Argumentos posibles
 
+// Producción para listas con manejo de espacios opcionales
+list : '[' WS? element (WS? COMMA WS? element)* WS? ']' ; // Definición de listas
+
+// Elementos de la lista pueden ser enteros, decimales o cadenas
+element : INT | FLOAT | STR ; // Elementos posibles dentro de una lista
