@@ -1,5 +1,0 @@
-$FUN $0 args:0 parent: $0
-LDV 10
-PRN
-HLT
-$END

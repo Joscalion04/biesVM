@@ -3,7 +3,6 @@ import antlr4 from 'antlr4';
 import Loader from "./Loader.mjs";
 import biesGrammarLexer from '../parser/biesLexer.js';
 import biesGrammarParser from '../parser/biesParser.js';
-let default_input_file = './test/reverse_hilera_iterativo.basm';
 
 /**
 * Función para probar el parser utilizando un archivo de entrada opcional.
@@ -17,7 +16,7 @@ let default_input_file = './test/reverse_hilera_iterativo.basm';
 * @author Josué Vindas Pérez
 * @author Joseph León Cabezas
 */
-function test_parser(input_file=default_input_file){
+function test_parser(input_file){
     console.log(`Leyendo el documento... ${input_file}`)
     
     /**
