@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: BiesVM</title>
+    <title>JSDoc: Class: biesParser</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: BiesVM</h1>
+    <h1 class="page-title">Class: biesParser</h1>
 
     
 
@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BiesVM<span class="signature">(code, bindings, contexts, stack)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Clase que representa una máquina virtual Bies, la cual ejecuta un conjunto de instrucciones</div>
+        <h2><span class="attribs"><span class="type-signature"></span></span>biesParser<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,11 +39,9 @@
         
 
     
-    <h2>Constructor</h2>
-    
 
     
-    <h4 class="name" id="BiesVM"><span class="type-signature"></span>new BiesVM<span class="signature">(code, bindings, contexts, stack)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="biesParser"><span class="type-signature"></span>new biesParser<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +49,7 @@
 
 
 <div class="description">
-    Constructor de la máquina virtual Bies con un conjunto de instrucciones y un entorno global
+    Clase que se encarga de realizar el parseo de la gramática de BIESutilizando la librería ANTLR4. Esta clase extiende de `antlr4.Parser`.
 </div>
 
 
@@ -62,124 +58,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>code</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Código fuente a ejecutar</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>bindings</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Entorno global</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>contexts</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Contextos de ejecución</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>stack</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Pila de ejecución</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -228,7 +106,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_biesVM.mjs.html">src/biesVM.mjs</a>, <a href="src_biesVM.mjs.html#line12">line 12</a>
+        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -260,6 +138,17 @@
 
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>antlr4.parser</li>
+    </ul>
+
 
     
 

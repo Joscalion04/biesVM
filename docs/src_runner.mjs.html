@@ -28,10 +28,10 @@
         <article>
             <pre class="prettyprint source linenums"><code>import fs from 'fs';
 import antlr4 from 'antlr4';
-import PrintVisitor from "../src/processor.mjs";
-import biesGrammarLexer from '../parser/biesLexer.js';
-import biesGrammarParser from '../parser/biesParser.js';
-let default_input_file = './test/biesTest.txt'
+import Loader from "./Loader.mjs";
+import biesGrammarLexer from '../parser/grammar/biesLexer.js';
+import biesGrammarParser from '../parser/grammar/biesParser.js';
+let default_input_file = './test/biesTest.basm'
 
 /**
 * Función para probar el parser utilizando un archivo de entrada opcional.
@@ -81,19 +81,12 @@ function test_parser(input_file=default_input_file){
     */
     const AST = parser.start();
 
+    // Se necesita un loader que pase del AST a la máquina virtual.
+
     //Visita el AST.
-    const visitor = new PrintVisitor();
-    visitor.visit(AST);
+    const loader = new Loader();
+    loader.visit(AST);
 
-    console.log(`PROCESADO ${input_file} !`)
-
-    //console.log("BUSCAR FUNCION")
-    // Supongamos que 'tree' es el árbol sintáctico completo
-    //const functionId = '$1'; // El ID de la función que deseas buscar y ejecutar
-    //const printVisitor = new PrintVisitor();
-
-    // Ejecutar la función con el ID especificado
-    //printVisitor.executeFunctionById(AST, functionId);
 }
 
 export default test_parser</code></pre>
@@ -106,13 +99,13 @@ export default test_parser</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="FunctionFinder.html">FunctionFinder</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="PrintVisitor.html">PrintVisitor</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#atn">atn</a></li><li><a href="global.html#decisionsToDFA">decisionsToDFA</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#serializedATN">serializedATN</a></li><li><a href="global.html#sharedContextCache">sharedContextCache</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#END">END</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Oct 08 2024 21:14:12 GMT-0600 (hora estándar central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 12:05:24 GMT-0600 (hora estándar central)
 </footer>
 
 <script> prettyPrint(); </script>

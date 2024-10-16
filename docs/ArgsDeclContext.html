@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ArgsDeclContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Contexto de la declaración de argumentos en el parser.Esta clase extiende `antlr4.ParserRuleContext` y maneja los tokensy las subreglas relacionadas con la declaración de argumentos en el lenguaje analizado.</div>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ArgsDeclContext<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,18 +39,18 @@
         
 
     
-    <h2>Constructor</h2>
+
+    
+    <h4 class="name" id="ArgsDeclContext"><span class="type-signature"></span>new ArgsDeclContext<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
-    <h4 class="name" id="ArgsDeclContext"><span class="type-signature"></span>new ArgsDeclContext<span class="signature">(parser, parent<span class="signature-attributes">opt</span>, invokingState<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
 
 
 
-
+<div class="description">
+    Clase que representa el contexto de la declaración de argumentos en el análisis sintáctico de la gramática de BIES.Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información relevante durante la ejecución de la regla de declaración de argumentos en el parser.El contexto de la declaración de argumentos puede incluir detalles sobre el tipo y número de argumentos que una función puede aceptar, proporcionando métodos para acceder a esta información.
+</div>
 
 
 
@@ -60,150 +58,6 @@
 
 
 
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>parser</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Parser</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">El parser que está utilizando este contexto.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>parent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">ParserRuleContext</span>
-|
-
-<span class="param-type">null</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    null
-                
-                </td>
-            
-
-            <td class="description last">El contexto padre, si existe; de lo contrario, `null`.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>invokingState</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    -1
-                
-                </td>
-            
-
-            <td class="description last">El estado de invocación; por defecto es `-1` si no se proporciona.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -252,7 +106,517 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line689">line 689</a>
+        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line732">line 732</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>antlr4.ParserRuleContext</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="INT"><span class="type-signature"></span>INT<span class="signature">()</span><span class="type-signature"> &rarr; {antlr4.Token}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Obtiene el token de tipo `INT` de la entrada del parser.Este método se utiliza para acceder al token que representaun número entero en el análisis sintáctico de la gramática de BIES.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line779">line 779</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El token de tipo `INT`.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">antlr4.Token</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="accept"><span class="type-signature"></span>accept<span class="signature">(visitor)</span><span class="type-signature"> &rarr; {any}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Permite que un visitante recorra el contexto de declaración de argumentos.Este método es parte del patrón Visitor y se utiliza para realizaroperaciones específicas en el contexto de la declaración de argumentosen el análisis sintáctico de la gramática de BIES.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>visitor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="biesVisitor.html">biesVisitor</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El visitante que realiza la operación.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line792">line 792</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    El resultado de la operación del visitante.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>ArgsDeclContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="ArgsDeclContext"><span class="type-signature"></span>new ArgsDeclContext<span class="signature">(parser, parent, invokingState)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Crea una instancia de `ArgsDeclContext`.Este constructor inicializa el contexto de la declaración de argumentosen el análisis sintáctico de la gramática de BIES.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parser</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">antlr4.Parser</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El parser que está utilizando esta regla.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">antlr4.ParserRuleContext</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El contexto del padre en la jerarquía de análisis sintáctico.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>invokingState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El estado de invocación de la regla.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line760">line 760</a>
     </li></ul></dd>
     
 
@@ -308,7 +672,7 @@
     
 
     
-    <h4 class="name" id="INT"><span class="type-signature"></span>INT<span class="signature">()</span><span class="type-signature"> &rarr; {Token}</span></h4>
+    <h4 class="name" id="INT"><span class="type-signature"></span>INT<span class="signature">()</span><span class="type-signature"> &rarr; {antlr4.Token}</span></h4>
     
 
     
@@ -316,7 +680,7 @@
 
 
 <div class="description">
-    Obtiene el token INT.
+    Obtiene el token de tipo `INT` de la entrada del parser.Este método se utiliza para acceder al token que representaun número entero en el análisis sintáctico de la gramática de BIES.
 </div>
 
 
@@ -360,7 +724,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line715">line 715</a>
+        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line779">line 779</a>
     </li></ul></dd>
     
 
@@ -389,7 +753,7 @@
 
         
 <div class="param-desc">
-    El token INT.
+    El token de tipo `INT`.
 </div>
 
 
@@ -400,7 +764,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Token</span>
+<span class="param-type">antlr4.Token</span>
 
 
     </dd>
@@ -426,7 +790,7 @@
 
 
 <div class="description">
-    Acepta un visitante.
+    Permite que un visitante recorra el contexto de declaración de argumentos.Este método es parte del patrón Visitor y se utiliza para realizaroperaciones específicas en el contexto de la declaración de argumentosen el análisis sintáctico de la gramática de BIES.
 </div>
 
 
@@ -468,7 +832,7 @@
             <td class="type">
             
                 
-<span class="param-type">Visitor</span>
+<span class="param-type"><a href="biesVisitor.html">biesVisitor</a></span>
 
 
             
@@ -478,7 +842,7 @@
 
             
 
-            <td class="description last">El visitante que realiza operaciones en el contexto.</td>
+            <td class="description last">El visitante que realiza la operación.</td>
         </tr>
 
     
@@ -519,7 +883,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="parser_biesParser.js.html">parser/biesParser.js</a>, <a href="parser_biesParser.js.html#line725">line 725</a>
+        <a href="parser_grammar_biesParser.js.html">parser/grammar/biesParser.js</a>, <a href="parser_grammar_biesParser.js.html#line792">line 792</a>
     </li></ul></dd>
     
 
@@ -548,7 +912,7 @@
 
         
 <div class="param-desc">
-    Resultado de la visita.
+    El resultado de la operación del visitante.
 </div>
 
 
@@ -587,13 +951,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="FunctionFinder.html">FunctionFinder</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="PrintVisitor.html">PrintVisitor</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="module.exports.html">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#atn">atn</a></li><li><a href="global.html#decisionsToDFA">decisionsToDFA</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#serializedATN">serializedATN</a></li><li><a href="global.html#sharedContextCache">sharedContextCache</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ArgContext.html">ArgContext</a></li><li><a href="ArgsDeclContext.html">ArgsDeclContext</a></li><li><a href="BiesVM.html">BiesVM</a></li><li><a href="FunDefContext.html">FunDefContext</a></li><li><a href="InstContext.html">InstContext</a></li><li><a href="Loader.html">Loader</a></li><li><a href="MnemonicContext.html">MnemonicContext</a></li><li><a href="StartContext.html">StartContext</a></li><li><a href="biesLexer.html">biesLexer</a></li><li><a href="biesParser.html">biesParser</a></li><li><a href="biesVisitor.html">biesVisitor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#END">END</a></li><li><a href="global.html#FUN">FUN</a></li><li><a href="global.html#FUNCTION">FUNCTION</a></li><li><a href="global.html#accept">accept</a></li><li><a href="global.html#arg">arg</a></li><li><a href="global.html#argsDecl">argsDecl</a></li><li><a href="global.html#createNewContext">createNewContext</a></li><li><a href="global.html#executeFunctionById">executeFunctionById</a></li><li><a href="global.html#executeInstruction">executeInstruction</a></li><li><a href="global.html#findContextByFUN">findContextByFUN</a></li><li><a href="global.html#findFunctionById">findFunctionById</a></li><li><a href="global.html#findINI">findINI</a></li><li><a href="global.html#funDef">funDef</a></li><li><a href="global.html#getActualContext">getActualContext</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#inst">inst</a></li><li><a href="global.html#mnemonic">mnemonic</a></li><li><a href="global.html#pop">pop</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#test_parser">test_parser</a></li><li><a href="global.html#visitArg">visitArg</a></li><li><a href="global.html#visitArgsDecl">visitArgsDecl</a></li><li><a href="global.html#visitFunDef">visitFunDef</a></li><li><a href="global.html#visitInst">visitInst</a></li><li><a href="global.html#visitMnemonic">visitMnemonic</a></li><li><a href="global.html#visitStart">visitStart</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Oct 08 2024 21:14:12 GMT-0600 (hora estándar central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Oct 16 2024 12:05:24 GMT-0600 (hora estándar central)
 </footer>
 
 <script> prettyPrint(); </script>
