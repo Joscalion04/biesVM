@@ -485,15 +485,35 @@ class BiesVM {
     this.code = [];
     this.labels = {};
   
-    // Primer pase: identificar etiquetas
+    // Primera pasada: Registrar todas las etiquetas
     let instructionIndex = 0;
     instructions.forEach(line => {
-      if (line.endsWith(':')) {
+      if (line.startsWith('$FUN')) {
+        // Extraer el nombre de la función, por ejemplo, '$0' de '$FUN $0 args:0 parent: $0'
+        const parts = line.split(' ');
+        const functionName = parts[1];
+        
+        // Registrar la etiqueta con el índice actual de instrucciones
+        this.labels[functionName] = instructionIndex;
+      } else if (line.endsWith(':')) {
+        // Manejo de etiquetas existentes que terminan con ':'
         const label = line.slice(0, -1);
         this.labels[label] = instructionIndex;
-      } else {
-        this.code.push(this.parseInstruction(line));
+      } else if (line !== '$END') {
+        // Contar solo las líneas que son instrucciones ejecutables
         instructionIndex++;
+      }
+      // Ignorar las líneas '$END' ya que solo marcan el fin de una función
+    });
+  
+    // Segunda pasada: Procesar y agregar las instrucciones al código
+    instructions.forEach(line => {
+      if (line.startsWith('$FUN') || line === '$END' || line.endsWith(':')) {
+        // Ignorar las líneas que definen funciones, finales de funciones o etiquetas
+        return;
+      } else {
+        // Agregar la instrucción al código después de parsearla
+        this.code.push(this.parseInstruction(line));
       }
     });
   }

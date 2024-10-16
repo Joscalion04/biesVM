@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "jest test",
-    "simulate": "node simulationVM.js simulate",
+    "simulate": "node simulationVM.js",
     "docs": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
