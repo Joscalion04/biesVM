@@ -239,7 +239,6 @@ export default class biesParser extends antlr4.Parser {
 	    return localctx;
 	}
 
-<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Define el análisis de una declaración de argumentos en la gramática de BIES.
 	* Este método maneja el reconocimiento de una estructura que comienza con
@@ -287,10 +286,6 @@ export default class biesParser extends antlr4.Parser {
 	* @throws {antlr4.error.RecognitionException} Lanza una excepción si se encuentra un error de 
 	* reconocimiento durante el análisis sintáctico.
 	*/
-=======
-
-
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	inst() {
 	    let localctx = new InstContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 4, biesParser.RULE_inst);
@@ -806,7 +801,6 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Obtiene el token correspondiente a la palabra clave 'END' en la gramática BIES.
 	* Este método permite acceder al token que indica el final de una estructura 
@@ -815,22 +809,10 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	* @method END
 	* @returns {Token} El token de 'END' correspondiente en la gramática BIES.
 	*/
-=======
-
-	ARGS() {
-	    return this.getToken(biesParser.ARGS, 0);
-	};
-
-	INT() {
-	    return this.getToken(biesParser.INT, 0);
-	};
-
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	END() {
 	    return this.getToken(biesParser.END, 0);
 	};
 
-<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Obtiene el contexto de declaración de argumentos en la gramática BIES.
 	* Este método permite acceder a la parte del árbol de análisis sintáctico 
@@ -842,10 +824,6 @@ class FunDefContext extends antlr4.ParserRuleContext {
 	*/
 	argsDecl() {
 	    return this.getTypedRuleContext(ArgsDeclContext,0);
-=======
-	PARENT() {
-	    return this.getToken(biesParser.PARENT, 0);
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	};
 
 	/**
@@ -896,7 +874,6 @@ class FunDefContext extends antlr4.ParserRuleContext {
 }
 
 
-<<<<<<< HEAD:parser/grammar/biesParser.js
 /**
 * Clase que representa el contexto de la declaración de argumentos en el análisis sintáctico de la gramática de BIES.
 * Esta clase extiende de `antlr4.ParserRuleContext` y se utiliza para almacenar la información 
@@ -983,9 +960,6 @@ class ArgsDeclContext extends antlr4.ParserRuleContext {
 * @author Josué Vindas Pérez
 * @author Joseph León Cabezas
 */
-=======
-
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 class InstContext extends antlr4.ParserRuleContext {
 
 	/**
@@ -1165,7 +1139,6 @@ class ArgContext extends antlr4.ParserRuleContext {
 	    return this.getToken(biesParser.INT, 0);
 	};
 
-<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Obtiene el token que representa una cadena de caracteres en la declaración de argumentos.
 	* Este método se utiliza para acceder al token de tipo `STR` en el contexto actual del análisis sintáctico,
@@ -1173,12 +1146,6 @@ class ArgContext extends antlr4.ParserRuleContext {
 	* 
 	* @returns {antlr4.Token} El token que representa una cadena de caracteres.
 	*/
-=======
-	FLOAT() {
-	    return this.getToken(biesParser.FLOAT, 0);
-	};
-
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	STR() {
 	    return this.getToken(biesParser.STR, 0);
 	};
@@ -1194,7 +1161,6 @@ class ArgContext extends antlr4.ParserRuleContext {
 	    return this.getToken(biesParser.FUNCTION, 0);
 	};
 
-<<<<<<< HEAD:parser/grammar/biesParser.js
 	/**
 	* Acepta un visitante en el contexto del argumento.
 	* Este método permite que un visitante realice operaciones específicas en el contexto del argumento 
@@ -1203,16 +1169,6 @@ class ArgContext extends antlr4.ParserRuleContext {
 	* @param {Object} visitor - El visitante que se aplicará al contexto del argumento.
 	* @returns {Object} El resultado de la visita al contexto del argumento.
 	*/
-=======
-	list() {
-	    return this.getTypedRuleContext(ListContext,0);
-	};
-
-	ID() {
-	    return this.getToken(biesParser.ID, 0);
-	};
-
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesParser.js
 	accept(visitor) {
 	    if ( visitor instanceof biesVisitor ) {
 	        return visitor.visitArg(this);

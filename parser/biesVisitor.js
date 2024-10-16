@@ -50,7 +50,6 @@ export default class biesVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-<<<<<<< HEAD:parser/grammar/biesVisitor.js
 	/**
  	* Método que visita el contexto de declaración de argumentos en el árbol de análisis sintáctico de BIES.
 	* Este método es responsable de procesar el nodo del contexto de declaración de argumentos y sus hijos en el árbol.
@@ -74,9 +73,6 @@ export default class biesVisitor extends antlr4.tree.ParseTreeVisitor {
 	* @param {InstContext} ctx - El contexto de instrucciones que se está visitando.
 	* @returns {*} El resultado de la visita a los nodos hijos del contexto de instrucciones.
 	*/
-=======
-	// Visit a parse tree produced by biesParser#inst.
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesVisitor.js
 	visitInst(ctx) {
 	  return this.visitChildren(ctx);
 	}
@@ -108,22 +104,4 @@ export default class biesVisitor extends antlr4.tree.ParseTreeVisitor {
 	visitArg(ctx) {
 	  return this.visitChildren(ctx);
 	}
-<<<<<<< HEAD:parser/grammar/biesVisitor.js
-=======
-
-
-	// Visit a parse tree produced by biesParser#list.
-	visitList(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by biesParser#element.
-	visitElement(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-
->>>>>>> d2b50944a9aef926b1c0e6a1879bc385b4dce5a1:parser/biesVisitor.js
 }
