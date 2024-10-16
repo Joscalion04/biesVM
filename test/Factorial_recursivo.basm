@@ -6,7 +6,7 @@ LDF $0           ; Cargar la función recursiva
 SWP
 LDV -1           ; Decrementar n
 ADD
-APP 1            ; Aplicar factorial_rec(n - 1)
+APP 0            ; Aplicar factorial_rec(n - 1)
 MUL              ; Multiplicar por n
 $1
 PRN
