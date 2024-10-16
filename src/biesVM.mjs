@@ -175,22 +175,13 @@ class BiesVM {
       // Negación
       case 'NEG': {
         const N = this.pop();
-        
-      
-        if (typeof N === 'number') {
-          
-          this.stack.push(-N);
-          
+        const numero = Number(N);
+        if (!isNaN(numero)) {
+          this.stack.push(-numero);
         } else {
-          const numero = Number(N);
-          if (!isNaN(numero)) {
-           
-            this.stack.push(-numero);
-           
-          } else {
-            // Lanzar un error si la conversión falla
-            throw new Error(`Error: No se puede aplicar NEG. El valor '${N}' no es un número válido.`);
-          }
+          this.stack.push(N);// Devolver el valor original
+          // Lanzar un error si la conversión falla
+          throw new Error(`Error: No se puede aplicar NEG. El valor '${N}' no es un número válido.`);
         }
       } break;
     
@@ -198,74 +189,101 @@ class BiesVM {
 
       // Signo
       case 'SGN': {
-        const N = this.pop()
+        const N = this.pop();
+        this.stack.push(N);
         if (typeof N === 'number') {
-          this.stack.push(Math.sign(N) > 0 ? 1 : 0);//Revisar
+          this.stack.push(Math.sign(N) >= 0 ? 1 : 0);//Revisar
         }
       } break;
 
       // Igual
       case 'EQ': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
        
         this.stack.push(N == M ? 1 : 0);
       } break;
 
       // Mayor que
       case 'GT': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
+
         this.stack.push(N > M ? 1 : 0);
       } break;
 
       // Mayor o igual que
       case 'GTE': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
+
         this.stack.push(N >= M ? 1 : 0);
       } break;
 
       // Menor que
       case 'LT': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
+
         this.stack.push(N < M ? 1 : 0);
       } break;
 
       // Menor o igual que
       case 'LTE': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
+
         this.stack.push(N <= M ? 1 : 0);
       } break;
 
       case 'AND': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
+        
         this.stack.push(N && M ? 1 : 0);
       } break;
 
       case 'OR': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
+
         this.stack.push(N || M ? 1 : 0);
       } break;
 
       case 'XOR': {
-        const N = this.pop()
-        const M = this.pop()
+        const N = this.pop();
+        const M = this.pop();
+        this.stack.push(M);
+        this.stack.push(N);
+
         this.stack.push(N ^ M);// Funciona este operador?
       } break;
 
       case 'NOT': {
-        const N = this.pop()
+        const N = this.pop();
+        this.stack.push(N);
+
         this.stack.push(N ? 0 : N);
       } break;
 
       // String null test
       case 'SNT': {
         const V = this.pop()
+        this.stack.push(V);
         
         this.stack.push(V === "" ? 1 : 0);
       
@@ -293,6 +311,8 @@ class BiesVM {
       // List null test
       case 'LNT': {
         const V = this.pop()
+        this.stack.push(V);
+
         this.stack.push(Array.isArray(V) && V.length === 0 ? 1 : 0);
       } break;
 
@@ -306,22 +326,21 @@ class BiesVM {
 
       // Tomar el k-ésimo elemento de la lista
       case 'LTK': {
-        const K = this.pop()
-        const V = this.pop()
-        this.stack.push(V[K]);
-        this.stack.push(K);
+        const K = this.pop();
+        const V = this.pop();
+
+        this.stack.push(V);// volver a meter la lista en la pila
+        this.stack.push(V[K]);// meter el k-ésimo elemento en la pila
       } break;
 
       // Tomar el resto después del k-ésimo elemento de la lista
       case 'LRK': {
         const K = actualCode.args[0]; // Extraemos el índice K directamente desde los argumentos
         const V = this.pop(); // Extraemos el valor V de la pila (debería ser una lista o cadena)
-    
-       
-    
+        this.stack.push(V); // Volvemos a meter V en la pila
+
         // Verificamos si V es una cadena o una lista antes de aplicar slice
         if (typeof V === 'string' || Array.isArray(V)) {
-    
             this.stack.push(V.slice(K)); // Si es válido, aplicamos slice y empujamos el resultado
         } else {
             throw new Error(`El valor ${V} no es una cadena ni una lista, no se puede aplicar slice.`);
@@ -439,13 +458,25 @@ class BiesVM {
         const value = this.pop()
       
         // Verificamos si el valor es del tipo adecuado
-        if (
-          (type === 'number' && typeof value === 'number') ||
-          (type === 'list' && Array.isArray(value)) ||
-          (type === 'string' && typeof value === 'string')
-        ) {
-          this.stack.push(value); // Si coincide el tipo, lo apilamos de nuevo
+        if (type === 'number') {
+          const number = Number(value);
+          if (!isNaN(number)) {
+            this.stack.push(number);
+          } else {
+            this.stack.push(value);// Devolver el valor original
+            throw new Error(`Casting fallido: ${value} no es un número`);
+          }
+        } else if (type === 'list') {
+          if (Array.isArray(value)) {
+            this.stack.push(value);
+          } else {
+            this.stack.push(value);// Devolver el valor original
+            throw new Error(`Casting fallido: ${value} no es una lista`);
+          }
+        } else if (type === 'string') {
+          this.stack.push(String(value));
         } else {
+          this.stack.push(value);// Devolver el valor original
           throw new Error(`Casting fallido: ${value} no es del tipo ${type}`);
         }
       } break;      
@@ -453,6 +484,7 @@ class BiesVM {
       case 'INO': {
         const type = actualCode.args[0]; // Tipo a verificar (number, list, string)
         const value = this.pop()
+        this.stack.push(value);
         
         // Verificamos si el valor es del tipo indicado
         const isInstanceOf = 
@@ -465,14 +497,16 @@ class BiesVM {
 
       case 'PRN': {
         const N = this.pop()
-        console.log(N);
         this.stack.push(N);
+        console.log(N);
       } break;
 
       // Tomar el k-ésimo elemento de un string
       case 'STK': {
         const K = this.pop();
         const V = this.pop();
+        this.stack.push(V);
+
         this.stack.push(V[K]);
       } break;
 
@@ -480,6 +514,8 @@ class BiesVM {
       case 'SRK': {
         const K = this.pop();
         const V = this.pop()
+        this.stack.push(V);
+
         this.stack.push(V.slice(K));
       } break;
 
