@@ -17,7 +17,7 @@ import biesGrammarParser from '../parser/biesParser.js';
 * @author Joseph León Cabezas
 */
 function test_parser(input_file){
-    console.log(`Leyendo el documento... ${input_file}`)
+   // console.log(`Leyendo el documento... ${input_file}`)
     
     /**
     * Contenido del archivo leído como una cadena.
