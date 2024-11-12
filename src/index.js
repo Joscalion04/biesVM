@@ -6,7 +6,7 @@
  * @author Josué Vindas Pérez
  * @author Joseph León Cabezas
  */
-import test_parser from "./src/runner.mjs";
+import test_parser from "./runner.mjs";
 import readline from 'readline';
 import fs from 'fs'; // Importar el módulo fs para trabajar con archivos
 

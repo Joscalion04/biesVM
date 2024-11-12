@@ -1,0 +1,5 @@
+{
+  "outfile": "default_output.out",
+  "errfile": "default_errors.err",
+  "trace": "0"
+}
