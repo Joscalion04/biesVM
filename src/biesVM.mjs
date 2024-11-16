@@ -257,7 +257,7 @@ class BiesVM {
         // Verificamos si V es una cadena o una lista antes de aplicar slice
         typeof V === 'string' || Array.isArray(V) ? this.stack.push(V.slice(K)) 
         : (() => { throw new Error(`El valor ${V} no es una cadena ni una lista, no se puede aplicar slice.`); })();
-    } break;
+      } break;
       // Convertir a lista
       case 'TOL': {
         this.stack.push(Array.of(this.stack.pop()));
@@ -423,6 +423,30 @@ class BiesVM {
         const input = await getInput();
         this.stack.push(input);
       } break;
+
+      case 'POW': {
+        const exponent = this.stack.pop();
+        const base = this.stack.pop();
+      
+        if (typeof base !== 'number' || typeof exponent !== 'number') {
+            throw new Error('**: Both base and exponent must be numbers');
+        }
+        const result = Math.pow(base, exponent); // Realiza la operación de potencia
+        this.stack.push(result); // Guarda el resultado en la pila
+        break;
+      }
+      
+      case 'LEN': {
+        const list = this.stack.pop(); // Extrae el valor de la pila
+        if (Array.isArray(list)) {
+            const length = list.length; // Calcula la longitud de la lista
+            this.stack.push(length); // Empuja la longitud a la pila
+        } else {
+            throw new Error(`Error: El valor '${list}' no es una lista.`);
+        }
+        break;
+      }
+
     }
     this.getActualContext().PC++;
     return null;

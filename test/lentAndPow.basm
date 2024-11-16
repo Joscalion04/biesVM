@@ -1,0 +1,14 @@
+$FUN $0 args:0 parent:$0
+    ; Primera parte: Cargar una lista y calcular su longitud
+    LDV ["1", "2", "3", "4"] ; Carga la lista en la pila
+    LEN                      ; Calcula la longitud de la lista
+    PRN                      ; Imprime la longitud (esperado: 4)
+
+    ; Segunda parte: Cargar base y exponente, calcular potencia
+    LDV 2                    ; Carga la base en la pila
+    LDV 3                    ; Carga el exponente en la pila
+    POW                      ; Realiza la operación de potencia (esperado: 8)
+    PRN                      ; Imprime el resultado de la potencia (esperado: 8)
+
+    HLT                      ; Detiene la ejecución
+$END
