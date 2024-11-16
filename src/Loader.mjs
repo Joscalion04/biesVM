@@ -113,19 +113,8 @@ class Loader extends biesGrammarVisitor {
         // Si es una lista
         else if (ctx.list()) {
             const listCtx = ctx.list();
-            // Mapeo de los elementos de la lista
-            const elements = listCtx.element().map(elementCtx => {
-                // Proceso manual para asegurarse de que se manejan correctamente enteros y cadenas
-                if (elementCtx.INT()) {
-                    return parseInt(elementCtx.INT().getText(), 10);
-                } else if (elementCtx.STR()) {
-                    return elementCtx.STR().getText().slice(1, -1);
-                } else {
-                    console.error("Elemento no reconocido:", elementCtx.getText());
-                    return undefined;
-                }
-            });
-            return elements;
+            // Manejar la lista de elementos
+            return this.visitList(listCtx);
         }
         // Si es una función
         else if (ctx.FUNCTION()) {
@@ -168,6 +157,14 @@ class Loader extends biesGrammarVisitor {
         finder.visit(tree);
 
         return foundNode; // Devolver el nodo encontrado o null
+    }
+
+    visitList(ctx) {
+        const elements = ctx.element().map(elementCtx => {
+            // Asegúrate de que `elementCtx` tenga la forma esperada
+            return this.visitArg(elementCtx);
+        });
+        return elements;
     }
 
     /**
@@ -220,7 +217,8 @@ class Loader extends biesGrammarVisitor {
         finder.visit(tree);
 
         if (foundNode) {
-            return foundNode.arg().map(arg => this.visit(arg)).filter(arg => arg !== null)[0];
+            const args = foundNode.arg().map(arg => this.visit(arg)).filter(arg => arg !== null);
+            return args.length > 0 ? args[0] : null; // Retorna el primer argumento si existe
         } else {
             return null;
         }

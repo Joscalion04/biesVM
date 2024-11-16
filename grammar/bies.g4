@@ -33,4 +33,4 @@ arg : INT | FLOAT | STR | FUNCTION | list | ID ; // Argumentos posibles
 list : '[' WS? element (WS? COMMA WS? element)* WS? ']' ; // Definición de listas
 
 // Elementos de la lista pueden ser enteros, decimales o cadenas
-element : INT | FLOAT | STR ; // Elementos posibles dentro de una lista
+element : INT | FLOAT | STR | list ; // Elementos posibles dentro de una lista

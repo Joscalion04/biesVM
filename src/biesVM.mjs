@@ -71,15 +71,14 @@ class BiesVM {
   * 
   * @param {Array<string>} [arg] - Argumento auxiliar para ejecutar el comando 'INI', que debe ser un array que contenga 
   *                                  una cadena (como 'INI') y un valor adicional.
-  * 
   * @returns {Promise<string|null>} Retorna una promesa que se resuelve con 'FIN' si se ejecuta la instrucción 'HLT', 
   *                                  o null si la instrucción se ejecuta normalmente.
-  * 
   * @throws {Error} Lanza un error si ocurre un fallo en el casteo de tipos en la instrucción 'CST'.
  */
   async executeInstruction(arg) { // arg auxiliar para ejecutar el INI mientras se guardan las instrucciones en el code, solo tiene ['INI', $n]
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
+
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -295,13 +294,14 @@ class BiesVM {
       } break;
 
       case 'APP': {
+
         const closure = this.stack.pop(); // La closure es la función que vamos a aplicar
 
         // Guardamos el contexto actual
         const actualContext = this.getActualContext();
         actualContext.context = { code: this.code };
         actualContext.ACTUAL = false;
-        
+
         // Ponemos el contexto de la nueva función en actual  
         const newContext = this.findContextByFUN(closure) || (() => { throw new Error(`La función ${closure} no existe.`); })();
         
@@ -311,7 +311,6 @@ class BiesVM {
         newContext.K = actualCode.args[0] || 1; // Guardamos el K de la función
         newContext.PC = 0; // Inicializamos el PC para empezar desde el inicio
         newContext.previousFUN = actualContext.FUN;
-        
         // Extraemos los argumentos de la pila
         const arr = Array.from({ length: newContext.K }, () => this.stack.pop());
         
