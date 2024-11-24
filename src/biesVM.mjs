@@ -219,7 +219,7 @@ class BiesVM {
         const H2 = this.stack.pop();
         H1 === undefined || H1 === null ? this.stack.push(H2)
             : H2 === undefined || H2 === null ? this.stack.push(H1)
-                : this.stack.push(H1.concat(H2));
+                : this.stack.push(String(H1).concat(String(H2)));
 
       } break;
 
