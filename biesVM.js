@@ -45,26 +45,21 @@ if (!fs.existsSync(filePath)) {
     process.exit(1);
 }
 
-console.log(`Archivo fuente: ${filePath}`);
-console.log(`Archivo de salida (sysout): ${outFile}`);
-console.log(`Archivo de errores (syserr): ${errFile}`);
-console.log(`Nivel de trace: ${traceLevel}`);
 
 // Ejecutar el compilador con trace y redirigir las salidas
 exec(`node ./src/index.js "${filePath}"`, (error, stdout, stderr) => {
     if (error) {
-        console.error('Error: La ejecución del archivo ha fallado.');
         
         if (traceLevel === '1') {
             stderr += `\nTrace de errores: ID de la función y la instrucción actual...\n`;
         }
 
         fs.writeFileSync(errFile, stderr);
-        console.log(`Errores guardados en: ${errFile}`);
         process.exit(1);
     }
 
     // Guardar la salaida en el archivo especificado
+    console.log(stdout); // Mostrar la salida estándar en la consola
     fs.writeFileSync(outFile, stdout);
     console.log(`Ejecución completada con éxito. Salida en: ${outFile}`);
 });
@@ -75,4 +70,4 @@ exec(`node ./src/index.js "${filePath}"`, (error, stdout, stderr) => {
 // -o salida.txt: archivo de salida para las impresiones (sysout)
 // -e errores.txt: archivo para las salidas de error (syserr)
 // --trace 1: nivel de trace (0 o 1), 1 para mostrar el trace, 0 para no mostrarlo
-// casting.basm: archivo fuente .basm
+// casting.basm: archivo fuente .basmV
