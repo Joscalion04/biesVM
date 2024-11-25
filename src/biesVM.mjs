@@ -79,6 +79,8 @@ class BiesVM {
     
     const actualCode = this.getActualContext() ? this.code[this.getActualContext().PC] : null;
 
+    // console.log(actualCode);
+
     switch (arg ? (arg[0] != null ? arg[0] : actualCode.mnemonic) : actualCode.mnemonic) {
       // Inicializar
       case 'INI': {
@@ -251,7 +253,7 @@ class BiesVM {
 
       // Tomar el resto después del k-ésimo elemento de la lista
       case 'LRK': {
-        const K = actualCode.args[0]; // Extraemos el índice K directamente desde los argumentos
+        const K = this.stack.pop(); // Extraemos el índice K directamente desde los argumentos
         const V = this.stack.pop(); // Extraemos el valor V de la pila (debería ser una lista o cadena)
         // Verificamos si V es una cadena o una lista antes de aplicar slice
         typeof V === 'string' || Array.isArray(V) ? this.stack.push(V.slice(K)) 
@@ -313,6 +315,7 @@ class BiesVM {
         newContext.previousFUN = actualContext.FUN;
         // Extraemos los argumentos de la pila
         const arr = Array.from({ length: newContext.K }, () => this.stack.pop());
+        arr.reverse(); // Invertimos el orden de los argumentos
         
         // Verificamos si el ambiente pertenece a una nueva función o la misma
         const isNewFunction = actualContext.FUN !== newContext.FUN;
@@ -437,7 +440,7 @@ class BiesVM {
       
       case 'LEN': {
         const list = this.stack.pop(); // Extrae el valor de la pila
-        if (Array.isArray(list)) {
+        if (Array.isArray(list) || typeof list === 'string') {
             const length = list.length; // Calcula la longitud de la lista
             this.stack.push(length); // Empuja la longitud a la pila
         } else {
@@ -447,6 +450,8 @@ class BiesVM {
       }
 
     }
+
+    // console.log(this.stack);
     this.getActualContext().PC++;
     return null;
   }

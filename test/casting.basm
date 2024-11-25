@@ -1,31 +1,19 @@
-
+;================ main ====================
   $FUN $0 args:0 parent:$0 ;main
-  LDV 1
-  LDV 3
+  LDV [1, 2, 3, "Hello World!", 5, 6, 7]
+  BST 0 0                              ;a
+  LDV ") ***"
+  BLD 0 0                              ;a
+  LDV "*** Testing List Access ("
+  CAT
+  CAT
+  PRN
+  BLD 0 0
+  LDV 2
+  BLD 0 0
+  LTK
   ADD
-  LDV 4
-  LDV 4
-  MUL
-  DIV
-  BST 0 0                              ;version
-  LDV " ***"
-  BLD 0 0                              ;version
-  LDV "Testing helloworld Version "
-  CAT
-  CAT
-  LDF $1
-  APP  1                ; splash([object Object])
-  LDF $2
-  APP  0                ; greetings()
+  LTK
   PRN
   HLT
-  $END
-  $FUN $1 args:1 parent:$0 ;splash
-  BLD 0 0                              ;msg
-  PRN
-  RET
-  $END
-  $FUN $2 args:0 parent:$0 ;greetings
-  LDV "Hello World!"
-  RET
   $END
